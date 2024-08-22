@@ -1,0 +1,75 @@
+/* AdminDashboard.css */
+.admin-dashboard {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .header {
+    background-color: #e5e51d;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header-nav ul {
+    list-style-type: none;
+    display: flex;
+  }
+  
+  .header-nav li {
+    margin-left: 20px;
+  }
+  
+  .header-nav a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .overview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .recent-activities {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .recent-activities ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .recent-activities li {
+    margin-bottom: 10px;
+  }
+  
+  .footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
