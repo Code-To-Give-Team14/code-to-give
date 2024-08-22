@@ -13,7 +13,7 @@ Instructions to run:
    ```
 2. Navigate to the project directory:
    ```
-   cd code-to-give 
+   cd code-to-give/frontend
    ```
 3. Install the dependencies:
    ```
@@ -23,7 +23,7 @@ Instructions to run:
 ## Running the Application
 1. Start the server:
    ```
-   node index.js
+   npm run dev
    ```
 2. Open a web browser and navigate to `http://localhost:5173` to access the application.
 
