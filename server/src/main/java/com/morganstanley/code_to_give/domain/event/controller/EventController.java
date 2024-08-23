@@ -25,7 +25,7 @@ import java.util.List;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/events")
+@RequestMapping
 public class EventController {
 
 
@@ -33,7 +33,7 @@ public class EventController {
     private final GetEventListService getEventListService;
     private final UpdateEventService updateEventService;
 
-    @PostMapping
+    @PostMapping("/admin/events")
     public ResponseEntity<CreateEventResponse> createEvent(
         @RequestBody
         CreateEventRequest request
@@ -42,17 +42,17 @@ public class EventController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{programId}")
+    @GetMapping("/events/{programId}")
     public ResponseEntity<List<EventListResponse>> getEventList(@PathVariable Integer programId) {
         return ResponseEntity.ok(getEventListService.getEventList(programId));
     }
 
-    @GetMapping("/admin/{programId}")
+    @GetMapping("/admin/programs/{programId}/events")
     public ResponseEntity<List<EventListResponse>> getEventListForAdmin(@PathVariable Integer programId) {
         return ResponseEntity.ok(getEventListService.getEventListForAdmin(programId));
     }
 
-    @PutMapping
+    @PutMapping("/admin/events")
     public ResponseEntity<Void> updateEvent(
         @RequestBody
         UpdateEventRequest request
@@ -61,7 +61,7 @@ public class EventController {
         return ResponseEntity.ok().build();
     }
 
-    @PatchMapping("/{eventId}/active-status")
+    @PatchMapping("/admin/events/{eventId}/active-status")
     public ResponseEntity<Void> changeActiveStatus(
         @PathVariable
         Integer eventId,
