@@ -21,7 +21,7 @@ public class MemberTraining extends AuditLoggingBase {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "memberEmail", nullable = false)
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -36,12 +36,6 @@ public class MemberTraining extends AuditLoggingBase {
 
     @Column(nullable = false)
     private Boolean isCompleted = false;
-
-    @Min(1)
-    @Max(5)
-    private Integer rating;
-
-    private String feedback;
 
     private LocalDateTime deletedAt;
 }
