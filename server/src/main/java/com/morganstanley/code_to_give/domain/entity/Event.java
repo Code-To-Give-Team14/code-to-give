@@ -56,13 +56,13 @@ public class Event  {
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> interestsEmbedding;
 
-    private LocalDateTime date;
+    private LocalDateTime startTime;
+
+    private LocalDateTime endTime;
 
     private String venue;
 
     private Integer quota;
-
-    private Integer duration;
 
     private Boolean isActivated;
 
