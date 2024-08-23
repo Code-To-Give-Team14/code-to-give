@@ -6,6 +6,8 @@ import com.azure.ai.openai.models.*;
 import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.morganstanley.code_to_give.domain.event.entity.Event;
+import com.morganstanley.code_to_give.domain.member.entity.Member;
 
 import java.util.*;
 
@@ -19,7 +21,7 @@ public class Chatbot {
             whose mission is to mission is to improve the lives of Hong Kong's ethnic minorities
             by reducing suffering and providing opportunities. You are here to help the user with their enquiry.
             You are currently talking to {FirstName}. You MUST NOT make up information that is not provided here.
-            {Context} Please be polite and keep the conversation casual.""";
+            {Context}Please be polite and keep the conversation casual.""";
 
     public static class Message {
         public String role; // Only "user" or "bot"
@@ -73,25 +75,59 @@ public class Chatbot {
                     .isUserAskingForEventRecommendation;
         } catch (Exception ignored) {}
 
-        String context = switch (isUserAskingForEventRecommendation) {
-            case "YesAsHelper" -> """
-                    The recommended event for the user as a helper is the Smart City Gathering.
-                    ONLY list out the event names for the user,
-                    DO NOT make up event details that is not provided here,
-                    ask the user if they need more information.""";
-            case "YesAsAttendee" -> """
-                    The recommended event for the user as an attendee is the Code To Give Hackathon.
-                    ONLY list out the event names for the user,
-                    DO NOT make up event details that is not provided here,
-                    ask the user if they need more information.""";
-            case "YesAsEitherHelperOrAttendee" -> """
-                    The recommended event for the user as a helper is the Smart City Gathering.
-                    The recommended event for the user as an attendee is the Code To Give Hackathon.
-                    ONLY list out the event names for the user,
-                    DO NOT make up event details that is not provided here,
-                    ask the user if they need more information.""";
-            default -> "Please chat with the user.";
-        };
+        Member member = new Member(
+                "lio-testing@email.com",
+                "Lio",
+                "Qing",
+                "PASSWORD",
+                "12345678",
+                List.of(),
+                List.of("Coding", "Hackathon"),
+                "Hong Kong",
+                "English",
+                false
+        );
+
+        String context = "";
+        // TODO: Implement the logic to get event helper recommendations
+//        if (isUserAskingForEventRecommendation.equals("YesAsHelper") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
+//            List<Event> events = Recommendation.findInterest(member);
+//            context += "Some relevant events for the user to participate as a helper are "
+//                    + String.join(", ", events.stream().limit(3).map(Event::getTitle).toList())
+//                    + ". ";
+//        }
+        if (isUserAskingForEventRecommendation.equals("YesAsHelper") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
+            List<Event> events = Recommendation.findInterest(member);
+            context += "Some relevant events for the user to participate as a helper (sorted from more to less suitable for the user) are "
+                    + String.join(
+                    ", ",
+                    events
+                            .stream()
+                            .limit(3)
+                            .map(event -> event.getTitle() + " (" + event.getDescription() + ")")
+                            .toList()
+            )
+                    + ". ";
+        }
+        if (isUserAskingForEventRecommendation.equals("YesAsAttendee") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
+            List<Event> events = Recommendation.findInterest(member);
+            context += "Some relevant events for the user to participate as an attendee (sorted from more to less suitable for the user) are "
+                    + String.join(
+                            ", ",
+                            events
+                                .stream()
+                                .limit(3)
+                                .map(event -> event.getTitle() + " (" + event.getDescription() + ")")
+                                .toList()
+                    )
+                    + ". ";
+        }
+
+        if (isUserAskingForEventRecommendation.equals("No")) {
+            context += "Please chat with the user. ";
+        } else {
+            context += "ONLY LIST OUT THE EVENT NAMES, DO NOT MAKE UP ANY INFORMATION, ASK DOES THE USER WANT TO KNOW MORE ABOUT THE EVENT. ";
+        }
 
         // Get response
         chatMessages.set(0, new ChatRequestSystemMessage(systemPromptTemplate
