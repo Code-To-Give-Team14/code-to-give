@@ -1,13 +1,22 @@
 package com.morganstanley.code_to_give.domain.event.controller;
 
 import com.morganstanley.code_to_give.domain.event.controller.request.CreateEventRequest;
+import com.morganstanley.code_to_give.domain.event.controller.request.UpdateEventRequest;
 import com.morganstanley.code_to_give.domain.event.controller.response.CreateEventResponse;
 import com.morganstanley.code_to_give.domain.event.controller.response.EventListResponse;
 import com.morganstanley.code_to_give.domain.event.service.CreateEventService;
 import com.morganstanley.code_to_give.domain.event.service.GetEventListService;
+import com.morganstanley.code_to_give.domain.event.service.UpdateEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -20,6 +29,7 @@ public class EventController {
 
     private final CreateEventService createEventService;
     private final GetEventListService getEventListService;
+    private final UpdateEventService updateEventService;
 
     @PostMapping
     public ResponseEntity<CreateEventResponse> createEvent(
@@ -40,4 +50,12 @@ public class EventController {
         return ResponseEntity.ok(getEventListService.getEventListForAdmin(programId));
     }
 
+    @PutMapping
+    public ResponseEntity<Void> updateEvent(
+        @RequestBody
+        UpdateEventRequest request
+    ) {
+        updateEventService.updateEvent(request);
+        return ResponseEntity.ok().build();
+    }
 }
