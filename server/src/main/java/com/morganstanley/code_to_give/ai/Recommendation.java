@@ -51,19 +51,20 @@ public class Recommendation {
     );
 
     public static List<Float> getEmbedding(List<String> texts) {
-        try {
-            OpenAIClient client = new OpenAIClientBuilder()
-                    .endpoint("https://openai-lio.openai.azure.com/")
-                    .credential(new AzureKeyCredential(System.getenv("AZURE_API_KEY")))
-                    .buildClient();
-
-            EmbeddingsOptions embeddingsOptions = new EmbeddingsOptions(List.of(String.join(", ", texts)));
-            Embeddings embeddings = client.getEmbeddings("dev-ada", embeddingsOptions);
-
-            return embeddings.getData().get(0).getEmbedding();
-        } catch (Exception ignored) {
-            return List.of();
-        }
+        return List.of(0.1f, 0.2f, 0.3f);
+//        try {
+//            OpenAIClient client = new OpenAIClientBuilder()
+//                    .endpoint("https://openai-lio.openai.azure.com/")
+//                    .credential(new AzureKeyCredential(System.getenv("AZURE_API_KEY")))
+//                    .buildClient();
+//
+//            EmbeddingsOptions embeddingsOptions = new EmbeddingsOptions(List.of(String.join(", ", texts)));
+//            Embeddings embeddings = client.getEmbeddings("dev-ada", embeddingsOptions);
+//
+//            return embeddings.getData().get(0).getEmbedding();
+//        } catch (Exception ignored) {
+//            return List.of();
+//        }
     }
 
     public static List<Event> findInterests(Member member) {
@@ -129,7 +130,7 @@ public class Recommendation {
         double normASum = 0f;
         double normBSum = 0f;
 
-        for (int i = 0; i < a.size(); i++) {
+        for (int i = 0; i < Math.min(a.size(), b.size()); i++) {
             dotProduct += a.get(i) * b.get(i);
             normASum += a.get(i) * a.get(i);
             normBSum += b.get(i) * b.get(i);
