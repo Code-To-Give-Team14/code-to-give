@@ -1,0 +1,17 @@
+.chatbot-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.chatbot-icon-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.react-chatbot-kit-chat-container {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+}
