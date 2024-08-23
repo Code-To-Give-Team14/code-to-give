@@ -26,7 +26,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE event SET deletedAt = CURRENT_TIMESTAMP WHERE id = ?")
 @Where(clause = "deletedAt IS NULL")
 @Table(name = "event")
-public class Event {
+public class Event  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

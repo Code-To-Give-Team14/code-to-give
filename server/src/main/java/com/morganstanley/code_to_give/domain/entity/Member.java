@@ -22,7 +22,7 @@ import java.util.List;
 @SQLDelete(sql = "UPDATE member SET deletedAt = CURRENT_TIMESTAMP WHERE email = ?")
 @Where(clause = "deletedAt IS NULL")
 @Table(name = "member")
-public class Member {
+public class Member extends AuditLoggingBase {
 
     @Id
     private String email;

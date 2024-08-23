@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @SQLDelete(sql = "UPDATE memberTraining SET deletedAt = CURRENT_TIMESTAMP WHERE id = ?")
 @Where(clause = "deletedAt IS NULL")
 @Table(name = "memberTraining")
-public class MemberTraining {
+public class MemberTraining extends AuditLoggingBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

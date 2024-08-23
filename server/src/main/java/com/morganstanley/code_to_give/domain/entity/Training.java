@@ -19,7 +19,7 @@ import java.util.List;
 @Where(clause = "deletedAt IS NULL")
 @Table(name = "training")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Training {
+public class Training extends AuditLoggingBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
