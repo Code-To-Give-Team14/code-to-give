@@ -7,13 +7,15 @@ Server for backend.
 ```mermaid
 erDiagram
     User {
-        String Username PK
+        String Email PK
         String FirstName
         String LastName
         String Password "Hashed"
-        Optional[String] Email
-        Optional[String] SMS
+        String SMS
         JSON Interests "JSON List"
+        JSON SKills "JSON List, extra skills not related to training"
+        String Location
+        String Language
         Bool IsAdmin
     }
 
@@ -49,8 +51,11 @@ erDiagram
         Integer Id PK
         String Title
         String Description
-        JSON Tags "{ 'Interests': [], 'Skills': [] }"
-        String Schedule "ISO 8601"
+        JSON Tags "{ 'Types': [], 'Interests': [], 'Skills': [] }"
+        String Date "ISO 8601"
+        String Venue
+        Integer Quota
+        Integer Duration "In seconds"
         Bool IsActivated "If false, event is hidden"
         JSON Reminder "JSON List of seconds (UI: Xm, Xh, Xd, Xw) before the event"
     }
