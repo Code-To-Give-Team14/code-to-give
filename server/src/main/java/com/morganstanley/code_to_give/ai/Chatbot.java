@@ -89,15 +89,8 @@ public class Chatbot {
         );
 
         String context = "";
-        // TODO: Implement the logic to get event helper recommendations
-//        if (isUserAskingForEventRecommendation.equals("YesAsHelper") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
-//            List<Event> events = Recommendation.findInterest(member);
-//            context += "Some relevant events for the user to participate as a helper are "
-//                    + String.join(", ", events.stream().limit(3).map(Event::getTitle).toList())
-//                    + ". ";
-//        }
         if (isUserAskingForEventRecommendation.equals("YesAsHelper") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
-            List<Event> events = Recommendation.findInterest(member);
+            List<Event> events = Recommendation.findSkills(member);
             context += "Some relevant events for the user to participate as a helper (sorted from more to less suitable for the user) are "
                     + String.join(
                     ", ",
@@ -110,19 +103,18 @@ public class Chatbot {
                     + ". ";
         }
         if (isUserAskingForEventRecommendation.equals("YesAsAttendee") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
-            List<Event> events = Recommendation.findInterest(member);
+            List<Event> events = Recommendation.findInterests(member);
             context += "Some relevant events for the user to participate as an attendee (sorted from more to less suitable for the user) are "
                     + String.join(
-                            ", ",
-                            events
-                                .stream()
-                                .limit(3)
-                                .map(event -> event.getTitle() + " (" + event.getDescription() + ")")
-                                .toList()
-                    )
+                    ", ",
+                    events
+                            .stream()
+                            .limit(3)
+                            .map(event -> event.getTitle() + " (" + event.getDescription() + ")")
+                            .toList()
+            )
                     + ". ";
         }
-
         if (isUserAskingForEventRecommendation.equals("No")) {
             context += "Please chat with the user. ";
         } else {
