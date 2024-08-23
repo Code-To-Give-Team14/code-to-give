@@ -1,4 +1,4 @@
-package com.morganstanley.code_to_give.domain.entity;
+package com.morganstanley.code_to_give.domain.event.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

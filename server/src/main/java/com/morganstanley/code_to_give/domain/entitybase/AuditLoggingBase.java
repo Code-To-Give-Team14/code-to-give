@@ -1,4 +1,4 @@
-package com.morganstanley.code_to_give.domain.entity;
+package com.morganstanley.code_to_give.domain.entitybase;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.validation.constraints.NotNull;
