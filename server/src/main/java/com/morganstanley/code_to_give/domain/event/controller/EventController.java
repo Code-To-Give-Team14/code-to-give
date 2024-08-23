@@ -1,5 +1,6 @@
 package com.morganstanley.code_to_give.domain.event.controller;
 
+import com.morganstanley.code_to_give.domain.event.controller.request.ChangeEventActiveStatusRequest;
 import com.morganstanley.code_to_give.domain.event.controller.request.CreateEventRequest;
 import com.morganstanley.code_to_give.domain.event.controller.request.UpdateEventRequest;
 import com.morganstanley.code_to_give.domain.event.controller.response.CreateEventResponse;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -56,6 +58,17 @@ public class EventController {
         UpdateEventRequest request
     ) {
         updateEventService.updateEvent(request);
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping("/{eventId}/active-status")
+    public ResponseEntity<Void> changeActiveStatus(
+        @PathVariable
+        Integer eventId,
+        @RequestBody
+        ChangeEventActiveStatusRequest request
+    ) {
+        updateEventService.changeEventActiveStatus(eventId, request);
         return ResponseEntity.ok().build();
     }
 }
