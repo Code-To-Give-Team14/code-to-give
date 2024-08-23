@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record CreateEventRequest(
+    Integer programId,
     String title,
     String description,
     List<String> types,

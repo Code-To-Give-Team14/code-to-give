@@ -17,4 +17,8 @@ public class Program {
 
     private String name;
 
+    public Program(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

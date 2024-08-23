@@ -5,6 +5,7 @@ import com.azure.ai.openai.OpenAIClientBuilder;
 import com.azure.ai.openai.models.*;
 import com.azure.core.credential.AzureKeyCredential;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
+import com.morganstanley.code_to_give.domain.event.entity.Program;
 import com.morganstanley.code_to_give.domain.member.entity.Member;
 
 import java.time.LocalDateTime;
@@ -20,34 +21,36 @@ public class Recommendation {
     private static final List<String> event2Interests = Arrays.asList("Football", "Sports", "Training");
     private static final List<String> event2Skills = Arrays.asList("Football", "Sports");
     private static final List<Event> events = Arrays.asList(
-            new Event(
-                    "Code to Give",
-                    "A hackathon for people interested in coding",
-                    List.of(),
-                    event1Skills,
-                    getEmbedding(event1Skills),
-                    event1Interests,
-                    getEmbedding(event1Interests),
-                    LocalDateTime.now(),
-                    LocalDateTime.now(),
-                    "Venue A",
-                    100,
-                    List.of()
-            ),
-            new Event(
-                    "Football training",
-                    "Football training for people of all age",
-                    List.of(),
-                    event2Skills,
-                    getEmbedding(event2Skills),
-                    event2Interests,
-                    getEmbedding(event2Interests),
-                    LocalDateTime.now(),
-                    LocalDateTime.now(),
-                    "Venue B",
-                    20,
-                    List.of()
-            )
+        new Event(
+            "Code to Give",
+            "A hackathon for people interested in coding",
+            new Program(1, "program1"),
+            List.of(),
+            event1Skills,
+            getEmbedding(event1Skills),
+            event1Interests,
+            getEmbedding(event1Interests),
+            LocalDateTime.now(),
+            LocalDateTime.now(),
+            "Venue A",
+            100,
+            List.of()
+        ),
+        new Event(
+            "Football training",
+            "Football training for people of all age",
+            new Program(2, "program2"),
+            List.of(),
+            event2Skills,
+            getEmbedding(event2Skills),
+            event2Interests,
+            getEmbedding(event2Interests),
+            LocalDateTime.now(),
+            LocalDateTime.now(),
+            "Venue B",
+            20,
+            List.of()
+        )
     );
 
     public static List<Float> getEmbedding(List<String> texts) {

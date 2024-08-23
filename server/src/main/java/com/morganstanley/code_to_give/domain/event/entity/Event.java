@@ -89,6 +89,7 @@ public class Event  {
     public Event(
         String title,
         String description,
+        Program program,
         List<String> types,
         List<String> skills,
         List<Float> skillsEmbedding,
@@ -102,6 +103,7 @@ public class Event  {
     ) {
         this.title = title;
         this.description = description;
+        this.program = program;
         this.types = types;
         this.skills = skills;
         this.skillsEmbedding = skillsEmbedding;
