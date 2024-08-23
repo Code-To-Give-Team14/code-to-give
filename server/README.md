@@ -22,7 +22,7 @@ erDiagram
         String Username PK
         Integer TrainingId PK
         Bool Completed
-        TBD Feedback
+        TBC Feedback
     }
 
     Training {
@@ -32,14 +32,10 @@ erDiagram
         Skill[] Skills FK
     }
 
-    Skill {
-        String Name PK
-    }
-
     UserEvent {
         String Username PK
         Integer EventId PK
-        TBD Feedback
+        TBC Feedback
     }
 
     Event {
@@ -54,8 +50,7 @@ erDiagram
 
     User |o--|| UserTraining: Has
     UserTraining ||--o| Training: Refers
-    Training }|--|{ Skill: Obtains
-    Skill }|--|{ Event: Requires
+    Training }|--|| Event: Depends
     User |o--|| UserEvent: Joins
     UserEvent ||--o| Event: Refers
 ```
