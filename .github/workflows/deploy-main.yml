@@ -5,7 +5,7 @@ on:
       - main
     paths:
       - "server/**"
-      - ".github/workflows/deploy-main.yaml"
+      - ".github/workflows/deploy-main.yml"
 jobs:
   deploy:
     runs-on: ubuntu-latest
