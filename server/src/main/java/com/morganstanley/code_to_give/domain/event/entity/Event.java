@@ -62,6 +62,8 @@ public class Event  {
 
     private Boolean isActivated;
 
+    private String imgUrl;
+
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> reminder;
