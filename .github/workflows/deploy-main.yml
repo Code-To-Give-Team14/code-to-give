@@ -45,5 +45,6 @@ jobs:
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
+                path: server
                 ref: ${{ github.ref }}
               preset: java-springboot
