@@ -1,0 +1,84 @@
+/* MainScrollPage.css */
+
+.main-scroll-page {
+    font-family: 'Open Sans', sans-serif;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .event {
+    display: flex;
+    align-items: center;
+    margin: 60px 0;
+  }
+  
+  .event-image {
+    width: 50%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .event-description {
+    width: 50%;
+    padding: 0 20px;
+    text-align: left;
+    margin-left: 20px;
+    margin-right: 20px;
+    line-height: 1.5; /* Adjusts the space between lines within a paragraph */
+    margin-bottom: 50px; /* Adjusts the space between separate paragraphs */
+  }
+  
+  .left-image {
+    order: 1;
+    margin-left: 50px;
+  }
+  
+  .right-description {
+    order: 2;
+    margin-right: 50px;
+    margin-left: 30px;
+  }
+  
+  .right-image {
+    order: 2;
+    margin-right: 50px;
+  }
+  
+  .left-description {
+    order: 1;
+    margin-left: 50px;
+    margin-right: 30px;
+  }
+  
+  .event:nth-child(even) .event-image {
+    order: 2; /* Image on the right */
+  }
+  
+  .event:nth-child(even) .event-description {
+    order: 1; /* Description on the left */
+  }
+  
+  .event:nth-child(odd) .event-image {
+    order: 1; /* Image on the left */
+  }
+  
+  .event:nth-child(odd) .event-description {
+    order: 2; /* Description on the right */
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    font-size: 14px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+  
+  .footer-bottom a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .footer-bottom a:hover {
+    text-decoration: underline;
+  }
