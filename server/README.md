@@ -55,9 +55,9 @@ erDiagram
         JSON Reminder "JSON List of seconds (UI: Xm, Xh, Xd, Xw) before the event"
     }
 
-    User |o--|| UserTraining: Has
-    UserTraining ||--o| Training: Refers
-    Training }|--|| Event: Depends
-    User |o--|| UserEvent: Joins
-    UserEvent ||--o| Event: Refers
+    User ||--o{ UserTraining: Has
+    UserTraining }o--|| Training: Refers
+    Training }o--|| Event: Depends
+    User ||--o{ UserEvent: Joins
+    UserEvent }o--|| Event: Refers
 ```
