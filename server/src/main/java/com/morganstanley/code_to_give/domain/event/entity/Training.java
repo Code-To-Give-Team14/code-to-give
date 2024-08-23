@@ -40,7 +40,7 @@ public class Training extends AuditLoggingBase {
     private Event event;
 
     @OneToMany(
-        mappedBy = "member",
+        mappedBy = "training",
         cascade = CascadeType.ALL,
         orphanRemoval = true,
         fetch = FetchType.LAZY
