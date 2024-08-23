@@ -9,9 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -21,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
+@Setter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SQLDelete(sql = "UPDATE event SET deletedAt = CURRENT_TIMESTAMP WHERE id = ?")
@@ -79,5 +78,20 @@ public class Event  {
     private List<Training> trainings;
 
     private LocalDateTime deletedAt;
+
+    public Event(String title, String description, List<String> types, List<String> skills, List<Float> skillsEmbedding, List<String> interests, List<Float> interestsEmbedding, LocalDateTime startTime, LocalDateTime endTime, String venue, Integer quota, List<String> reminder) {
+        this.title = title;
+        this.description = description;
+        this.types = types;
+        this.skills = skills;
+        this.skillsEmbedding = skillsEmbedding;
+        this.interests = interests;
+        this.interestsEmbedding = interestsEmbedding;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.venue = venue;
+        this.quota = quota;
+        this.reminder = reminder;
+    }
 }
 
