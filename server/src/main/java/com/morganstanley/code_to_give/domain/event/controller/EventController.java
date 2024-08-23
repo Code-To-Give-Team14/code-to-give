@@ -3,22 +3,16 @@ package com.morganstanley.code_to_give.domain.event.controller;
 import com.morganstanley.code_to_give.domain.event.controller.request.ChangeEventActiveStatusRequest;
 import com.morganstanley.code_to_give.domain.event.controller.request.CreateEventRequest;
 import com.morganstanley.code_to_give.domain.event.controller.request.UpdateEventRequest;
+import com.morganstanley.code_to_give.domain.event.controller.response.AdminEventDetailResponse;
 import com.morganstanley.code_to_give.domain.event.controller.response.CreateEventResponse;
 import com.morganstanley.code_to_give.domain.event.controller.response.EventListResponse;
+import com.morganstanley.code_to_give.domain.event.controller.response.MemberEventDetailResponse;
 import com.morganstanley.code_to_give.domain.event.service.CreateEventService;
 import com.morganstanley.code_to_give.domain.event.service.GetEventListService;
 import com.morganstanley.code_to_give.domain.event.service.UpdateEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,7 +36,7 @@ public class EventController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/events/{programId}")
+    @GetMapping("programs/{programId}/events")
     public ResponseEntity<List<EventListResponse>> getEventList(@PathVariable Integer programId) {
         return ResponseEntity.ok(getEventListService.getEventList(programId));
     }
@@ -71,4 +65,14 @@ public class EventController {
         updateEventService.changeEventActiveStatus(eventId, request);
         return ResponseEntity.ok().build();
     }
+    @GetMapping("/{eventId}")
+    public ResponseEntity<MemberEventDetailResponse> getEventDetail(@PathVariable Integer eventId) {
+        return ResponseEntity.ok(getEventListService.getEventDetailForMember(eventId));
+    }
+
+    @GetMapping("/admin/{eventId}")
+    public ResponseEntity<AdminEventDetailResponse> getEventDetailForAdmin(@PathVariable Integer eventId) {
+        return ResponseEntity.ok(getEventListService.getEventDetailForAdmin(eventId));
+    }
+
 }
