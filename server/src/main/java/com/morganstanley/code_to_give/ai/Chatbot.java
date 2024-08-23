@@ -80,13 +80,13 @@ public class Chatbot {
                     DO NOT make up event details that is not provided here,
                     ask the user if they need more information.""";
             case "YesAsAttendee" -> """
-                    The recommended event for the user an attendee is the Code To Give Hackathon.
+                    The recommended event for the user as an attendee is the Code To Give Hackathon.
                     ONLY list out the event names for the user,
                     DO NOT make up event details that is not provided here,
                     ask the user if they need more information.""";
             case "YesAsEitherHelperOrAttendee" -> """
                     The recommended event for the user as a helper is the Smart City Gathering.
-                    The recommended event for the user an attendee is the Code To Give Hackathon.
+                    The recommended event for the user as an attendee is the Code To Give Hackathon.
                     ONLY list out the event names for the user,
                     DO NOT make up event details that is not provided here,
                     ask the user if they need more information.""";
