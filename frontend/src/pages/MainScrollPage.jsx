@@ -9,32 +9,41 @@ const MainScrollPage = () => {
       <h1>The Zubin Foundation</h1>
 
       <div className="event">
-        <Link to="/EventPage" style={{ display: 'contents' }}>
-          <img src={activityImage} alt="Latest Events" className="event-image right-image" />
-        </Link>
-        <div className="event-description left-description">
-          <h2>Latest Events</h2>
-          <p>This is the description for Event 1. It's going to be an amazing event where you can enjoy, learn, and connect with others. This is the description for Event 1. It's going to be an amazing event where you can enjoy, learn, and connect with others. This is the description for Event 1. It's going to be an amazing event where you can enjoy, learn, and connect with others.</p>
+        <div className="event-box">
+          <Link to="/EventPage" style={{ display: 'contents' }}>
+            <img src={activityImage} alt="Latest Events" className="event-image right-image" />
+          </Link>
+          <div className="event-description left-description">
+            <h2>Latest Events</h2>
+            <p>This is the description for Event 1. It's going to be an amazing event where you can enjoy, learn, and connect with others. This is the description for Event 1. It's going to be an amazing event where you can enjoy, learn, and connect with others. This is the description for Event 1. It's going to be an amazing event where you can enjoy, learn, and connect with others.</p>
+          </div>
+          <button className="event-button"><span>Learn More</span></button>
         </div>
       </div>
 
       <div className="event">
-        <div className="event-description right-description">
-          <h2>Our Community</h2>
-          <p>This is the description for Event 2. Don’t miss out on the opportunity to be part of something extraordinary!</p>
+        <div className="event-box">
+          <div className="event-description right-description">
+            <h2>Our Community</h2>
+            <p>This is the description for Event 2. Don’t miss out on the opportunity to be part of something extraordinary!</p>
+          </div>
+          <Link to="/CommunityPage" style={{ display: 'contents' }}>
+            <img src="https://placehold.jp/256x200.png" alt="Community" className="event-image left-image" />
+          </Link>
+          <button className="event-button" style={{ position: 'absolute', bottom: '-390px', left: '750px' }}><span>Learn More</span></button>
         </div>
-        <Link to="/CommunityPage" style={{ display: 'contents' }}>
-          <img src="https://placehold.jp/256x200.png" alt="Community" className="event-image left-image" />
-        </Link>
       </div>
 
       <div className="event">
-        <Link to="/MainScrollPage" style={{ display: 'contents' }}>
-          <img src="https://placehold.jp/256x200.png" alt="Chatbot" className="event-image right-image" />
-        </Link>
-        <div className="event-description left-description">
-          <h2>About Us</h2>
-          <p>This is the description for Event 3. Join us for an unforgettable experience filled with excitement and fun.</p>
+        <div className="event-box">
+          <Link to="/MainScrollPage" style={{ display: 'contents' }}>
+            <img src="https://placehold.jp/256x200.png" alt="Chatbot" className="event-image right-image" />
+          </Link>
+          <div className="event-description left-description">
+            <h2>About Us</h2>
+            <p>This is the description for Event 3. Join us for an unforgettable experience filled with excitement and fun.</p>
+          </div>
+          <button className="event-button" style={{bottom: '-930px'}}><span>Learn More</span></button>
         </div>
       </div>
       <footer>
