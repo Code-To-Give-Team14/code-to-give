@@ -1,7 +1,6 @@
 package com.morganstanley.code_to_give.domain.event;
 
 import com.morganstanley.code_to_give.domain.event.entity.Event;
-import com.morganstanley.code_to_give.domain.event.entity.EventRepository;
 import com.morganstanley.code_to_give.domain.event.entity.MemberEvent;
 import com.morganstanley.code_to_give.domain.event.entity.MemberTraining;
 import com.morganstanley.code_to_give.domain.event.entity.Training;
@@ -10,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
