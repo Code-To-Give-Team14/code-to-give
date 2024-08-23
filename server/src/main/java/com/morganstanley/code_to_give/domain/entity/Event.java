@@ -13,6 +13,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
@@ -21,6 +23,8 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "UPDATE event SET deletedAt = CURRENT_TIMESTAMP WHERE id = ?")
+@Where(clause = "deletedAt IS NULL")
 @Table(name = "event")
 public class Event {
 
@@ -73,5 +77,7 @@ public class Event {
         fetch = FetchType.LAZY
     )
     private List<Training> trainings;
+
+    private LocalDateTime deletedAt;
 }
 
