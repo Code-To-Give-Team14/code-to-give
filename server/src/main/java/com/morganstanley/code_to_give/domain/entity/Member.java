@@ -6,10 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -18,9 +16,7 @@ import java.util.List;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
 @Table(name = "member")
-@ToString
 public class Member {
 
     @Id
@@ -36,11 +32,11 @@ public class Member {
 
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
-    private List<String> interests;
+    private List<String> skills;
 
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
-    private List<String> skills;
+    private List<String> interests;
 
     private String location;
 
