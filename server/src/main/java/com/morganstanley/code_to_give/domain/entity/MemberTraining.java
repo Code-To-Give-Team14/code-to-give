@@ -35,6 +35,6 @@ public class MemberTraining {
     @Max(5)
     private Integer rating;
 
-    @Column(columnDefinition = "TEXT")
+    @Lob
     private String feedback;
 }
