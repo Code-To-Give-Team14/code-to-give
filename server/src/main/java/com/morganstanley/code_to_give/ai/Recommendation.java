@@ -16,14 +16,16 @@ public class Recommendation {
 
     // For testing purposes
     private static final List<String> event1Interests = Arrays.asList("Coding", "Hackathon");
+    private static final List<String> event1Skills = Arrays.asList("Coding", "Socializing");
     private static final List<String> event2Interests = Arrays.asList("Football", "Sports", "Training");
+    private static final List<String> event2Skills = Arrays.asList("Football", "Sports");
     private static final List<Event> events = Arrays.asList(
             new Event(
                     "Code to Give",
                     "A hackathon for people interested in coding",
                     List.of(),
-                    List.of(),
-                    List.of(),
+                    event1Skills,
+                    getEmbedding(event1Skills),
                     event1Interests,
                     getEmbedding(event1Interests),
                     LocalDateTime.now(),
@@ -36,8 +38,8 @@ public class Recommendation {
                     "Football training",
                     "Football training for people of all age",
                     List.of(),
-                    List.of(),
-                    List.of(),
+                    event2Skills,
+                    getEmbedding(event2Skills),
                     event2Interests,
                     getEmbedding(event2Interests),
                     LocalDateTime.now(),
@@ -49,15 +51,19 @@ public class Recommendation {
     );
 
     public static List<Float> getEmbedding(List<String> texts) {
-        OpenAIClient client = new OpenAIClientBuilder()
-                .endpoint("https://openai-lio.openai.azure.com/")
-                .credential(new AzureKeyCredential(System.getenv("AZURE_API_KEY")))
-                .buildClient();
+        try {
+            OpenAIClient client = new OpenAIClientBuilder()
+                    .endpoint("https://openai-lio.openai.azure.com/")
+                    .credential(new AzureKeyCredential(System.getenv("AZURE_API_KEY")))
+                    .buildClient();
 
-        EmbeddingsOptions embeddingsOptions = new EmbeddingsOptions(List.of(String.join(", ", texts)));
-        Embeddings embeddings = client.getEmbeddings("dev-ada", embeddingsOptions);
+            EmbeddingsOptions embeddingsOptions = new EmbeddingsOptions(List.of(String.join(", ", texts)));
+            Embeddings embeddings = client.getEmbeddings("dev-ada", embeddingsOptions);
 
-        return embeddings.getData().get(0).getEmbedding();
+            return embeddings.getData().get(0).getEmbedding();
+        } catch (Exception ignored) {
+            return List.of();
+        }
     }
 
     public static List<Event> findInterests(Member member) {
@@ -67,6 +73,10 @@ public class Recommendation {
                 .buildClient();
 
         List<String> userInterests = new ArrayList<>(member.getInterests());
+
+        if (userInterests.isEmpty()) {
+            return events;
+        }
 
         EmbeddingsOptions embeddingsOptions = new EmbeddingsOptions(List.of(String.join(", ", userInterests)));
         Embeddings embeddings = client.getEmbeddings("dev-ada", embeddingsOptions);
@@ -87,6 +97,10 @@ public class Recommendation {
                 .buildClient();
 
         List<String> userSkills = new ArrayList<>(member.getSkills());
+
+        if (userSkills.isEmpty()) {
+            return events;
+        }
 
         EmbeddingsOptions embeddingsOptions = new EmbeddingsOptions(List.of(String.join(", ", userSkills)));
         Embeddings embeddings = client.getEmbeddings("dev-ada", embeddingsOptions);

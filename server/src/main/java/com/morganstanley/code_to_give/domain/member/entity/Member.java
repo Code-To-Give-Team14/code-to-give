@@ -51,4 +51,17 @@ public class Member extends AuditLoggingBase {
     private Boolean isAdmin;
 
     private LocalDateTime deletedAt;
+
+    public Member(String email, String firstName, String lastName, String password, String sms, List<String> skills, List<String> interests, String location, String language, Boolean isAdmin) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.sms = sms;
+        this.skills = skills;
+        this.interests = interests;
+        this.location = location;
+        this.language = language;
+        this.isAdmin = isAdmin;
+    }
 }
