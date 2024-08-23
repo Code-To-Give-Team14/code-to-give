@@ -39,6 +39,14 @@ public class Training extends AuditLoggingBase {
     @JoinColumn(name = "eventId", nullable = false)
     private Event event;
 
+    @OneToMany(
+        mappedBy = "member",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
+    private List<MemberTraining> memberTrainings;
+
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> skills;

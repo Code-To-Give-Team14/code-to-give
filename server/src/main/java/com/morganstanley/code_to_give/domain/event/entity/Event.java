@@ -78,6 +78,14 @@ public class Event  {
     )
     private List<Training> trainings;
 
+    @OneToMany(
+        mappedBy = "event",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
+    private List<MemberEvent> memberEvents;
+
     private LocalDateTime deletedAt;
 
     public Event(String title, String description, List<String> types, List<String> skills, List<Float> skillsEmbedding, List<String> interests, List<Float> interestsEmbedding, LocalDateTime startTime, LocalDateTime endTime, String venue, Integer quota, List<String> reminder) {
