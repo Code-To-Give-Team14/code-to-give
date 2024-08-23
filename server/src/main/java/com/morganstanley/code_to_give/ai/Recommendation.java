@@ -130,7 +130,7 @@ public class Recommendation {
         double normASum = 0f;
         double normBSum = 0f;
 
-        for (int i = 0; i < a.size(); i++) {
+        for (int i = 0; i < Math.min(a.size(), b.size()); i++) {
             dotProduct += a.get(i) * b.get(i);
             normASum += a.get(i) * a.get(i);
             normBSum += b.get(i) * b.get(i);
