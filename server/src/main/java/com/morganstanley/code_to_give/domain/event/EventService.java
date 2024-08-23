@@ -1,5 +1,8 @@
 package com.morganstanley.code_to_give.domain.event;
 
+import com.morganstanley.code_to_give.domain.event.entity.Event;
+import com.morganstanley.code_to_give.domain.event.entity.EventRepository;
+import com.morganstanley.code_to_give.domain.member.entity.Member;
 import com.morganstanley.code_to_give.domain.event.entity.*;
 import com.morganstanley.code_to_give.domain.member.entity.Member;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +16,7 @@ public class EventService {
 
     private final EventRepository eventRepository;
 
-    private final MemberEventRepository memberService;
+    private final MemberEventRepository memberEventRepository;
 
     private final MemberTrainingRepository memberTrainingRepository;
 
