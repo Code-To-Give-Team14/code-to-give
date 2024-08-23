@@ -146,5 +146,10 @@ public class Event  {
 
         return this;
     }
+
+    public Event changeActiveStatus(Boolean activeStatus) {
+        this.isActivated = activeStatus;
+        return this;
+    }
 }
 

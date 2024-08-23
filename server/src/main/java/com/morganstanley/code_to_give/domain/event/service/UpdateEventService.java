@@ -1,6 +1,7 @@
 package com.morganstanley.code_to_give.domain.event.service;
 
 import com.morganstanley.code_to_give.domain.event.EventRepository;
+import com.morganstanley.code_to_give.domain.event.controller.request.ChangeEventActiveStatusRequest;
 import com.morganstanley.code_to_give.domain.event.controller.request.UpdateEventRequest;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
 import com.morganstanley.code_to_give.global.exception.CustomException;
@@ -41,5 +42,16 @@ public class UpdateEventService {
             request.quota(),
             request.reminder()
         );
+    }
+
+    @Transactional
+    public void changeEventActiveStatus(
+        Integer eventId,
+        ChangeEventActiveStatusRequest request
+    ) {
+        Event event = eventRepository.findById(eventId)
+            .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
+
+        event.changeActiveStatus(request.isActive());
     }
 }
