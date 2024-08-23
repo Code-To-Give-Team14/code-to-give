@@ -46,7 +46,7 @@ public class Event  {
 
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
-    private List<String> skillsEmbedding;
+    private List<Float> skillsEmbedding;
 
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
@@ -54,7 +54,7 @@ public class Event  {
 
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
-    private List<String> interestsEmbedding;
+    private List<Float> interestsEmbedding;
 
     private LocalDateTime startTime;
 
