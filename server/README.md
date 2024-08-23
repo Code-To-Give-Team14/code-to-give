@@ -14,7 +14,7 @@ erDiagram
         Optional[String] Email
         Optional[String] SMS
         JSON Interests "JSON List"
-        String Roles "One of 'Member', 'Volunteer', 'Staff'"
+        Bool IsAdmin
     }
 
     UserTraining {
@@ -23,14 +23,16 @@ erDiagram
         Bool RemindEmail
         Bool RemindSMS
         Bool Completed "Just for reference, might be optional"
-        TBC Feedback
+        Integer Rating
+        String Comment
     }
 
     Training {
         Integer Id PK
         String Title
         String Description
-        JSON Links "JSON List"
+        String VideoLink
+        String QuizLink
         JSON Tags "JSON List"
     }
 
