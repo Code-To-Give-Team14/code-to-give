@@ -29,6 +29,10 @@ public class Training {
 
     private String quizLink;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "eventId", nullable = false)
+    private Event event;
+
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> skills;
