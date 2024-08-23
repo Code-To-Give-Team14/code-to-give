@@ -14,6 +14,8 @@ import AdminPage from './pages/AdminPage'
 // Component for navigate the unauthorized users to the loginPage
 import ProtectedRoute from './components/ProtectedRoute';
 
+import { ChatBot } from './components/ChatBot';
+
 function App() {
 
   const isAuthenticated = true;
