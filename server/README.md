@@ -33,7 +33,7 @@ erDiagram
         String Description
         String VideoLink
         String QuizLink
-        JSON Tags "JSON List"
+        JSON Skills "JSON List"
     }
 
     UserEvent {
