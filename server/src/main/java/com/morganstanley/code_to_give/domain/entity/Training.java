@@ -23,7 +23,6 @@ public class Training {
     @Column(nullable = false)
     private String title;
 
-    @Lob
     private String description;
 
     private String videoLink;

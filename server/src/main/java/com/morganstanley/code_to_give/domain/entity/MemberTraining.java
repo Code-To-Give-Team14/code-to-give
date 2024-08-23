@@ -35,6 +35,5 @@ public class MemberTraining {
     @Max(5)
     private Integer rating;
 
-    @Lob
     private String feedback;
 }
