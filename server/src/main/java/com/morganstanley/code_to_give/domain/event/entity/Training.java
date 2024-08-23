@@ -1,5 +1,6 @@
-package com.morganstanley.code_to_give.domain.entity;
+package com.morganstanley.code_to_give.domain.event.entity;
 
+import com.morganstanley.code_to_give.domain.entitybase.AuditLoggingBase;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

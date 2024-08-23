@@ -1,6 +1,7 @@
-package com.morganstanley.code_to_give.domain.entity;
+package com.morganstanley.code_to_give.domain.member.entity;
 
 
+import com.morganstanley.code_to_give.domain.entitybase.AuditLoggingBase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
