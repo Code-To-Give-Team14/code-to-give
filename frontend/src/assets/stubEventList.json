@@ -1,0 +1,56 @@
+[
+    {
+        "id": "0",
+        "title":"Tung Chung Chai Gathering",
+        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "day":"27",
+        "month": "AUG",
+        "time": "10:00 am - 11:00 am",
+        "imageURL": "chaiAndPainting.jpg"
+    },
+    {   
+        "id": "1",
+        "title":"DIY Mirror Clay Art",
+        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "day":"14",
+        "month": "SEP",
+        "time": "10:00 am - 11:00 am",
+        "imageURL": "mirrorClay.jpg"
+    },
+    {   
+        "id": "2",
+        "title":"Mother-Daughter Bonding Time",
+        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "day":"28",
+        "month": "OCT",
+        "time": "5:30 pm - 8:30 pm",
+        "imageURL": "motherAndDaughter.png"
+    },
+    {
+        "id": "3",
+        "title":"DIY Mirror Clay Art",
+        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "day":"14",
+        "month": "SEP",
+        "time": "10:00 am - 11:00 am",
+        "imageURL": "mirrorClay.jpg"
+    },
+    {   
+        "id": "4",
+        "title":"Mother-Daughter Bonding Time",
+        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "day":"28",
+        "month": "OCT",
+        "time": "5:30 pm - 8:30 pm",
+        "imageURL": "motherAndDaughter.png"
+    },
+    {
+        "id": "5",
+        "title":"Tung Chung Chai Gathering",
+        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "day":"27",
+        "month": "AUG",
+        "time": "10:00 am - 11:00 am",
+        "imageURL": "chaiAndPainting.jpg"
+    }
+]
