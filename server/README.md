@@ -51,7 +51,7 @@ erDiagram
         Integer Id PK
         String Title
         String Description
-        JSON Tags "{ 'Types': [], 'Interests': [], 'Skills': [] }"
+        JSON Tags "{ 'Types': [], 'Interests': [], 'Skills': [], 'InterestsEmbedding': [], 'SkillsEmbedding': [] }"
         String Date "ISO 8601"
         String Venue
         Integer Quota
