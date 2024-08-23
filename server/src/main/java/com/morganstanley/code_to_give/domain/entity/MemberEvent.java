@@ -11,12 +11,18 @@ import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@SQLDelete(sql = "UPDATE memberEvent SET deletedAt = CURRENT_TIMESTAMP WHERE id = ?")
+@Where(clause = "deletedAt IS NULL")
 @Table(name = "memberEvent")
-public class MemberEvent {
+public class MemberEvent extends AuditLoggingBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,4 +43,6 @@ public class MemberEvent {
     private Integer rating;
 
     private String feedback;
+
+    private LocalDateTime deletedAt;
 }

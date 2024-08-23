@@ -4,11 +4,17 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Getter;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
+@SQLDelete(sql = "UPDATE memberTraining SET deletedAt = CURRENT_TIMESTAMP WHERE id = ?")
+@Where(clause = "deletedAt IS NULL")
 @Table(name = "memberTraining")
-public class MemberTraining {
+public class MemberTraining extends AuditLoggingBase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +42,6 @@ public class MemberTraining {
     private Integer rating;
 
     private String feedback;
+
+    private LocalDateTime deletedAt;
 }
