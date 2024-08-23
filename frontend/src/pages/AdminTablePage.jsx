@@ -1,10 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
-import EventList from "../components/EventList.jsx"
-import SearchBar from "../components/SearchBar.jsx"
-import '../styles/AdminTable.css';
+import EventList from "components/EventList.js"
 
-const AdminPage = () => {
+const AdminTablePage = () => {
+
   const [events, setEvents] = useState([
     { title: 'Weekly Chai Gathering', date: '2024-08-23', id: 1 },
     { title: 'Weekly Elderly Gathering', date: '2024-08-24', id: 2 },
@@ -22,10 +20,9 @@ const AdminPage = () => {
 
   return (
     <div>
-      <SearchBar></SearchBar>
-      <EventList events={events} name="All Published Events" handleEdit={handleEdit} handleDelete={handleDelete} />
+    <EventList events={events} name="All Published Events" handleEdit={handleEdit} handleDelete={handleDelete} />
     </div>
   )
 }
 
-export default AdminPage
+export default AdminTablePage
