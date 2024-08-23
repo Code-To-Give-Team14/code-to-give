@@ -79,5 +79,20 @@ public class Event  {
     private List<Training> trainings;
 
     private LocalDateTime deletedAt;
+
+    public Event(String title, String description, List<String> types, List<String> skills, List<Float> skillsEmbedding, List<String> interests, List<Float> interestsEmbedding, LocalDateTime startTime, LocalDateTime endTime, String venue, Integer quota, List<String> reminder) {
+        this.title = title;
+        this.description = description;
+        this.types = types;
+        this.skills = skills;
+        this.skillsEmbedding = skillsEmbedding;
+        this.interests = interests;
+        this.interestsEmbedding = interestsEmbedding;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.venue = venue;
+        this.quota = quota;
+        this.reminder = reminder;
+    }
 }
 
