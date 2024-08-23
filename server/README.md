@@ -6,7 +6,7 @@ Server for backend.
 
 ```mermaid
 erDiagram
-    User {
+    Member {
         String Email PK
         String FirstName
         String LastName
@@ -17,52 +17,72 @@ erDiagram
         String Location
         String Language
         Bool IsAdmin
+        DateTime CreatedAt
+        DateTime UpdatedAt
+        DateTime DeletedAt
     }
 
-    UserTraining {
-        String Username PK
-        Integer TrainingId PK
+    MemberTraining {
+        Integer Id PK
+        String MemberEmail FK
+        Integer TrainingId FK
         Bool RemindEmail
         Bool RemindSMS
-        Bool Completed "Just for reference, might be optional"
-        Integer Rating
-        String Comment
+        Bool isCompleted
+        DateTime CreatedAt
+        DateTime UpdatedAt
+        DateTime DeletedAt
     }
 
     Training {
         Integer Id PK
+        Integer EventId FK
         String Title
         String Description
         String VideoLink
         String QuizLink
         JSON Skills "JSON List"
+        DateTime CreatedAt
+        DateTime UpdatedAt
+        DateTime DeletedAt
     }
 
-    UserEvent {
-        String Username PK
-        Integer EventId PK
+    MemberEvent {
+        Integer id PK
+        String MemberEmail FK
+        Integer EventId FK
         Bool RemindEmail
         Bool RemindSMS
         Integer Rating
-        String Comment
+        String feedback
+        DateTime CreatedAt
+        DateTime UpdatedAt
+        DateTime DeletedAt
     }
 
     Event {
         Integer Id PK
         String Title
         String Description
-        JSON Tags "{ 'Types': [], 'Interests': [], 'Skills': [], 'InterestsEmbedding': [], 'SkillsEmbedding': [] }"
-        String Date "ISO 8601"
+        JSON Types "JSON List"
+        JSON Interests "JSON List"
+        JSON InterestsEmbedding "JSON List"
+        JSON Skills "JSON List"
+        JSON SkillsEmbedding "JSON List"
+        DateTime StartTime
+        DateTime EndTime
         String Venue
         Integer Quota
-        Integer Duration "In seconds"
         Bool IsActivated "If false, event is hidden"
-        JSON Reminder "JSON List of seconds (UI: Xm, Xh, Xd, Xw) before the event"
+        JSON Reminder "JSON List of minutes (UI: Xm, Xh, Xd, Xw) before the event"
+        DateTime CreatedAt
+        DateTime UpdatedAt
+        DateTime DeletedAt
     }
 
-    User ||--o{ UserTraining: Has
-    UserTraining }o--|| Training: Refers
+    Member ||--o{ MemberTraining: Has
+    MemberTraining }o--|| Training: Refers
     Training }o--|| Event: Depends
-    User ||--o{ UserEvent: Joins
-    UserEvent }o--|| Event: Refers
+    Member ||--o{ MemberEvent: Joins
+    MemberEvent }o--|| Event: Refers
 ```
