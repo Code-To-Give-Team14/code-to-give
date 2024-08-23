@@ -88,7 +88,20 @@ public class Event  {
 
     private LocalDateTime deletedAt;
 
-    public Event(String title, String description, List<String> types, List<String> skills, List<Float> skillsEmbedding, List<String> interests, List<Float> interestsEmbedding, LocalDateTime startTime, LocalDateTime endTime, String venue, Integer quota, List<String> reminder) {
+    public Event(
+        String title,
+        String description,
+        List<String> types,
+        List<String> skills,
+        List<Float> skillsEmbedding,
+        List<String> interests,
+        List<Float> interestsEmbedding,
+        LocalDateTime startTime,
+        LocalDateTime endTime,
+        String venue,
+        Integer quota,
+        List<String> reminder
+    ) {
         this.title = title;
         this.description = description;
         this.types = types;
@@ -101,6 +114,7 @@ public class Event  {
         this.venue = venue;
         this.quota = quota;
         this.reminder = reminder;
+        this.isActivated = true;
     }
 }
 
