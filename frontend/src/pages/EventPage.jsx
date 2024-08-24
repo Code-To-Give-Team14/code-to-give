@@ -53,7 +53,6 @@ const EventPage = () => {
       });
   }, []);
 
-
   const eventsRef = useRef(null);
 
   const scrollToEvents = () => {
@@ -78,7 +77,7 @@ const EventPage = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minHeight: "100vh", backgroundColor: "white" }}>
       
-      <div style={{ backgroundImage: "url(/events.png)", backgroundSize: "cover", width: "100%", height: "800px", backgroundPosition: "center", display: "flex", justifyContent: "center", alignItems: "end" }}>
+      <div style={{ backgroundImage: "url(/events.png)", backgroundSize: "cover", width: "100%", height: "750px", backgroundPosition: "center", display: "flex", justifyContent: "center", alignItems: "end" }}>
         <Button
           ghost
           style={{
@@ -95,10 +94,12 @@ const EventPage = () => {
         >
           Click to see more
         </Button>
-      </div>
 
-      <div ref={eventsRef} style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold", marginTop: "20px", backgroundColor: "white", width: "100%", paddingTop: "25px" }}>
-        ### UPCOMING EVENTS ###
+        <div ref={eventsRef} style ={{paddingBottom: "100px"}}></div>
+      </div>
+      
+      <div  style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold", marginTop: "20px", backgroundColor: "white", width: "100%" }}>
+        
       </div>
       
 
@@ -113,7 +114,7 @@ const EventPage = () => {
           key,
           children: (
 
-        <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", padding: "20px", backgroundColor: "white", width: "100%" }}>
+        <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", backgroundColor: "white", width: "100%" }}>
           {events.map((event, index) => {
             
             const date = new Date(event.startTime);
