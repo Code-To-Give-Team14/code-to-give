@@ -12,6 +12,7 @@ import ChatBotPage from './pages/ChatBotPage'
 import CommunityPage from './pages/CommunityPage'
 import VolunteerPage from './pages/VolunteerPage'
 import AdminPage from './pages/AdminPage'
+import AdminTablePage from './pages/AdminTablePage'
 
 // Component for navigate the unauthorized users to the loginPage
 import ProtectedRoute from './components/ProtectedRoute';
@@ -51,7 +52,9 @@ function App() {
           <Route path="/volunteer" element={<ProtectedRoute element={<VolunteerPage />} isAuthenticated={isAuthenticated} />} />
 
           {/* Admin Routes */}
-          <Route path="/admin" element={<ProtectedRoute element={<AdminPage />} isAuthenticated={isAuthenticated && isAdmin} />} />
+          <Route path="/admin" element={<ProtectedRoute element={<AdminPage />} isAuthenticated={isAuthenticated && isAdmin} />}>
+            <Route path="table" element={<AdminTablePage />} />
+          </Route>
         </Routes>
       </Router>
     </>
