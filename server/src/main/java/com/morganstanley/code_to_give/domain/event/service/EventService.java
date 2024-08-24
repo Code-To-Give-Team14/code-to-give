@@ -1,5 +1,7 @@
-package com.morganstanley.code_to_give.domain.event;
+package com.morganstanley.code_to_give.domain.event.service;
 
+import com.morganstanley.code_to_give.domain.event.EventRepository;
+import com.morganstanley.code_to_give.domain.event.TrainingRepository;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
 import com.morganstanley.code_to_give.domain.event.entity.MemberEvent;
 import com.morganstanley.code_to_give.domain.event.entity.MemberTraining;
