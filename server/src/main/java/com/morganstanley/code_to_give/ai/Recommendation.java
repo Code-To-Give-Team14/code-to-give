@@ -6,12 +6,35 @@ import com.azure.ai.openai.models.*;
 import com.azure.core.credential.AzureKeyCredential;
 import com.morganstanley.code_to_give.domain.event.service.EventService;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
+import com.morganstanley.code_to_give.domain.member.MemberService;
 import com.morganstanley.code_to_give.domain.member.entity.Member;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Recommendation {
+
+    public static List<Member> getMemberByMatchingInterestsAndSkills(
+            MemberService memberService,
+            Integer limit,
+            List<String> interests,
+            List<String> skills
+    ) {
+        List<Float> interestsEmbedding = getEmbedding(interests);
+        List<Float> skillsEmbedding = getEmbedding(skills);
+        return memberService
+                .getMembers()
+                .stream()
+                .map(member -> new MemberSimilarity(
+                        member,
+                        computeSimilarity(interestsEmbedding, member.getInterestsEmbedding())
+                                + computeSimilarity(skillsEmbedding, member.getSkillsEmbedding())
+                ))
+                .sorted((a, b) -> b.similarity.compareTo(a.similarity))
+                .limit(limit)
+                .map(memberSimilarity -> memberSimilarity.member)
+                .toList();
+    }
 
     public static List<Float> getEmbedding(List<String> texts) {
         try {
@@ -87,6 +110,16 @@ public class Recommendation {
 
         public EventSimilarity(Event event, Float similarity) {
             this.event = event;
+            this.similarity = similarity;
+        }
+    }
+
+    static class MemberSimilarity {
+        Member member;
+        Float similarity;
+
+        public MemberSimilarity(Member member, Float similarity) {
+            this.member = member;
             this.similarity = similarity;
         }
     }
