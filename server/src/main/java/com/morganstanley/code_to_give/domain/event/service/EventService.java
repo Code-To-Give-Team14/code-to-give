@@ -41,5 +41,9 @@ public class EventService {
             .toList();
     }
 
+    public List<Event> getEvents() {
+        return eventRepository.findAll();
+    }
+
 }
 

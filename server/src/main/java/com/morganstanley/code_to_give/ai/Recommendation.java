@@ -4,81 +4,41 @@ import com.azure.ai.openai.OpenAIClient;
 import com.azure.ai.openai.OpenAIClientBuilder;
 import com.azure.ai.openai.models.*;
 import com.azure.core.credential.AzureKeyCredential;
+import com.morganstanley.code_to_give.domain.event.service.EventService;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
-import com.morganstanley.code_to_give.domain.event.entity.Program;
 import com.morganstanley.code_to_give.domain.member.entity.Member;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Recommendation {
 
-    // For testing purposes
-    private static final List<String> event1Interests = Arrays.asList("Coding", "Hackathon");
-    private static final List<String> event1Skills = Arrays.asList("Coding", "Socializing");
-    private static final List<String> event2Interests = Arrays.asList("Football", "Sports", "Training");
-    private static final List<String> event2Skills = Arrays.asList("Football", "Sports");
-    private static final List<Event> events = Arrays.asList(
-        new Event(
-            "Code to Give",
-            "A hackathon for people interested in coding",
-            new Program(1, "program1"),
-            List.of(),
-            event1Skills,
-            getEmbedding(event1Skills),
-            event1Interests,
-            getEmbedding(event1Interests),
-            LocalDateTime.now(),
-            LocalDateTime.now(),
-            "Venue A",
-            100,
-            List.of()
-        ),
-        new Event(
-            "Football training",
-            "Football training for people of all age",
-            new Program(2, "program2"),
-            List.of(),
-            event2Skills,
-            getEmbedding(event2Skills),
-            event2Interests,
-            getEmbedding(event2Interests),
-            LocalDateTime.now(),
-            LocalDateTime.now(),
-            "Venue B",
-            20,
-            List.of()
-        )
-    );
-
     public static List<Float> getEmbedding(List<String> texts) {
-        return List.of(0.1f, 0.2f, 0.3f);
-//        try {
-//            OpenAIClient client = new OpenAIClientBuilder()
-//                    .endpoint("https://openai-lio.openai.azure.com/")
-//                    .credential(new AzureKeyCredential(System.getenv("AZURE_API_KEY")))
-//                    .buildClient();
-//
-//            EmbeddingsOptions embeddingsOptions = new EmbeddingsOptions(List.of(String.join(", ", texts)));
-//            Embeddings embeddings = client.getEmbeddings("dev-ada", embeddingsOptions);
-//
-//            return embeddings.getData().get(0).getEmbedding();
-//        } catch (Exception ignored) {
-//            return List.of();
-//        }
+        try {
+            OpenAIClient client = new OpenAIClientBuilder()
+                    .endpoint("https://openai-lio.openai.azure.com/")
+                    .credential(new AzureKeyCredential(System.getenv("AZURE_API_KEY")))
+                    .buildClient();
+
+            EmbeddingsOptions embeddingsOptions = new EmbeddingsOptions(List.of(String.join(", ", texts)));
+            Embeddings embeddings = client.getEmbeddings("dev-ada", embeddingsOptions);
+
+            return embeddings.getData().get(0).getEmbedding();
+        } catch (Exception ignored) {
+            return List.of();
+        }
     }
 
-    public static List<Event> findInterests(Member member) {
+    public static List<Event> findInterests(Member member, EventService eventService) {
         OpenAIClient client = new OpenAIClientBuilder()
                 .endpoint("https://openai-lio.openai.azure.com/")
                 .credential(new AzureKeyCredential(System.getenv("AZURE_API_KEY")))
                 .buildClient();
 
         List<String> userInterests = new ArrayList<>(member.getInterests());
+        List<Event> events = getPotentialUserEvents(member, eventService);
 
-        if (userInterests.isEmpty()) {
+        if (userInterests.isEmpty() || events.isEmpty()) {
             return events;
         }
 
@@ -88,21 +48,23 @@ public class Recommendation {
 
         return events
                 .stream()
+                .filter(event -> event.getInterestsEmbedding() != null && !event.getInterestsEmbedding().isEmpty())
                 .map(event -> new EventSimilarity(event, computeSimilarity(userEmbedding, event.getInterestsEmbedding())))
                 .sorted((a, b) -> b.similarity.compareTo(a.similarity))
                 .map(event -> event.event)
                 .toList();
     }
 
-    public static List<Event> findSkills(Member member) {
+    public static List<Event> findSkills(Member member, EventService eventService) {
         OpenAIClient client = new OpenAIClientBuilder()
                 .endpoint("https://openai-lio.openai.azure.com/")
                 .credential(new AzureKeyCredential(System.getenv("AZURE_API_KEY")))
                 .buildClient();
 
         List<String> userSkills = new ArrayList<>(member.getSkills());
+        List<Event> events = getPotentialUserEvents(member, eventService);
 
-        if (userSkills.isEmpty()) {
+        if (userSkills.isEmpty() || events.isEmpty()) {
             return events;
         }
 
@@ -112,6 +74,7 @@ public class Recommendation {
 
         return events
                 .stream()
+                .filter(event -> event.getSkillsEmbedding() != null && !event.getSkillsEmbedding().isEmpty())
                 .map(event -> new EventSimilarity(event, computeSimilarity(userEmbedding, event.getSkillsEmbedding())))
                 .sorted((a, b) -> b.similarity.compareTo(a.similarity))
                 .map(event -> event.event)
@@ -128,6 +91,34 @@ public class Recommendation {
         }
     }
 
+    static List<Event> getPotentialUserEvents(Member member, EventService eventService) {
+        return eventService
+                .getEvents()
+                .stream()
+                .filter(event -> member
+                        .getMemberEvents()
+                        .stream()
+                        .map(memberEvent -> memberEvent
+                                .getEvent()
+                                .getId()
+                        )
+                        .noneMatch(id -> id
+                                .equals(event.getId())
+                        ) && member
+                        .getMemberTrainings()
+                        .stream()
+                        .map(memberTraining -> memberTraining
+                                .getTraining()
+                                .getEvent()
+                                .getId()
+                        )
+                        .noneMatch(id -> id
+                                .equals(event.getId())
+                        )
+                )
+                .toList();
+    }
+
     static Float computeSimilarity(List<Float> a, List<Float> b) {
         double dotProduct = 0f;
         double normASum = 0f;
@@ -140,6 +131,9 @@ public class Recommendation {
         }
 
         double dist = Math.sqrt(normASum) * Math.sqrt(normBSum);
+        if (dist == 0) {
+            return 0f;
+        }
         return (float)(dotProduct / dist);
     }
 
