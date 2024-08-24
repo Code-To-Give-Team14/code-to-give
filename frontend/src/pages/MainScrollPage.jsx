@@ -11,14 +11,16 @@ const MainScrollPage = () => {
     <div className="main-scroll-page">
       <div className="event">
         <div className="event-box">
-          <Link to="/EventPage" style={{ display: 'contents' }}>
+          <Link to="/event" style={{ display: 'contents' }}>
             <img src={activityImage} alt="Latest Events" className="event-image right-image" />
           </Link>
           <div className="event-description left-description">
             <h2>Latest Events</h2>
             <p>This is the description for Event 1. It's going to be an amazing event where you can enjoy, learn, and connect with others. This is the description for Event 1. It's going to be an amazing event where you can enjoy, learn, and connect with others. This is the description for Event 1. It's going to be an amazing event where you can enjoy, learn, and connect with others.</p>
           </div>
-          <button className="event-button"><span>Learn More</span></button>
+          <Link to="/event" style={{ display: 'contents' }}>
+            <button className="event-button"><span>Learn More</span></button>
+          </Link>
         </div>
       </div>
 
@@ -28,10 +30,12 @@ const MainScrollPage = () => {
             <h2>Our Community</h2>
             <p>This is the description for Event 2. Don’t miss out on the opportunity to be part of something extraordinary!</p>
           </div>
-          <Link to="/CommunityPage" style={{ display: 'contents' }}>
+          <Link to="/community" style={{ display: 'contents' }}>
             <img src={communityImage} alt="Community" className="event-image left-image" />
           </Link>
-          <button className="event-button" style={{ position: 'absolute', left: '650px' }}><span>Learn More</span></button>
+          <Link to="/community" style={{ display: 'contents' }}>
+            <button className="event-button" style={{ position: 'absolute', left: '650px' }}><span>Learn More</span></button>
+          </Link>
         </div>
       </div>
 
