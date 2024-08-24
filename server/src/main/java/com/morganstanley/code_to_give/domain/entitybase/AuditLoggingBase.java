@@ -12,7 +12,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AuditLoggingBase {
 
@@ -23,4 +22,9 @@ public abstract class AuditLoggingBase {
     @NotNull
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    public AuditLoggingBase() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 }
