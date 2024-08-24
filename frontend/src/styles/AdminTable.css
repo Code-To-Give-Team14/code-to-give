@@ -1,34 +1,64 @@
 * {
   background-color: #f1f1f1;
+  font-family: "Poppins", sans-serif;
 }
 
 .event-preview {
-  font-family: "Open Sans", sans-serif;
-  padding: 10px 16px;
+  padding: 6px 16px 16px;
   margin: 20px 0;
-  border-bottom: 1px solid #fafafa;
   background-color: #fafafa;
+  position: relative;
+  overflow: hidden;
 }
-.event-preview:hover {
-  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+.event-preview::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 5px solid transparent;
+  transition: border-color 0.5s ease-in-out;
+}
+.event-preview:hover::before {
+  animation: borderTransition 0.5s forwards;
+}
+@keyframes borderTransition {
+  0% {
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px;
+    clip-path: polygon(0% 0%, 20% 0%, 0% 100%, 0% 20%);
+  }
+  100% {
+    border-color: #f9ef1e;
+    clip-path: none;
+  }
 }
 .event-preview h2 {
   font-size: 24px;
-  color: #00a9ff;
-  margin-bottom: 8px;
+  /* color: #00a9ff; */
+  margin-top: 10px;
+  margin-bottom: 0px;
   background-color: #fafafa;
 }
 .event-preview p {
   font-size: 16px;
+  color: #666666;
+  margin-top: 6px;
   background-color: #fafafa;
 }
 .event-preview button {
-  font-size: 16px;
-  padding: 1 !important;
+  color: #333333;
+  font-size: 14px;
+  padding: 10px 25px !important;
   background-color: #f9ef1e;
-  line-height: 1.5 !important;
-  border-radius: 0px;
-  border-color: #f9ef1e;
+  line-height: 1 !important;
+  border-width: 0;
   font-weight: bold;
   margin-right: 10px;
+}
+.event-preview button:hover {
+  background-color: #e0a800;
+  color: #ffffff;
 }
