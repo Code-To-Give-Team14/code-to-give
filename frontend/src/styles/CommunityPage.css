@@ -8,7 +8,7 @@ body {
 
 .header {
   background-color: #f1f1f1;
-  padding: 20px 20px;
+  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -35,7 +35,7 @@ body {
 
 .new-thread-btn {
   position: absolute; /* Absolutely position the button within the box */
-  bottom: 610px; /* Adjust the distance from the bottom of the box */
+  bottom: 590px; /* Adjust the distance from the bottom of the box */
   left: 40px; /* Adjust the distance from the left of the box */
   width: 160px;
   padding: 10px 20px;
@@ -92,6 +92,7 @@ body {
 .categories h3 {
   font-size: 1em;
   margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
 }
 
 .courses ul,
@@ -99,6 +100,11 @@ body {
   list-style-type: none;
   padding: 0;
   margin: 0;
+}
+
+.categories li.active {
+  background-color: #e0e0e0; /* Highlight active category */
+  color: #333;
 }
 
 .courses li,
@@ -116,6 +122,7 @@ body {
   border-color: black;
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow: hidden;
+  border-bottom: 1px solid #ddd;
 }
 
 .courses li.active,
@@ -144,7 +151,7 @@ body {
   font-size: 16px;
   position: absolute;
   right: 20px; /* Position the arrow on the right inside the list item */
-  top: 50%; /* Center the arrow vertically */
+  top: 45%; /* Center the arrow vertically */
   transform: translateY(-50%); /* Adjust for exact centering */
   opacity: 0; /* Initially hide the arrow */
   transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and transform */
@@ -156,10 +163,12 @@ body {
   padding: 20px;
   border-right: 1px solid #ddd;
   overflow-y: auto;
+  width: 200px;
 }
 
 .search-bar {
   margin-bottom: 20px;
+  width: 320px;
 }
 
 .search-bar input {
@@ -179,6 +188,7 @@ body {
   border: 1px solid #ddd;
   margin-bottom: 10px;
   cursor: pointer;
+  width: "150px";
 }
 
 .thread-item:hover {
@@ -207,6 +217,10 @@ body {
   flex-grow: 2;
   padding: 20px;
   overflow-y: auto;
+  padding-bottom: 70px; /* Add padding to ensure content does not overlap the form */
+  width: 500px;
+  position: relative; /* Make the discussion panel a relative container */
+  padding-bottom: 0px; /* Increase padding to add more space at the bottom */
 }
 
 .thread-detail {
@@ -268,4 +282,43 @@ body {
   max-width: 100%;
   margin-top: 10px;
   border-radius: 5px;
+}
+
+.reply-form {
+  position: fixed; /* Absolutely position the form */
+  bottom: 0; /* Stick the form to the bottom */
+  left: 700;
+  width: 700px;
+  background-color: #fff;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.reply-form textarea {
+  width: calc(100% - 40px);
+  height: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  resize: vertical;
+  margin-bottom: 10px;
+  font-family: "Open Sans", sans-serif;
+  margin-left: 20px;
+}
+
+.reply-form button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 20px;
+}
+
+.reply-form button:hover {
+  background-color: #45a049;
 }
