@@ -1,5 +1,6 @@
-package com.morganstanley.code_to_give.domain.entity;
+package com.morganstanley.code_to_give.domain.event.entity;
 
+import com.morganstanley.code_to_give.domain.entitybase.AuditLoggingBase;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -37,6 +38,14 @@ public class Training extends AuditLoggingBase {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "eventId", nullable = false)
     private Event event;
+
+    @OneToMany(
+        mappedBy = "training",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
+    private List<MemberTraining> memberTrainings;
 
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)

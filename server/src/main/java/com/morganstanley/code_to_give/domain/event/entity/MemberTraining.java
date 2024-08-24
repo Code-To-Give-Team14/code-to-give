@@ -1,8 +1,8 @@
-package com.morganstanley.code_to_give.domain.entity;
+package com.morganstanley.code_to_give.domain.event.entity;
 
+import com.morganstanley.code_to_give.domain.entitybase.AuditLoggingBase;
+import com.morganstanley.code_to_give.domain.member.entity.Member;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
