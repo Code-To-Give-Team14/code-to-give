@@ -8,8 +8,8 @@ nav {
 }
 
 .nav-logo {
-  height: 60px; /* Adjust the size as necessary */
-  margin-right: 20px; /* Provides spacing between the logo and the nav links */
+  height: 60px;
+  margin-right: 20px;
 }
 
 nav ul {
@@ -18,11 +18,11 @@ nav ul {
   justify-content: space-around;
   padding: 0;
   margin: 0;
-  flex-grow: 1; /* Allows the nav links to fill the space */
+  flex-grow: 1;
 }
 
 nav li {
-  margin: 0 10px; /* Adjust spacing between links */
+  margin: 0 10px;
 }
 
 .nav-link {
@@ -35,5 +35,5 @@ nav li {
 }
 
 .nav-link:hover {
-  color: #00a9ff; /* Makes text color blue on hover */
+  color: #00a9ff;
 }
