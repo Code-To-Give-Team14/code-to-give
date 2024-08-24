@@ -1,13 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/MainScrollPage.css';
 import activityImage from '../assets/mainScroll_activities.jpg';
+import communityImage from '../assets/mainScroll_community.png';
+import aboutUsImage from '../assets/mainScroll_aboutUs.jpg';
+import zubinLogo from '../assets/mainScroll_zubinLogo.jpg';
 
 const MainScrollPage = () => {
   return (
     <div className="main-scroll-page">
-      <h1>The Zubin Foundation</h1>
-
       <div className="event">
         <div className="event-box">
           <Link to="/EventPage" style={{ display: 'contents' }}>
@@ -28,22 +29,22 @@ const MainScrollPage = () => {
             <p>This is the description for Event 2. Don’t miss out on the opportunity to be part of something extraordinary!</p>
           </div>
           <Link to="/CommunityPage" style={{ display: 'contents' }}>
-            <img src="https://placehold.jp/256x200.png" alt="Community" className="event-image left-image" />
+            <img src={communityImage} alt="Community" className="event-image left-image" />
           </Link>
-          <button className="event-button" style={{ position: 'absolute', bottom: '-390px', left: '750px' }}><span>Learn More</span></button>
+          <button className="event-button" style={{ position: 'absolute', left: '650px' }}><span>Learn More</span></button>
         </div>
       </div>
 
       <div className="event">
         <div className="event-box">
           <Link to="/MainScrollPage" style={{ display: 'contents' }}>
-            <img src="https://placehold.jp/256x200.png" alt="Chatbot" className="event-image right-image" />
+            <img src={aboutUsImage} alt="Chatbot" className="event-image right-image" />
           </Link>
           <div className="event-description left-description">
             <h2>About Us</h2>
             <p>This is the description for Event 3. Join us for an unforgettable experience filled with excitement and fun.</p>
           </div>
-          <button className="event-button" style={{bottom: '-930px'}}><span>Learn More</span></button>
+          <button className="event-button"><span>Learn More</span></button>
         </div>
       </div>
       <footer>

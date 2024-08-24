@@ -16,6 +16,7 @@ public class ChatbotController {
 
     @PostMapping("/chat")
     public Chatbot.Message chat(@RequestBody ChatRequest request) {
-        return new Chatbot.Message("bot", Chatbot.getResponse(request.messages));
+        String response = Chatbot.getResponse(request.messages);
+        return new Chatbot.Message("bot", response);
     }
 }

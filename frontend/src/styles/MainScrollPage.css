@@ -1,9 +1,28 @@
 /* MainScrollPage.css */
 
 .main-scroll-page {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Poppins", sans-serif;
   padding: 20px;
   text-align: center;
+}
+
+.header-container {
+  display: flex;
+  align-items: center; /* Aligns the logo and text vertically centered */
+  justify-content: center; /* Centers the entire header section */
+  margin-bottom: 20px; /* Adds space below the header */
+}
+
+.logo {
+  width: 100px; /* Adjust the width of the logo */
+  height: auto; /* Maintain the aspect ratio of the logo */
+  margin-right: 15px; /* Space between the logo and the text */
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0; /* Remove default margin */
+  font-family: "Open Sans", sans-serif; /* Ensures font consistency */
 }
 
 .event {
@@ -21,12 +40,22 @@
   margin-left: 50px;
   margin-right: 50px;
   background-color: #f9f9f9; /* Background color for the box */
-  width: 150%; /* Full width of its container */
-  max-width: 2000px; /* Optional: limit the max width */
+  width: 150%;
+  max-width: 1500px;
+  height: 450px; /* Fixed height to prevent box from expanding */
+  box-shadow: 0px 4px 10px rgba(255, 223, 0, 0.6);
+  transition: box-shadow 0.3s ease;
+  overflow: hidden; /* Ensure content that overflows is hidden */
+  align-items: center; /* Vertically center the content */
+  justify-content: space-between; /* Ensure there's space between image and text */
+  position: relative; /* Make this box a positioning context for absolute elements */
+}
+
+.event-box:hover {
+  box-shadow: 10px 15px 15px rgba(255, 221, 0, 0.957); /* Slightly stronger shadow on hover */
 }
 
 .event-button {
-  position: absolute; /* Absolutely position the button within the box */
   bottom: 150px; /* Adjust the distance from the bottom of the box */
   left: 130px; /* Adjust the distance from the left of the box */
   padding: 10px 20px;
@@ -38,10 +67,16 @@
   font-weight: bold;
   border-color: black;
   transition: background-color 0.3s ease, color 0.3s ease;
-  overflow: hidden;
+  overflow: visible; /* Allow content to overflow */
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 20px;
+  align-self: flex-start; /* Aligns button to the start of the description column */
+  margin-top: 20px;
+  position: absolute; /* Absolutely position the button */
+  bottom: 40px; /* Position it 20px from the bottom */
+  left: 30px; /* Position it 20px from the left */
 }
 
 .event-button::after {
@@ -75,9 +110,12 @@
 }
 
 .event-image {
-  width: 50%;
-  height: auto;
-  border-radius: 10px;
+  width: 100%; /* Make the image fill the width of its container */
+  max-width: 580px; /* Limit the maximum width of the image */
+  height: auto; /* Maintain the aspect ratio */
+  object-fit: cover; /* Crop the image to fit the container */
+  border-radius: 10px; /* Keep the border radius consistent with the box */
+  flex-shrink: 0; /* Prevent the image from shrinking when space is limited */
 }
 
 .event-description {
@@ -88,6 +126,12 @@
   margin-right: 20px;
   line-height: 1.5; /* Adjusts the space between lines within a paragraph */
   margin-bottom: 50px; /* Adjusts the space between separate paragraphs */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures the button stays at the bottom */
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 50%;
 }
 
 .left-image {
@@ -113,19 +157,19 @@
 }
 
 .event:nth-child(even) .event-image {
-  order: 2; /* Image on the right */
+  order: 1; /* Image on the right */
 }
 
 .event:nth-child(even) .event-description {
-  order: 1; /* Description on the left */
+  order: 2; /* Description on the left */
 }
 
 .event:nth-child(odd) .event-image {
-  order: 1; /* Image on the left */
+  order: 2; /* Image on the left */
 }
 
 .event:nth-child(odd) .event-description {
-  order: 2; /* Description on the right */
+  order: 1; /* Description on the right */
 }
 
 .footer-bottom {

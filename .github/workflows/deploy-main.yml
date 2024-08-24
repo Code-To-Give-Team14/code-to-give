@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - "server/**"
+      - ".github/workflows/deploy-main.yml"
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -28,10 +29,23 @@ jobs:
             options:
               ports: 8080
               healthz: /ping
-              env: []
+              env: 
+                - name: AWS_ACCESS_KEY_ID
+                  value: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                - name: AWS_SECRET_ACCESS_KEY
+                  value: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                - name : AWS_REGION
+                  value: ${{ secrets.AWS_REGION }}
+                - name: SPRING_PROFILES_ACTIVE
+                  value: dev
+                - name: AZURE_API_KEY
+                  value: ${{ secrets.AZURE_API_KEY }}
+                - name : AZURE_OPENAI_CHAT_DEPLOYMENT
+                  value: dev
               buildenv: []
             context:
               git:
                 url: git@github.com:${{ github.repository }}.git
+                path: server
                 ref: ${{ github.ref }}
               preset: java-springboot

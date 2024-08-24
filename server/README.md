@@ -46,6 +46,11 @@ erDiagram
         DateTime UpdatedAt
         DateTime DeletedAt
     }
+    
+    Program {
+        Integer Id PK
+        String Name 
+    }
 
     MemberEvent {
         Integer id PK
@@ -62,6 +67,7 @@ erDiagram
 
     Event {
         Integer Id PK
+        Integer ProgramId FK
         String Title
         String Description
         JSON Types "JSON List"
@@ -85,4 +91,5 @@ erDiagram
     Training }o--|| Event: Depends
     Member ||--o{ MemberEvent: Joins
     MemberEvent }o--|| Event: Refers
+    Program ||--o{ Event: Has
 ```
