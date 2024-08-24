@@ -1,0 +1,209 @@
+[
+    {
+    "programId": 3,
+    "title": "DIY Mirror Clay Art",
+    "description": "Get creative with your child by designing unique clay decorations for mirrors. A fun and artistic way to bond and express creativity.",
+    "types": [
+      ""
+    ],
+    "interests": [
+      "Drawing",
+      "Art"
+    ],
+    "skills": [
+      "Drawing"
+    ],
+    "startTime": "2024-08-24T10:00:00.128Z",
+    "endTime": "2024-08-24T12:30:00.128Z",
+    "venue": "Zubin Hub",
+    "quota": 30,
+    "imgUrl": "/mirrorClay.jpg",
+    "reminder": [
+      "string"
+    ]
+    },
+    {
+    "programId": 3,
+    "title": "Mother-Daughter Bonding Time",
+    "description": "Lets cherish special moments with engaging activities that strengthen the mother-daughter relationship. Perfect for creating lasting memories.",
+    "types": [
+      ""
+    ],
+    "interests": [
+      "Food"
+    ],
+    "skills": [
+      "Kind"
+    ],
+    "startTime": "2024-08-31T17:30:00.128Z",
+    "endTime": "2024-08-31T20:30:00.128Z",
+    "venue": "Zubin Hub",
+    "quota": 1,
+    "imgUrl": "/motherAndDaughter.png",
+    "reminder": [
+      "string"
+    ]
+    },
+    {
+    "programId": 3,
+    "title": "Family Plant-A-Tree",
+    "description": "Join forces with your family to plant a tree and contribute to the environment. A rewarding activity that teaches sustainability and teamwork.",
+    "types": [
+      ""
+    ],
+    "interests": [
+      "Agriculture",
+      "Planting"
+    ],
+    "skills": [
+      "string"
+    ],
+    "startTime": "2024-09-14T10:00:00.128Z",
+    "endTime": "2024-09-14T11:00:00.128Z",
+    "venue": "Zubin Hub",
+    "quota": 30,
+    "imgUrl": "/plantTree.jpg",
+    "reminder": [
+      "Planting"
+    ]
+    },
+    {
+    "programId": 3,
+    "title": "Family Movie Night",
+    "description": "Gather your loved ones, choose a favorite film, and enjoy a cozy movie night. Don't forget the popcorn!",
+    "types": [
+      ""
+    ],
+    "interests": [
+      "Movie",
+      "Art"
+    ],
+    "skills": [
+      "Kind",
+      "helpful"
+    ],
+    "startTime": "2024-09-28T10:00:00.128Z",
+    "endTime": "2024-09-28T11:00:00.128Z",
+    "venue": "Zubin Hub",
+    "quota": 10,
+    "imgUrl": "/famMovieNight.png",
+    "reminder": [
+      "string"
+    ]
+    },
+    {
+    "programId": 3,
+    "title": "Family Karaoke Night",
+    "description": "Sing your heart out with family and enjoy an evening of laughter and music. Perfect for discovering hidden talents and having fun together.",
+    "types": [
+      ""
+    ],
+    "interests": [
+      "Singing"
+    ],
+    "skills": [
+      "Singing"
+    ],
+    "startTime": "2024-10-08T10:00:00.128Z",
+    "endTime": "2024-10-08T11:00:00.128Z",
+    "venue": "Zubin Hub",
+    "quota": 10,
+    "imgUrl": "/famKarNight.png",
+    "reminder": [
+      "string"
+    ]
+    },
+    {
+    "programId": 3,
+    "title": "Picnic Bliss - Savor the Afternoon",
+    "description": "Pack a basket with your favorite snacks and head to a park for a relaxing afternoon picnic. Enjoy nature and quality family time outdoors.",
+    "types": [
+      ""
+    ],
+    "interests": [
+      "Food",
+      "Subshine"
+    ],
+    "skills": [
+      "helpful"
+    ],
+    "startTime": "2024-10-18T10:00:00.128Z",
+    "endTime": "2024-10-18T11:00:00.128Z",
+    "venue": "Zubin Hub",
+    "quota": 10,
+    "imgUrl": "/picnic.jpg",
+    "reminder": [
+      "string"
+    ]
+    },
+    {
+        "programId": 4,
+        "title": "Mindfulness Meditation Workshop",
+        "description": "Learn techniques to calm your mind and reduce stress in a guided meditation session.",
+        "types": ["Workshop"],
+        "interests": ["Mindfulness", "Meditation"],
+        "skills": ["Meditation"],
+        "startTime": "2024-10-10T09:00:00.128Z",
+        "endTime": "2024-10-10T10:30:00.128Z",
+        "venue": "Peace Center",
+        "quota": 20,
+        "imgUrl": "/mindfulnessWorkshop.png",
+        "reminder": ["Bring a yoga mat"]
+    },
+    {
+        "programId": 4,
+        "title": "Stress Management Seminar",
+        "description": "Join us for an informative session on effective stress management strategies.",
+        "types": ["Seminar"],
+        "interests": ["Stress Management"],
+        "skills": ["Coping Strategies"],
+        "startTime": "2024-10-12T14:00:00.128Z",
+        "endTime": "2024-10-12T15:30:00.128Z",
+        "venue": "Harmony Hall",
+        "quota": 50,
+        "imgUrl": "/stressManagement.png",
+        "reminder": ["Bring a notebook"]
+    },
+    {
+        "programId": 4,
+        "title": "Yoga for Mental Wellness",
+        "description": "Experience the benefits of yoga for mental clarity and emotional balance.",
+        "types": ["Class"],
+        "interests": ["Yoga", "Wellness"],
+        "skills": ["Yoga"],
+        "startTime": "2024-10-15T08:00:00.128Z",
+        "endTime": "2024-10-15T09:00:00.128Z",
+        "venue": "Tranquility Studio",
+        "quota": 15,
+        "imgUrl": "/yogaWellness.jpg",
+        "reminder": ["Wear comfortable clothing"]
+    },
+    {
+        "programId": 4,
+        "title": "Art Therapy Session",
+        "description": "Explore your emotions through art in this therapeutic session.",
+        "types": ["Therapy"],
+        "interests": ["Art Therapy"],
+        "skills": ["Creative Expression"],
+        "startTime": "2024-10-18T11:00:00.128Z",
+        "endTime": "2024-10-18T12:30:00.128Z",
+        "venue": "Art Haven",
+        "quota": 10,
+        "imgUrl": "/artTherapy.jpg",
+        "reminder": ["Materials provided"]
+    },
+    {
+        "programId": 4,
+        "title": "Mental Health Awareness Talk",
+        "description": "An engaging talk on the importance of mental health and resources available.",
+        "types": ["Talk"],
+        "interests": ["Mental Health Awareness"],
+        "skills": ["Public Speaking"],
+        "startTime": "2024-10-20T13:00:00.128Z",
+        "endTime": "2024-10-20T14:00:00.128Z",
+        "venue": "Community Center",
+        "quota": 30,
+        "imgUrl": "/mentalHealthTalk.png",
+        "reminder": ["Open to all"]
+    }
+]
