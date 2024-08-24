@@ -6,6 +6,25 @@
   text-align: center;
 }
 
+.header-container {
+  display: flex;
+  align-items: center; /* Aligns the logo and text vertically centered */
+  justify-content: center; /* Centers the entire header section */
+  margin-bottom: 20px; /* Adds space below the header */
+}
+
+.logo {
+  width: 100px; /* Adjust the width of the logo */
+  height: auto; /* Maintain the aspect ratio of the logo */
+  margin-right: 15px; /* Space between the logo and the text */
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0; /* Remove default margin */
+  font-family: "Open Sans", sans-serif; /* Ensures font consistency */
+}
+
 .event {
   display: flex;
   align-items: center;
@@ -21,8 +40,18 @@
   margin-left: 50px;
   margin-right: 50px;
   background-color: #f9f9f9; /* Background color for the box */
-  width: 150%; /* Full width of its container */
-  max-width: 2000px; /* Optional: limit the max width */
+  width: 150%;
+  max-width: 1500px;
+  height: 450px; /* Fixed height to prevent box from expanding */
+  box-shadow: 0px 4px 10px rgba(255, 223, 0, 0.6);
+  transition: box-shadow 0.3s ease;
+  overflow: hidden; /* Ensure content that overflows is hidden */
+  align-items: center; /* Vertically center the content */
+  justify-content: space-between; /* Ensure there's space between image and text */
+}
+
+.event-box:hover {
+  box-shadow: 10px 15px 15px rgba(255, 221, 0, 0.957); /* Slightly stronger shadow on hover */
 }
 
 .event-button {
@@ -75,9 +104,12 @@
 }
 
 .event-image {
-  width: 50%;
-  height: auto;
-  border-radius: 10px;
+  width: 100%; /* Make the image fill the width of its container */
+  max-width: 580px; /* Limit the maximum width of the image */
+  height: auto; /* Maintain the aspect ratio */
+  object-fit: cover; /* Crop the image to fit the container */
+  border-radius: 10px; /* Keep the border radius consistent with the box */
+  flex-shrink: 0; /* Prevent the image from shrinking when space is limited */
 }
 
 .event-description {
