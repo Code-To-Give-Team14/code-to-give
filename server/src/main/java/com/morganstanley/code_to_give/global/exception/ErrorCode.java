@@ -10,7 +10,8 @@ public enum ErrorCode {
     TRAINING_NOT_FOUND(404, "TRAINING_NOT_FOUND", "Cannot Find Training"),
     MEMBER_NOT_FOUND(404, "MEMBER_NOT_FOUND", "Cannot Find Member"),
     PROGRAM_NOT_FOUND(404, "PROGRAM_NOT_FOUND", "Cannot Find Program"),
-    MEMBER_ALREADY_REGISTERED(409, "MEMBER_ALREADY_REGISTERED", "The Member Already Registered to This Event")
+    MEMBER_ALREADY_REGISTERED(409, "MEMBER_ALREADY_REGISTERED", "The Member Already Registered to This Event"),
+    EVENT_REMINDER_NOT_VALID_FORMAT(400, "EVENT_REMINDER_NOT_VALID_FORMAT", "The Format of the Event Reminder is Not Valid")
     ;
 
 
