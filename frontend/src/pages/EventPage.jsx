@@ -1,10 +1,34 @@
 import React from 'react'
 import EventCard from '../components/EventCard'
 import eventDataList from '../assets/stubEventList.json'
+import { useState, useEffect } from 'react';
 import { Tabs } from 'antd';
+import axios from 'axios';
 
 
 const EventPage = () => {
+
+  const [events, setEvents] = useState([]);
+  const [error, setError] = useState(null);
+  
+  const programId = 1
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await fetch(`/admin/programs/${programId}/events`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setEvents(data);
+      } catch (err) {
+        setError(err);
+      }
+    };
+
+    fetchEvents();
+  }, []);
   
   return (
     <div style={{ display: "flex", flexDirection:"column", justifyContent:"center", backgroundColor:"white"}}>
@@ -24,6 +48,9 @@ const EventPage = () => {
               description = {event.description}
             />
         ))}
+      </div>
+      <div>
+        {events}
       </div>
   </div>
   )
