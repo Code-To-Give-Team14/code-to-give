@@ -9,11 +9,6 @@ import zubinLogo from '../assets/mainScroll_zubinLogo.jpg';
 const MainScrollPage = () => {
   return (
     <div className="main-scroll-page">
-      <div className="header-container">
-        <img src={zubinLogo} alt="The Zubin Foundation Logo" className="logo" />
-        <h1>The Zubin Foundation</h1>
-      </div>
-
       <div className="event">
         <div className="event-box">
           <Link to="/EventPage" style={{ display: 'contents' }}>

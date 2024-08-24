@@ -145,19 +145,19 @@ h1 {
 }
 
 .event:nth-child(even) .event-image {
-  order: 2; /* Image on the right */
+  order: 1; /* Image on the right */
 }
 
 .event:nth-child(even) .event-description {
-  order: 1; /* Description on the left */
+  order: 2; /* Description on the left */
 }
 
 .event:nth-child(odd) .event-image {
-  order: 1; /* Image on the left */
+  order: 2; /* Image on the left */
 }
 
 .event:nth-child(odd) .event-description {
-  order: 2; /* Description on the right */
+  order: 1; /* Description on the right */
 }
 
 .footer-bottom {
