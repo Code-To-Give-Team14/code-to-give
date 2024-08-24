@@ -41,7 +41,15 @@ public class Member extends AuditLoggingBase {
 
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
+    private List<Float> skillsEmbedding;
+
+    @Column(columnDefinition = "json")
+    @JdbcTypeCode(SqlTypes.JSON)
     private List<String> interests;
+
+    @Column(columnDefinition = "json")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private List<Float> interestsEmbedding;
 
     private String location;
 
@@ -67,14 +75,16 @@ public class Member extends AuditLoggingBase {
     )
     private List<MemberTraining> memberTrainings;
 
-    public Member(String email, String firstName, String lastName, String password, String sms, List<String> skills, List<String> interests, String location, String language, Boolean isAdmin) {
+    public Member(String email, String firstName, String lastName, String password, String sms, List<String> skills, List<Float> skillsEmbedding, List<String> interests, List<Float> interestsEmbedding, String location, String language, Boolean isAdmin) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.sms = sms;
         this.skills = skills;
+        this.skillsEmbedding = skillsEmbedding;
         this.interests = interests;
+        this.interestsEmbedding = interestsEmbedding;
         this.location = location;
         this.language = language;
         this.isAdmin = isAdmin;

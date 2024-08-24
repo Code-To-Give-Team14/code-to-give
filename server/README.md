@@ -13,7 +13,9 @@ erDiagram
         String Password "Hashed"
         String SMS
         JSON Interests "JSON List"
-        JSON SKills "JSON List, extra skills not related to training"
+        JSON InterestsEmbedding "JSON List"
+        JSON Skills "JSON List, extra skills not related to training"
+        JSON SkillsEmbedding "JSON List"
         String Location
         String Language
         Bool IsAdmin
