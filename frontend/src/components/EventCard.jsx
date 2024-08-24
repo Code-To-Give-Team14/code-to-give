@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Card, Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import { Modal } from 'antd';
 import EventDescription from './EventDescription';
 
@@ -8,16 +7,39 @@ const { Meta } = Card;
 
 const EventCard = (props) => {
 
-    const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [partiClicked, setPartiClicked] = useState(false)
+    const [volunClicked, setVolunClicked] = useState(false)
 
     const showModal = () => {
         setIsModalOpen(true);
     };
 
-    const handleClick = () => {
+    const registerParti = () => {
+        if (partiClicked){
+            setPartiClicked(!partiClicked)
+        }
+        else{
+            setPartiClicked(!partiClicked)
+            setVolunClicked(false)
+        } 
+    };
+
+    const registerVolun = () => {
+        if (volunClicked){
+            setVolunClicked(!volunClicked)
+        }
+        else{
+            setVolunClicked(!volunClicked)
+            setPartiClicked(false)
+        }
+        
+    };
+    
+    const registerVolunteer = () => {
         console.log("EOH")
     };
+    
 
     const handleOk = () => {
         setIsModalOpen(false);
@@ -74,14 +96,19 @@ const EventCard = (props) => {
                         description = {props.description}
                     />
                     <div style = {{display:"flex", justifyContent:"center", margin: "8px"}}>
-                        <Button type="primary" style = {{width: "400px", height: "70px", backgroundColor:"#f9ef1e", color: "black", fontWeight: "bold"}}>Register as a Participant</Button>
+                        <Button 
+                            type="primary" 
+                            style = {{width: "400px", height: "70px", backgroundColor: partiClicked ? "#d9d9d9" : "#f9ef1e", color: "black", fontWeight: "bold"}}
+                            onClick = {registerParti}
+                        > {partiClicked ? "Successfully Registered" : "Register as a participant"}</Button>
                     </div>
                     <div style = {{display:"flex", justifyContent:"center", margin: "8px"}}>
-                        <Button style = {{width: "400px", height: "70px", fontWeight: "bold"}}>Register as a Volunteer</Button>
+                        <Button 
+                            style = {{width: "400px", height: "70px", fontWeight: "bold", backgroundColor: volunClicked ? "#d9d9d9": "white", color: volunClicked? "black": "#108ee9"}}
+                            onClick = {registerVolun}    
+                        >{volunClicked ? "Successfully Registered" : "Register as a volunteer"}</Button>
                     </div>
-                   
                 </div>
-                
             </Modal>
         </div>
   )

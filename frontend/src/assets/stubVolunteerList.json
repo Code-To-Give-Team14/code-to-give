@@ -1,0 +1,30 @@
+[
+    {
+        "eventId": 1,
+        "title": "DIY Mirror Clay Art",
+        "description": "string",
+        "venue": "Times Square",
+        "startTime": "2024-08-24T09:00:00",
+        "endTime": "2024-08-24T10:00:12",
+        "imageUrl": "/mirrorClay.jpg"
+    },
+    {
+      "eventId": 2,
+      "title": "Tung Chung Chai Gathering",
+      "description": "string",
+      "venue": "High Fashion Centre,",
+      "startTime": "2024-09-24T10:30:43",
+      "endTime": "2024-08-24T11:30:43",
+      "imageUrl": "/painting.jpg"
+    },
+    {
+      "eventId": 3,
+      "title": "Mother-Daughter Bonding Time",
+      "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+      "venue": "High Fashion Centre",
+      "startTime": "2025-10-25T10:15:30",
+      "endTime": "2025-08-30T10:15:30",
+      "imageUrl": "/motherAndDaughter.png"
+    }
+]
+ 
