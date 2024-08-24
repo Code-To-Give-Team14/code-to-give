@@ -14,11 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 public class MessageController {
 
-    private final WhatsAppService whatsAppService;
+    private final WhatsAppMessageSender whatsAppMessageSender;
 
     @PostMapping("/send-whatsapp")
     public ResponseEntity<String> sendWhatsAppMessage(@RequestBody WhatsAppMessage request) {
-        String result = whatsAppService.sendWhatsAppMessage(request.to(), request.message());
+        String result = whatsAppMessageSender.sendWhatsAppMessage(request.to(), request.message());
         return ResponseEntity.ok(result);
 
     }
@@ -26,7 +26,7 @@ public class MessageController {
 
     @PostMapping("/send-whatsapp-bulk")
     public ResponseEntity<List<String>> sendWhatsAppMessageBulk(@RequestBody WhatsAppBulkMessage message) {
-        List<String> result = whatsAppService.sendWhatsAppMessageToMultipleUsers(message.to(), message.message());
+        List<String> result = whatsAppMessageSender.sendWhatsAppMessageToMultipleUsers(message.to(), message.message());
         return ResponseEntity.ok(result);
     }
 

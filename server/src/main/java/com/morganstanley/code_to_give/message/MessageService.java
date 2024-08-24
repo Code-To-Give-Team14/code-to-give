@@ -17,7 +17,7 @@ public class MessageService {
             "w", "weeks"
     );
 
-    private final WhatsAppService whatsAppService;
+    private final WhatsAppMessageSender whatsAppMessageSender;
 
     public void sendMessage(Event livedEvent, String reminder) {
         List<String> recipientPhoneNumbers = livedEvent.getMemberEvents().stream()
@@ -25,7 +25,7 @@ public class MessageService {
                 .toList();
 
         String message = createRemindMessage(livedEvent, reminder);
-        whatsAppService.sendWhatsAppMessageToMultipleUsers(recipientPhoneNumbers, message);
+        whatsAppMessageSender.sendWhatsAppMessageToMultipleUsers(recipientPhoneNumbers, message);
     }
 
 

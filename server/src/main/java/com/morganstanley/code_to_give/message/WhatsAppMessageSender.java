@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Service
-public class WhatsAppService {
+public class WhatsAppMessageSender {
 
     private final TwilioConfig twilioConfig;
 
-    public WhatsAppService(TwilioConfig twilioConfig) {
+    public WhatsAppMessageSender(TwilioConfig twilioConfig) {
         this.twilioConfig = twilioConfig;
         Twilio.init(twilioConfig.getAccountSid(), twilioConfig.getAuthToken());
     }
