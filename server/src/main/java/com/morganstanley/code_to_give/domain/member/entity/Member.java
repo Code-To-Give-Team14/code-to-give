@@ -2,10 +2,9 @@ package com.morganstanley.code_to_give.domain.member.entity;
 
 
 import com.morganstanley.code_to_give.domain.entitybase.AuditLoggingBase;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.morganstanley.code_to_give.domain.event.entity.MemberEvent;
+import com.morganstanley.code_to_give.domain.event.entity.MemberTraining;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -51,6 +50,22 @@ public class Member extends AuditLoggingBase {
     private Boolean isAdmin;
 
     private LocalDateTime deletedAt;
+
+    @OneToMany(
+            mappedBy = "member",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<MemberEvent> memberEvents;
+
+    @OneToMany(
+            mappedBy = "member",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<MemberTraining> memberTrainings;
 
     public Member(String email, String firstName, String lastName, String password, String sms, List<String> skills, List<String> interests, String location, String language, Boolean isAdmin) {
         this.email = email;

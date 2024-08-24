@@ -1,5 +1,6 @@
 package com.morganstanley.code_to_give.domain.event.service;
 
+import com.morganstanley.code_to_give.ai.Recommendation;
 import com.morganstanley.code_to_give.domain.event.EventRepository;
 import com.morganstanley.code_to_give.domain.event.controller.request.ChangeEventActiveStatusRequest;
 import com.morganstanley.code_to_give.domain.event.controller.request.UpdateEventRequest;
@@ -31,11 +32,9 @@ public class UpdateEventService {
             request.description(),
             request.types(),
             request.skills(),
-            //TODO: skills to skillsEmbedding convert logic needed
-            List.of(),
+            Recommendation.getEmbedding(request.skills()),
             request.interests(),
-            //TODO: interests to interestsEmbedding convert logic needed
-            List.of(),
+            Recommendation.getEmbedding(request.interests()),
             request.startTime(),
             request.endTime(),
             request.venue(),
