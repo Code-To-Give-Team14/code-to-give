@@ -27,9 +27,8 @@ function App() {
     <>
       <Router>
         <nav>
-          <img src={logo} className="nav-logo"/>
+          <Link className="nav-link" to="/"><img src={logo} className="nav-logo"/></Link>
             <ul className="nav-links">
-              <li><Link className="nav-link" to="/">Main Scroll</Link></li>
               <li><Link className="nav-link" to="/event">Event</Link></li>
               <li><Link className="nav-link" to="/community">Community</Link></li>
               <li><Link className="nav-link" to="/engagement">Volunteer</Link></li>
