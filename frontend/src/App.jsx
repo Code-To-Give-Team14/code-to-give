@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './styles/NavBar.css';
 import logo from './assets/Zubin-Logo.jpg'
+import './App.css'
 
 // List of pages
 import MainScrollPage from './pages/MainScrollPage'
