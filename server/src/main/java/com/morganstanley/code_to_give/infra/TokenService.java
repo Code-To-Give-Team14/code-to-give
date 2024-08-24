@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class TokenService {
 
     public TokenDto getTokenInfo() {
-        return new TokenDto("mock@mock.com");
+        return new TokenDto("lio-testing@email.com");
 //        return (TokenDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //TODO: implement Spring Security
 
     }
