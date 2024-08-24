@@ -3,6 +3,7 @@ package com.morganstanley.code_to_give.message;
 import com.morganstanley.code_to_give.message.request.WhatsAppBulkMessage;
 import com.morganstanley.code_to_give.message.request.WhatsAppMessage;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,16 +16,18 @@ public class MessageController {
 
     private final WhatsAppService whatsAppService;
 
-    @PostMapping("/whatsapp/send")
-    public String sendWhatsAppMessage(@RequestBody WhatsAppMessage request) {
-        whatsAppService.sendWhatsAppMessage(request.to(), request.message());
-        return "Message sent successfully";
+    @PostMapping("/send-whatsapp")
+    public ResponseEntity<String> sendWhatsAppMessage(@RequestBody WhatsAppMessage request) {
+        String result = whatsAppService.sendWhatsAppMessage(request.to(), request.message());
+        return ResponseEntity.ok(result);
+
     }
 
 
     @PostMapping("/send-whatsapp-bulk")
-    public List<String> sendWhatsAppMessageBulk(@RequestBody WhatsAppBulkMessage message) {
-        return whatsAppService.sendWhatsAppMessageToMultipleUsers(message.to(), message.message());
+    public ResponseEntity<List<String>> sendWhatsAppMessageBulk(@RequestBody WhatsAppBulkMessage message) {
+        List<String> result = whatsAppService.sendWhatsAppMessageToMultipleUsers(message.to(), message.message());
+        return ResponseEntity.ok(result);
     }
 
 }

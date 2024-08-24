@@ -18,14 +18,14 @@ public class WhatsAppService {
         Twilio.init(twilioConfig.getAccountSid(), twilioConfig.getAuthToken());
     }
 
-    public void sendWhatsAppMessage(String to, String messageBody) {
+    public String sendWhatsAppMessage(String to, String messageBody) {
         Message message = Message.creator(
                         new com.twilio.type.PhoneNumber("whatsapp:" + to),
                         new com.twilio.type.PhoneNumber("whatsapp:+" + twilioConfig.getWhatsappNumber()),
                         messageBody)
                 .create();
 
-        System.out.println(message.getSid());
+        return "Message sent to " + to + ". SID: " + message.getSid();
     }
 
     public List<String> sendWhatsAppMessageToMultipleUsers(List<String> recipients, String messageBody) {

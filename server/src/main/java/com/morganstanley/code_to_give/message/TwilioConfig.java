@@ -16,6 +16,4 @@ public class TwilioConfig {
 
     @Value("${twilio.whatsapp.number}")
     private String whatsappNumber;
-
-    // Getters for the properties
 }
