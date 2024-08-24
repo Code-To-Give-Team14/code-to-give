@@ -1,0 +1,129 @@
+.sidebar {
+  background-color: #f1f1f1;
+  width: 200px;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-event-btn {
+  position: absolute; /* Absolutely position the button within the box */
+  bottom: 610px; /* Adjust the distance from the bottom of the box */
+  left: 40px; /* Adjust the distance from the left of the box */
+  width: 160px;
+  padding: 10px 20px;
+  background-color: #f9ef1e;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  border-color: #eedf9f;
+  color: #333333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-event-btn::after {
+  content: "+"; /* Plus symbol */
+  font-size: 16px;
+  position: absolute;
+  right: 25px; /* Position the arrow on the right inside the button */
+  opacity: 0; /* Initially hide the arrow */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and transform */
+  transform: translateX(10px);
+}
+
+.new-event-btn:hover {
+  background-color: #e0a800;
+  color: #fff;
+}
+
+.new-event-btn:hover::after {
+  opacity: 1; /* Make the arrow visible */
+  transform: translateX(0); /* Move the arrow to its original position */
+}
+
+.new-event-btn span {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for text movement */
+}
+
+.new-event-btn:hover span {
+  transform: translateX(-10px); /* Move the text to the left */
+}
+
+.courses,
+.categories {
+  margin-top: 45px;
+  margin-bottom: 20px;
+}
+
+.courses h3,
+.categories h3 {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.courses ul,
+.categories ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.courses li,
+.categories li {
+  position: relative;
+  cursor: pointer;
+  padding: 10px; /* Add some padding for better clickability */
+  border-radius: 5px; /* Optional: Add border radius for smoother corners */
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  border-color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow: hidden;
+}
+
+.courses li.active,
+.courses li:hover,
+.categories li:hover {
+  background-color: #e0e0e0; /* Light grey background on hover */
+  color: #333; /* Optional: Change the text color on hover */
+}
+
+.categories li:hover::after {
+  opacity: 1; /* Show the arrow on hover */
+  transform: translateY(-50%) translateX(-5px); /* Slightly move the arrow to the right */
+}
+
+.categories li span {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for text movement */
+}
+
+.categories li:hover span {
+  transform: translateX(10px); /* Move the text to the left */
+}
+
+.categories li::after {
+  content: "→"; /* Arrow symbol */
+  font-size: 16px;
+  position: absolute;
+  right: 20px; /* Position the arrow on the right inside the list item */
+  top: 50%; /* Center the arrow vertically */
+  transform: translateY(-50%); /* Adjust for exact centering */
+  opacity: 0; /* Initially hide the arrow */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and transform */
+}
+.side-link {
+  color: #333333; /* Change color as needed */
+  text-decoration: none; /* Optional: removes underline from links */
+}
