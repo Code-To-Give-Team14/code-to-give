@@ -1,8 +1,10 @@
-package com.morganstanley.code_to_give.domain.event.batch;
+package com.morganstanley.code_to_give.batch;
 
 import com.morganstanley.code_to_give.domain.event.EventRepository;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
 import com.morganstanley.code_to_give.global.exception.CustomException;
+import com.morganstanley.code_to_give.message.MessageService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,7 +21,9 @@ import static com.morganstanley.code_to_give.global.exception.ErrorCode.EVENT_RE
 public class ReminderBatchRunner {
 
     private final EventRepository eventRepository;
+    private final MessageService messageService;
 
+    @Transactional
     @Scheduled(fixedDelay = 1000)
     public void sendReminderMessage() {
         LocalDateTime now = LocalDateTime.now();
@@ -31,7 +35,7 @@ public class ReminderBatchRunner {
                     LocalDateTime reminderTime = getReminderTime(reminder, livedEvent.getStartTime());
                     if (now.isEqual(reminderTime) ||
                         now.isAfter(reminderTime)) {
-                        System.out.println("SEND MESSAGE");
+                        messageService.sendMessage(livedEvent, reminder);
                         livedEvent.getSentReminder().add(reminder);
                         eventRepository.save(livedEvent);
                     }
