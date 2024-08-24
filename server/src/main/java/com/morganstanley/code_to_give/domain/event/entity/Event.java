@@ -103,6 +103,7 @@ public class Event  {
         LocalDateTime endTime,
         String venue,
         Integer quota,
+        String imgUrl,
         List<String> reminder
     ) {
         this.title = title;
@@ -119,6 +120,7 @@ public class Event  {
         this.quota = quota;
         this.reminder = reminder!=null ? reminder : List.of();
         this.sentReminder = List.of();
+        this.imgUrl = imgUrl;
         this.isActivated = true;
     }
 

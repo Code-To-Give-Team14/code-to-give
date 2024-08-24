@@ -43,6 +43,7 @@ public class CreateEventService {
             request.endTime(),
             request.venue(),
             request.quota(),
+            request.imgUrl(),
             request.reminder()
         );
 
