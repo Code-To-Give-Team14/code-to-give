@@ -68,6 +68,10 @@ public class Event  {
     @JdbcTypeCode(SqlTypes.JSON)
     private List<String> reminder;
 
+    @Column(columnDefinition = "json")
+    @JdbcTypeCode(SqlTypes.JSON)
+    private List<String> sentReminder;
+
     @OneToMany(
         mappedBy = "event",
         cascade = CascadeType.ALL,
@@ -113,7 +117,8 @@ public class Event  {
         this.endTime = endTime;
         this.venue = venue;
         this.quota = quota;
-        this.reminder = reminder;
+        this.reminder = reminder!=null ? reminder : List.of();
+        this.sentReminder = List.of();
         this.isActivated = true;
     }
 
@@ -142,7 +147,7 @@ public class Event  {
         this.endTime = endTime;
         this.venue = venue;
         this.quota = quota;
-        this.reminder = reminder;
+        this.reminder = reminder!=null ? reminder : List.of();;
 
         return this;
     }
