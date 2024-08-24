@@ -10,11 +10,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +27,7 @@ import java.time.LocalDateTime;
 @SQLDelete(sql = "UPDATE memberEvent SET deletedAt = CURRENT_TIMESTAMP WHERE id = ?")
 @Where(clause = "deletedAt IS NULL")
 @Table(name = "memberEvent")
-public class MemberEvent extends AuditLoggingBase {
+public class MemberEvent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,5 +49,18 @@ public class MemberEvent extends AuditLoggingBase {
 
     private String feedback;
 
+    private LocalDateTime createdAt;
+
+    private LocalDateTime updatedAt;
+
     private LocalDateTime deletedAt;
+
+    public MemberEvent(Member member, Event event, Boolean remindEmail, Boolean remindSMS) {
+        this.member = member;
+        this.event = event;
+        this.remindEmail = remindEmail;
+        this.remindSMS = remindSMS;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 }

@@ -1,0 +1,271 @@
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333333;
+}
+
+.header {
+  background-color: #f1f1f1;
+  padding: 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+}
+
+.header-title {
+  font-size: 1.5em;
+}
+
+.main-container {
+  display: flex;
+  height: calc(100vh - 50px); /* Subtract the height of the header */
+}
+
+.sidebar {
+  background-color: #f1f1f1;
+  width: 200px;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.new-thread-btn {
+  position: absolute; /* Absolutely position the button within the box */
+  bottom: 610px; /* Adjust the distance from the bottom of the box */
+  left: 40px; /* Adjust the distance from the left of the box */
+  width: 160px;
+  padding: 10px 20px;
+  background-color: #f9ef1e;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  border-color: #eedf9f;
+  color: #333333;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.new-thread-btn::after {
+  content: "+"; /* Plus symbol */
+  font-size: 16px;
+  position: absolute;
+  right: 25px; /* Position the arrow on the right inside the button */
+  opacity: 0; /* Initially hide the arrow */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and transform */
+  transform: translateX(10px);
+}
+
+.new-thread-btn:hover {
+  background-color: #e0a800;
+  color: #fff;
+}
+
+.new-thread-btn:hover::after {
+  opacity: 1; /* Make the arrow visible */
+  transform: translateX(0); /* Move the arrow to its original position */
+}
+
+.new-thread-btn span {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for text movement */
+}
+
+.new-thread-btn:hover span {
+  transform: translateX(-10px); /* Move the text to the left */
+}
+
+.courses,
+.categories {
+  margin-top: 45px;
+  margin-bottom: 20px;
+}
+
+.courses h3,
+.categories h3 {
+  font-size: 1em;
+  margin-bottom: 10px;
+}
+
+.courses ul,
+.categories ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.courses li,
+.categories li {
+  position: relative;
+  cursor: pointer;
+  padding: 10px; /* Add some padding for better clickability */
+  border-radius: 5px; /* Optional: Add border radius for smoother corners */
+  padding: 10px 20px;
+  background-color: #f1f1f1;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  border-color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow: hidden;
+}
+
+.courses li.active,
+.courses li:hover,
+.categories li:hover {
+  background-color: #e0e0e0; /* Light grey background on hover */
+  color: #333; /* Optional: Change the text color on hover */
+}
+
+.categories li:hover::after {
+  opacity: 1; /* Show the arrow on hover */
+  transform: translateY(-50%) translateX(-5px); /* Slightly move the arrow to the right */
+}
+
+.categories li span {
+  display: inline-block;
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for text movement */
+}
+
+.categories li:hover span {
+  transform: translateX(10px); /* Move the text to the left */
+}
+
+.categories li::after {
+  content: "→"; /* Arrow symbol */
+  font-size: 16px;
+  position: absolute;
+  right: 20px; /* Position the arrow on the right inside the list item */
+  top: 50%; /* Center the arrow vertically */
+  transform: translateY(-50%); /* Adjust for exact centering */
+  opacity: 0; /* Initially hide the arrow */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and transform */
+}
+
+.thread-list {
+  background-color: #ffffff;
+  flex-grow: 1;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+.thread-section {
+  margin-bottom: 20px;
+}
+
+.thread-item {
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.thread-item:hover {
+  background-color: #f0f0f5;
+}
+
+.thread-item.pinned {
+  background-color: #fdf5d4;
+  border-color: #e0c96b;
+}
+
+.thread-item h4 {
+  margin: 0;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.thread-item p {
+  margin: 5px 0 0 0;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.discussion-panel {
+  background-color: #ffffff;
+  flex-grow: 2;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.thread-detail {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.thread-detail h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.thread-meta {
+  font-size: 0.9em;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.reply-item {
+  background-color: #f8f8f8;
+  border-left: 4px solid #5a2d82;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.reply-item h4 {
+  font-size: 1.1em;
+  margin: 0;
+  color: #5a2d82;
+}
+
+.role-badge {
+  background-color: #ffd700;
+  color: white;
+  padding: 2px 5px;
+  margin-left: 10px;
+  border-radius: 3px;
+  font-size: 0.8em;
+}
+
+.reply-actions {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 10px;
+}
+
+.reply-actions span {
+  margin-right: 15px;
+}
+
+.nested-reply {
+  margin-top: 10px;
+  padding-left: 15px;
+  border-left: 2px solid #ddd;
+}
+
+.nested-reply img {
+  max-width: 100%;
+  margin-top: 10px;
+  border-radius: 5px;
+}

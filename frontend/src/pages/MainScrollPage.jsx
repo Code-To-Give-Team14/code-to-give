@@ -9,11 +9,6 @@ import zubinLogo from '../assets/mainScroll_zubinLogo.jpg';
 const MainScrollPage = () => {
   return (
     <div className="main-scroll-page">
-      <div className="header-container">
-        <img src={zubinLogo} alt="The Zubin Foundation Logo" className="logo" />
-        <h1>The Zubin Foundation</h1>
-      </div>
-
       <div className="event">
         <div className="event-box">
           <Link to="/EventPage" style={{ display: 'contents' }}>
@@ -36,7 +31,7 @@ const MainScrollPage = () => {
           <Link to="/CommunityPage" style={{ display: 'contents' }}>
             <img src={communityImage} alt="Community" className="event-image left-image" />
           </Link>
-          <button className="event-button" style={{ position: 'absolute', bottom: '-390px', left: '750px' }}><span>Learn More</span></button>
+          <button className="event-button" style={{ position: 'absolute', left: '650px' }}><span>Learn More</span></button>
         </div>
       </div>
 
@@ -49,7 +44,7 @@ const MainScrollPage = () => {
             <h2>About Us</h2>
             <p>This is the description for Event 3. Join us for an unforgettable experience filled with excitement and fun.</p>
           </div>
-          <button className="event-button" style={{bottom: '-930px'}}><span>Learn More</span></button>
+          <button className="event-button"><span>Learn More</span></button>
         </div>
       </div>
       <footer>

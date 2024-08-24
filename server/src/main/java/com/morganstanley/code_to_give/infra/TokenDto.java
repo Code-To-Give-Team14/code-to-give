@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class TokenDto {
-    private Integer memberId;
+    private String memberEmail;
 }

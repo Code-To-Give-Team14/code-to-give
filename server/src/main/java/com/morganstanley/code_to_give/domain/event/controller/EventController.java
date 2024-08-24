@@ -2,6 +2,7 @@ package com.morganstanley.code_to_give.domain.event.controller;
 
 import com.morganstanley.code_to_give.domain.event.controller.request.ChangeEventActiveStatusRequest;
 import com.morganstanley.code_to_give.domain.event.controller.request.CreateEventRequest;
+import com.morganstanley.code_to_give.domain.event.controller.request.RegisterEventRequest;
 import com.morganstanley.code_to_give.domain.event.controller.request.UpdateEventRequest;
 import com.morganstanley.code_to_give.domain.event.controller.response.AdminEventDetailResponse;
 import com.morganstanley.code_to_give.domain.event.controller.response.CreateEventResponse;
@@ -9,6 +10,7 @@ import com.morganstanley.code_to_give.domain.event.controller.response.EventList
 import com.morganstanley.code_to_give.domain.event.controller.response.MemberEventDetailResponse;
 import com.morganstanley.code_to_give.domain.event.service.CreateEventService;
 import com.morganstanley.code_to_give.domain.event.service.GetEventListService;
+import com.morganstanley.code_to_give.domain.event.service.RegisterEventService;
 import com.morganstanley.code_to_give.domain.event.service.UpdateEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ public class EventController {
     private final CreateEventService createEventService;
     private final GetEventListService getEventListService;
     private final UpdateEventService updateEventService;
+    private final RegisterEventService registerEventService;
 
     @PostMapping("/admin/events")
     public ResponseEntity<CreateEventResponse> createEvent(
@@ -36,7 +39,7 @@ public class EventController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("programs/{programId}/events")
+    @GetMapping("/events/{programId}")
     public ResponseEntity<List<EventListResponse>> getEventList(@PathVariable Integer programId) {
         return ResponseEntity.ok(getEventListService.getEventList(programId));
     }
@@ -75,4 +78,12 @@ public class EventController {
         return ResponseEntity.ok(getEventListService.getEventDetailForAdmin(eventId));
     }
 
+    @PostMapping("/events/registration")
+    public ResponseEntity<Void> registerEvent(
+        @RequestBody
+        RegisterEventRequest request
+    ) {
+        registerEventService.registerEventService(request);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import HelloWorld from './components/hellowWord'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import './styles/NavBar.css';
+import logo from './assets/Zubin-Logo.jpg'
 
 // List of pages
 import MainScrollPage from './pages/MainScrollPage'
@@ -10,11 +12,13 @@ import ChatBotPage from './pages/ChatBotPage'
 import CommunityPage from './pages/CommunityPage'
 import EngagementPage from './pages/EngagementPage'
 import AdminPage from './pages/AdminPage'
+import AdminTablePage from './pages/AdminTablePage'
 
 // Component for navigate the unauthorized users to the loginPage
 import ProtectedRoute from './components/ProtectedRoute';
 
 import { ChatBot } from './components/ChatBot';
+import { EventForm } from './components/EventForm'
 
 function App() {
 
@@ -24,29 +28,16 @@ function App() {
   return (
     <>
       <Router>
-        <nav style={{ backgroundColor: '#f0f0f0', padding: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-          <ul style={{ listStyleType: 'none', display: 'flex', justifyContent: 'space-around', padding: 0, margin: 0 }}>
-            <li style={{ display: 'inline' }}>
-              <Link to="/" style={{ color: 'black', textDecoration: 'none', padding: '10px 20px', borderRadius: '5px' }}>Main Scroll</Link>
-            </li>
-            <li style={{ display: 'inline' }}>
-              <Link to="/event" style={{ color: 'black', textDecoration: 'none', padding: '10px 20px', borderRadius: '5px' }}>Event</Link>
-            </li>
-            <li style={{ display: 'inline' }}>
-              <Link to="/community" style={{ color: 'black', textDecoration: 'none', padding: '10px 20px', borderRadius: '5px' }}>Community</Link>
-            </li>
-            <li style={{ display: 'inline' }}>
-              <Link to="/chatbot" style={{ color: 'black', textDecoration: 'none', padding: '10px 20px', borderRadius: '5px' }}>Chat Bot</Link>
-            </li>
-            <li style={{ display: 'inline' }}>
-              <Link to="/engagement" style={{ color: 'black', textDecoration: 'none', padding: '10px 20px', borderRadius: '5px' }}>Engagement</Link>
-            </li>
-            <li style={{ display: 'inline' }}>
-              <Link to="/admin" style={{ color: 'black', textDecoration: 'none', padding: '10px 20px', borderRadius: '5px' }}>Admin</Link>
-            </li>
-            <li style={{ display: 'inline' }}>
-              <Link to="/login" style={{ color: 'black', textDecoration: 'none', padding: '10px 20px', borderRadius: '5px' }}>Login</Link>
-            </li>
+        <nav>
+        <img src={logo} className="nav-logo" />
+          <ul className="nav-links">
+            <li><Link className="nav-link" to="/">Main Scroll</Link></li>
+            <li><Link className="nav-link" to="/event">Event</Link></li>
+            <li><Link className="nav-link" to="/community">Community</Link></li>
+            <li><Link className="nav-link" to="/chatbot">Chat Bot</Link></li>
+            <li><Link className="nav-link" to="/engagement">Volunteer</Link></li>
+            <li><Link className="nav-link" to="/admin">Admin</Link></li>
+            <li><Link className="nav-link" to="/login">Login</Link></li>
           </ul>
         </nav>
       
@@ -62,7 +53,9 @@ function App() {
           <Route path="/engagement" element={<ProtectedRoute element={<EngagementPage />} isAuthenticated={isAuthenticated} />} />
 
           {/* Admin Routes */}
-          <Route path="/admin" element={<ProtectedRoute element={<AdminPage />} isAuthenticated={isAuthenticated && isAdmin} />} />
+          <Route path="/admin" element={<ProtectedRoute element={<AdminPage />} isAuthenticated={isAuthenticated && isAdmin} />}>
+            <Route path="table" element={<AdminTablePage />} />
+          </Route>
         </Routes>
       </Router>
     </>
