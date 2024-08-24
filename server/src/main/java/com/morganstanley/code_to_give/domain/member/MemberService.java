@@ -13,4 +13,8 @@ public class MemberService {
     public Member getMemberByEmail(String email) {
         return memberRepository.findById(email).orElseThrow(() -> new RuntimeException("Member not found"));
     }
+
+    public Member createMember(Member member) {
+        return memberRepository.save(member);
+    }
 }
