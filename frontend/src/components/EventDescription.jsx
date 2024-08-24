@@ -6,20 +6,21 @@ import { Badge, Descriptions } from 'antd';
 const EventDescription = (props) => {
 
     const items = [
+        
         {
           key: '1',
-          label: 'Event',
-          children: props.title,
+          label: 'Date',
+          children: props.day + " "+ props.month + ", " + props.year,
         },
         {
           key: '2',
-          label: 'Date',
-          children: props.day + " "+ props.month,
+          label: 'Time',
+          children: props.hour + ":" + props.min + " - " + props.endHour + ":" + props.endMin,
         },
         {
           key: '3',
-          label: 'Time',
-          children: props.time,
+          label: 'Venue',
+          children: props.venue,
         },
         {
           key: '4',

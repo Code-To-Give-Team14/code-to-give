@@ -11,7 +11,7 @@
     {   
         "id": "1",
         "title":"DIY Mirror Clay Art",
-        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "description": "Get creative with your child by designing unique clay decorations for mirrors. A fun and artistic way to bond and express creativity.",
         "day":"14",
         "month": "SEP",
         "time": "10:00 am - 11:00 am",
@@ -20,7 +20,7 @@
     {   
         "id": "2",
         "title":"Mother-Daughter Bonding Time",
-        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "description": "Lets cherish special moments with engaging activities that strengthen the mother-daughter relationship. Perfect for creating lasting memories.",
         "day":"28",
         "month": "OCT",
         "time": "5:30 pm - 8:30 pm",
@@ -28,8 +28,8 @@
     },
     {
         "id": "3",
-        "title":"DIY Mirror Clay Art",
-        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "title":"Family Plant-A-Tree",
+        "description": "Join forces with your family to plant a tree and contribute to the environment. A rewarding activity that teaches sustainability and teamwork.",
         "day":"14",
         "month": "SEP",
         "time": "10:00 am - 11:00 am",
@@ -37,8 +37,8 @@
     },
     {   
         "id": "4",
-        "title":"Mother-Daughter Bonding Time",
-        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "title":"Family Movie Night",
+        "description": "Gather your loved ones, choose a favorite film, and enjoy a cozy movie night. Don't forget the popcorn!",
         "day":"28",
         "month": "OCT",
         "time": "5:30 pm - 8:30 pm",
@@ -46,8 +46,17 @@
     },
     {
         "id": "5",
-        "title":"Tung Chung Chai Gathering",
-        "description": "Looking for some 'out of home bonding time' with your mother? Come join us for this fun session where we will paint, share and have tea and snacks together.",
+        "title":"Family Karaoke Night",
+        "description": "Sing your heart out with family and enjoy an evening of laughter and music. Perfect for discovering hidden talents and having fun together.",
+        "day":"27",
+        "month": "AUG",
+        "time": "10:00 am - 11:00 am",
+        "imageURL": "/chaiAndPainting.jpg"
+    },
+    {
+        "id": "6",
+        "title":"Picnic Bliss - Savor the Afternoon",
+        "description": "Pack a basket with your favorite snacks and head to a park for a relaxing afternoon picnic. Enjoy nature and quality family time outdoors.",
         "day":"27",
         "month": "AUG",
         "time": "10:00 am - 11:00 am",

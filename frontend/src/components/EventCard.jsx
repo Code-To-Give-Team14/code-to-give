@@ -34,12 +34,7 @@ const EventCard = (props) => {
             setPartiClicked(false)
         }
         
-    };
-    
-    const registerVolunteer = () => {
-        console.log("EOH")
-    };
-    
+    }; 
 
     const handleOk = () => {
         setIsModalOpen(false);
@@ -80,7 +75,7 @@ const EventCard = (props) => {
                                 {props.title}
                             </div>
                             <div style={{ fontSize: "15px" }}>
-                                {props.time}
+                                {props.hour}:{props.min} - {props.endHour}:{props.endMin}
                             </div>  
                         </div>
                     </div>
@@ -90,10 +85,15 @@ const EventCard = (props) => {
                 <div style = {{display: "flex", flexDirection: "column"}}>
                     <EventDescription
                         title = {props.title}
-                        day = {props.day}
+                        year = {props.year}
                         month = {props.month}
-                        time = {props.time}
+                        day = {props.day}
+                        hour={props.hour}
+                        min={props.min}
+                        endHour={props.endHour}
+                        endMin={props.endMin}
                         description = {props.description}
+                        venue = {props.venue}
                     />
                     <div style = {{display:"flex", justifyContent:"center", margin: "8px"}}>
                         <Button 

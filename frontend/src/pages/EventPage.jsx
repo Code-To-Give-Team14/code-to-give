@@ -1,17 +1,41 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import EventCard from '../components/EventCard';
 import eventDataList from '../assets/stubEventList.json';
-import { Button } from 'antd';
+import { Button, Tabs } from 'antd';
 
 const EventPage = () => {
 
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
-  
-  const programId = "1"
 
+  const tabData = [
+    { label: 'Women and Girls', key: '1'},
+    { label: 'Family', key: '3'},
+    { label: 'Mental Health', key: '4'}
+  ];
   
- /** useEffect(() => {
+  const programId = 3
+
+  const handleTabChange = (activeKey) => {
+    fetch(`https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/admin/programs/${activeKey}/events`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+        setEvents(data);
+        
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+        setError(error);
+      });
+  };
+
+  useEffect(() => {
     fetch(`https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/admin/programs/${programId}/events`)
       .then(response => {
         if (!response.ok) {
@@ -27,12 +51,28 @@ const EventPage = () => {
         console.error('There was a problem with the fetch operation:', error);
         setError(error);
       });
-  }, [programId]); */
+  }, []);
+
 
   const eventsRef = useRef(null);
 
   const scrollToEvents = () => {
     eventsRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const monthMap = {
+    '01': 'JAN',
+    '02': 'FEB',
+    '03': 'MAR',
+    '04': 'APR',
+    '05': 'MAY',
+    '06': 'JUN',
+    '07': 'JUL',
+    '08': 'AUG',
+    '09': 'SEP',
+    '10': 'OCT',
+    '11': 'NOV',
+    '12': 'DEC'
   };
 
   return (
@@ -60,23 +100,54 @@ const EventPage = () => {
       <div ref={eventsRef} style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold", marginTop: "20px", backgroundColor: "white", width: "100%", paddingTop: "25px" }}>
         ### UPCOMING EVENTS ###
       </div>
+      
 
-      <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", padding: "20px", backgroundColor: "white", width: "100%" }}>
-        {eventDataList.map((event, index) => (
-          <EventCard
-            key={index}
-            id={event.id}
-            title={event.title}
-            day={event.day}
-            month={event.month}
-            time={event.time}
-            imageURL={event.imageURL}
-            description={event.description}
-          />
-        ))}
-      </div>
+      <Tabs
+        defaultActiveKey="3"
+        centered
+        onChange={handleTabChange}
+      
+      
+        items={tabData.map(({ label, key }) => ({
+          label,
+          key,
+          children: (
 
-      <div style={{ padding: "30px", backgroundColor: "white", width: "100%" }}></div>
+        <div style={{ display: "flex", justifyContent: "center", flexWrap: "wrap", padding: "20px", backgroundColor: "white", width: "100%" }}>
+          {events.map((event, index) => {
+            
+            const date = new Date(event.startTime);
+            const year = date.getFullYear();
+            const month = monthMap[date.toISOString().slice(5, 7)];
+            const day = String(date.getDate()).padStart(2, '0');
+            const hour = String(date.getHours()).padStart(2, '0');
+            const min = String(date.getMinutes()).padStart(2, '0');
+
+            const endDate = new Date(event.endTime);
+            const endHour = String(endDate.getHours()).padStart(2, '0');
+            const endMin = String(endDate.getMinutes()).padStart(2, '0');
+                    
+            return (
+              <EventCard
+                key={index}
+                id={event.id}
+                title={event.title}
+                venue = {event.venue}
+                year = {year}
+                month={month}
+                day={day}
+                hour={hour}
+                min={min}
+                endHour={endHour}
+                endMin={endMin}
+                imageURL={event.imageUrl}
+                description={event.description}
+              />)
+          })}
+        </div>)}))}>
+      </Tabs>
+
+      <div style={{ paddingBottom: "30px", backgroundColor: "white", width: "100%" }}></div>
 
     </div>
   );
