@@ -12,6 +12,7 @@ import CommunityPage from './pages/CommunityPage'
 import EngagementPage from './pages/EngagementPage'
 import AdminPage from './pages/AdminPage'
 import AdminTablePage from './pages/AdminTablePage'
+import TrainingPage from './pages/TrainingPage';
 
 // Component for navigate the unauthorized users to the loginPage
 import ProtectedRoute from './components/ProtectedRoute';
@@ -44,7 +45,9 @@ function App() {
 
           {/* Protected Routes */}
           <Route path="/community" element={<ProtectedRoute element={<CommunityPage />} isAuthenticated={isAuthenticated} />} />
-          <Route path="/engagement" element={<ProtectedRoute element={<EngagementPage />} isAuthenticated={isAuthenticated} />} />
+          <Route path="/engagement" element={<ProtectedRoute element={<EngagementPage />} isAuthenticated={isAuthenticated} />} >
+            <Route path=":id"element={<ProtectedRoute element={<TrainingPage />} isAuthenticated={isAuthenticated} />}/>
+          </Route>
 
           {/* Admin Routes */}
           <Route path="/admin" element={<ProtectedRoute element={<AdminPage />} isAuthenticated={isAuthenticated && isAdmin} />}>

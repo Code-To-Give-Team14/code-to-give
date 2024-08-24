@@ -1,10 +1,28 @@
-import React from 'react'
-import { Tabs } from 'antd';
+import React, { useRef, useState, useEffect } from 'react'
+import { Tabs, Button, Modal } from 'antd';
+import { useNavigate, Outlet } from 'react-router-dom';
 import eventDataList from '../assets/stubEngagementList.json'
 import volunDataList from '../assets/stubVolunteerList.json'
 import EngagementCard from '../components/EngagementCard';
+import QuizForm from '../components/QuizBox';
 
 const EngagementPage = () => {
+
+  const [eventId, setEventId] = useState("1")
+  const [eventTitle, setEventTitle] = useState("DIY Mirror Clay Art")
+  const [eventLink, setEventLink] = useState("https://www.youtube.com/watch?v=oR4vdnNa7oI")
+
+  const eventsRef = useRef(null);
+
+  const scrollToEvents = (id, title) => {
+    eventsRef.current.scrollIntoView({ behavior: 'smooth' });
+    setEventId(id);
+    setEventTitle(title)
+  };
+
+  useEffect(() => {
+    setEventLink(listOfLinks[eventId]);
+  }, [eventId]);
 
   const monthMap = {
     '01': 'JAN',
@@ -21,6 +39,24 @@ const EngagementPage = () => {
     '12': 'DEC'
   };
 
+  const listOfLinks = {
+    "1": "https://www.youtube.com/embed/Gg2-hIdf61o",
+    "2": "https://www.youtube.com/embed/Kv1vQyrEOyA",
+    "3": "https://www.youtube.com/embed/Fo6Wg7rXW1A"
+  }
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const navigate = useNavigate();
   const ParticipatedEvents = () => (
 
     <>
@@ -38,17 +74,17 @@ const EngagementPage = () => {
         const endMin = String(endDate.getMinutes()).padStart(2, '0');
 
         return (
-          <EngagementCard
-            key={event.eventId}
-            title={event.title}
-            description={event.description}
-            year={year}
-            month={month}
-            day={day}
-            hour={hour}
-            min={min}
-            endHour = {endHour}
-            endMin = {endMin}
+            <EngagementCard
+              key={event.eventId}
+              title={event.title}
+              description={event.description}
+              year={year}
+              month={month}
+              day={day}
+              hour={hour}
+              min={min}
+              endHour = {endHour}
+              endMin = {endMin}
           />
         );
       })}
@@ -73,26 +109,26 @@ const EngagementPage = () => {
       const endMin = String(endDate.getMinutes()).padStart(2, '0');
 
       return (
-        <EngagementCard
-          key={event.eventId}
-          title={event.title}
-          description={event.description}
-          year={year}
-          month={month}
-          day={day}
-          hour={hour}
-          min={min}
-          endHour = {endHour}
-          endMin = {endMin}
-        />
+        <div
+          onClick={() => scrollToEvents(event.eventId, event.title)}
+          >
+          <EngagementCard
+            key={event.eventId}
+            title={event.title}
+            description={event.description}
+            year={year}
+            month={month}
+            day={day}
+            hour={hour}
+            min={min}
+            endHour = {endHour}
+            endMin = {endMin}
+          />
+        </div>
       );
     })}
   </>
   );
-
-  const onChange = (key) => {
-    console.log(key);
-  };
 
   const items = [
     {
@@ -108,26 +144,65 @@ const EngagementPage = () => {
   ];
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+
+    <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center",  }}>
       
-      <div style={{ width: "100%" }}>
-        <div style={{ backgroundImage: "url(/volunteer2.avif)", backgroundSize: "cover", backgroundPosition: "center", height: "300px" }}>
+      <div style={{ width: "100%", overflow: 'hidden' }}>
+        <div style={{ backgroundImage: "url(/volunteer.avif)", backgroundSize: "cover", objectPosition: 'top', backgroundPosition: "center", height: "250px"}}>
         </div>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "center", width: '80%', margin: "10px" }}>
-        <div style={{ width: "80%" }}>
+      <div style={{ display: "flex", justifyContent: "center", width: '80%', margin: "10px", overflowY: "auto" }}>
+        
+        <div style={{ width: "80%"}}>
           <Tabs
             defaultActiveKey="1"
             items={items}
-            onChange={onChange}
             tabBarStyle={{ padding: "10px" }}
           />
         </div>
       </div>
+      
+      <div ref={eventsRef} style = {{height:"120px"}}></div>
+      <div  style ={{height: "100vh"}}>
+        <div style ={{marginTop: "10px", display: "flex", flexDirection: "column", justifyContent:"center", alignItems:"center"}}>
+          <div 
+            style = {{fontSize: "25px", fontWeight: "bold", padding: "15px", textAlign:"center", marginBottom: "20px"}}> Volunteer Training - {eventTitle}</div>
+            <iframe
+                  width="800"
+                  height="450"
+                  src={eventLink}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+            ></iframe>
+        </div>
 
+        <div style ={{display: "flex", justifyContent:"center", padding:"40px", alignItems:"self-start"}}>
+        <Button
+          onClick={showModal}
+          style={{
+            width: '200px',
+            height: '60px',
+            fontSize: '18px',
+          }}
+        >
+          Attempt Quiz
+        </Button>
+        </div>
+
+        
+        <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} width={600}>
+        <div style={{ fontSize: '30px', fontWeight: 'bold', textAlign: 'center', marginBottom: '20px' }}>
+        Quiz
+      </div>
+          <QuizForm/>
+        </Modal>
+      </div>
     </div>
+
   );
+  
 }
 
 export default EngagementPage
