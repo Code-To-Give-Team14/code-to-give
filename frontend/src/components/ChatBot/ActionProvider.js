@@ -12,15 +12,16 @@ class ActionProvider {
       ...messageHistory,
       "messages": [...messageHistory.messages, newMessage]
     };
-    // axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/chat', messageHistory)
-    //   .then(response => {
-    //     console.log('Response from "/chat" API:', response.data);
-    //     const botMessage = this.createChatBotMessage(response.data.response);
-    //     this.setChatbotMessage(botMessage);
-    //   })
-    //   .catch(error => {
-    //     console.error('Error calling the "/chat" API:', error);
-    //   });
+    console.log('Message history:', messageHistory);
+    axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/chat', messageHistory)
+      .then(response => {
+        console.log('Response from "/chat" API:', response.data);
+        const botMessage = this.createChatBotMessage(response.data.response);
+        this.setChatbotMessage(botMessage);
+      })
+      .catch(error => {
+        console.error('Error calling the "/chat" API:', error);
+      });
 
 
 

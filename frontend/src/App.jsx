@@ -17,6 +17,7 @@ import AdminPage from './pages/AdminPage'
 import ProtectedRoute from './components/ProtectedRoute';
 
 import { ChatBot } from './components/ChatBot';
+import { EventForm } from './components/EventForm'
 
 function App() {
 
