@@ -15,11 +15,11 @@ export const ChatBot = () => {
     };
 
     const saveMessages = (messages, HTMLString) => {
-        localStorage.setItem('chat_messages', JSON.stringify(messages));
+        sessionStorage.setItem('chat_messages', JSON.stringify(messages));
     };
 
     const loadMessages = () => {
-        const messages = JSON.parse(localStorage.getItem('chat_messages'));
+        const messages = JSON.parse(sessionStorage.getItem('chat_messages'));
         return messages;
     };
 
