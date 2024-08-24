@@ -33,10 +33,7 @@ body {
 }
 
 .new-thread-btn {
-  position: absolute; /* Absolutely position the button within the box */
-  bottom: 590px; /* Adjust the distance from the bottom of the box */
-  left: 40px; /* Adjust the distance from the left of the box */
-  width: 160px;
+  position: flex; /* Absolutely position the button within the box */
   padding: 10px 20px;
   background-color: #f9ef1e;
   border-radius: 7px;
@@ -55,11 +52,10 @@ body {
 .new-thread-btn::after {
   content: "+"; /* Plus symbol */
   font-size: 16px;
-  position: absolute;
-  right: 25px; /* Position the arrow on the right inside the button */
+  position: flex;
   opacity: 0; /* Initially hide the arrow */
   transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and transform */
-  transform: translateX(10px);
+  transform: translateX(0px);
 }
 
 .new-thread-btn:hover {
@@ -69,7 +65,7 @@ body {
 
 .new-thread-btn:hover::after {
   opacity: 1; /* Make the arrow visible */
-  transform: translateX(0); /* Move the arrow to its original position */
+  transform: translateX(0);
 }
 
 .new-thread-btn span {
@@ -78,12 +74,12 @@ body {
 }
 
 .new-thread-btn:hover span {
-  transform: translateX(-10px); /* Move the text to the left */
+  transform: translateX(-5px); /* Move the text to the left */
 }
 
 .courses,
 .categories {
-  margin-top: 45px;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
