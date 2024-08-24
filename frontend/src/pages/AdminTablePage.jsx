@@ -42,7 +42,7 @@ const AdminTablePage = () => {
   };
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#f0f0f0' }}>
       <Input
         placeholder="Search"
         value={value}
