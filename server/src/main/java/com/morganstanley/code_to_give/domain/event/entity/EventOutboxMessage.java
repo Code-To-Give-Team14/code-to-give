@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@SQLDelete(sql = "UPDATE eventOutboxMessage SET publishedAt = CURRENT_TIMESTAMP, isPublished = true WHERE id = ?")
+@SQLDelete(sql = "UPDATE eventOutboxMessage SET publishedAt = CURRENT_TIMESTAMP, isPublished = 1 WHERE id = ?")
 @Where(clause = "isPublished = 0")
 @Table(name = "eventOutboxMessage")
 public class EventOutboxMessage {
