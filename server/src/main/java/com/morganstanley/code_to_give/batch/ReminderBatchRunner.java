@@ -1,7 +1,13 @@
 package com.morganstanley.code_to_give.batch;
 
+import com.morganstanley.code_to_give.ai.Chatbot;
+import com.morganstanley.code_to_give.ai.Recommendation;
+import com.morganstanley.code_to_give.domain.event.EventOutboxMessageRepository;
 import com.morganstanley.code_to_give.domain.event.EventRepository;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
+import com.morganstanley.code_to_give.domain.event.entity.EventOutboxMessage;
+import com.morganstanley.code_to_give.domain.member.MemberService;
+import com.morganstanley.code_to_give.domain.member.entity.Member;
 import com.morganstanley.code_to_give.global.exception.CustomException;
 import com.morganstanley.code_to_give.message.MessageService;
 import jakarta.transaction.Transactional;
@@ -13,6 +19,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.morganstanley.code_to_give.global.exception.ErrorCode.EVENT_NOT_FOUND;
 import static com.morganstanley.code_to_give.global.exception.ErrorCode.EVENT_REMINDER_NOT_VALID_FORMAT;
 
 @Component
@@ -22,6 +29,9 @@ public class ReminderBatchRunner {
 
     private final EventRepository eventRepository;
     private final MessageService messageService;
+    private final MemberService memberService;
+    private final EventOutboxMessageRepository eventOutboxMessageRepository;
+
 
     @Transactional
     @Scheduled(fixedDelay = 1000)
@@ -35,11 +45,30 @@ public class ReminderBatchRunner {
                     LocalDateTime reminderTime = getReminderTime(reminder, livedEvent.getStartTime());
                     if (now.isEqual(reminderTime) ||
                         now.isAfter(reminderTime)) {
-                        messageService.sendMessage(livedEvent, reminder);
+                        messageService.sendReminderMessage(livedEvent, reminder);
                         livedEvent.getSentReminder().add(reminder);
                         eventRepository.save(livedEvent);
                     }
                 });
+        });
+    }
+
+    @Transactional
+    @Scheduled(cron = "0 0 10,22 * * *")
+    public void handleEventCreatedEvent() {
+        List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
+
+        eventCreatedEvents.forEach(event -> {
+            Event newEvent = eventRepository.findById(event.getPayload().eventId())
+                .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
+            List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
+                memberService,
+                10,
+                newEvent.getInterests(),
+                newEvent.getSkills()
+            );
+            messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
+            eventOutboxMessageRepository.delete(event);
         });
     }
 
