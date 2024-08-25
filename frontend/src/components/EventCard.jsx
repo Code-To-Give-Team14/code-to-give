@@ -43,7 +43,7 @@ const EventCard = (props) => {
       const handleCancel = () => {
         setIsModalOpen(false);
       };
-
+      
     return (
 
         <div style = {{margin: "20px"}}>
@@ -52,7 +52,7 @@ const EventCard = (props) => {
                 style = {{ width: 350 }}
                 onClick = {showModal}
                 cover = {
-                    <img alt="example" src = {props.imageURL} style={{width:350, height:200, display: "flex", objectFit:"cover"}} />
+                    <img alt="example" src={props.imgUrl} style={{width:350, height:200, display: "flex", objectFit:"cover"}} />
                 }
             >
                 <div style={{ display: "flex", flexDirection: "column", padding: "5px" }}>
