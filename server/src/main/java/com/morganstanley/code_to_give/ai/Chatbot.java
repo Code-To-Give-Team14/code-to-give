@@ -19,12 +19,27 @@ public class Chatbot {
     static final String systemPromptTemplate = "You are a helpful assistant on the Code To Give website of the Zubin Foundation, whose mission is to mission is to improve the lives of Hong Kong's ethnic minorities by reducing suffering and providing opportunities. You must answer the user's question. You are currently talking to {FirstName} {LastName}. You MUST NOT make up information that is not provided here. {Context}Please be friendly and keep the conversation casual.";
 
     public static class Message {
+
+        public static class ExtraItems {
+            public List<Integer> eventForUserToJoinAsMember;
+            public List<Integer> eventForUserToJoinAsVolunteer;
+        }
+
         public String type; // Only "user" or "bot"
         public String message;
+        public ExtraItems items;
 
-        public Message(String type, String message) {
+        public Message(
+                String type,
+                String message,
+                List<Integer> eventForUserToJoinAsMember,
+                List<Integer> eventForUserToJoinAsVolunteer
+        ) {
             this.type = type;
             this.message = message;
+            this.items = new ExtraItems();
+            this.items.eventForUserToJoinAsMember = eventForUserToJoinAsMember;
+            this.items.eventForUserToJoinAsVolunteer = eventForUserToJoinAsVolunteer;
         }
     }
 
@@ -32,7 +47,7 @@ public class Chatbot {
         public String isUserAskingForEventRecommendation;
     }
 
-    public static String getResponse(Member member, List<Message> messages, EventService eventService) {
+    public static Message getResponse(Member member, List<Message> messages, EventService eventService) {
         String model = System.getenv("AZURE_OPENAI_CHAT_DEPLOYMENT");
 
         OpenAIClient client = new OpenAIClientBuilder()
@@ -71,6 +86,7 @@ public class Chatbot {
         } catch (Exception ignored) {}
 
         String context = "";
+        List<Integer> helperEventIds = new ArrayList<>();
         if (isUserAskingForEventRecommendation.equals("YesAsHelper") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
             List<Event> events = Recommendation.findSkills(member, eventService);
             if (!events.isEmpty()) {
@@ -79,13 +95,19 @@ public class Chatbot {
                         ", ",
                         events
                                 .stream()
-                                .limit(3)
+                                .limit(2)
                                 .map(event -> event.getTitle() + " (" + event.getDescription() + ")")
                                 .toList()
                 )
                         + ". ";
+                helperEventIds = events
+                        .stream()
+                        .limit(2)
+                        .map(Event::getId)
+                        .toList();
             }
         }
+        List<Integer> attendeeEventIds = new ArrayList<>();
         if (isUserAskingForEventRecommendation.equals("YesAsAttendee") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
             List<Event> events = Recommendation.findInterests(member, eventService);
             if (!events.isEmpty()) {
@@ -94,11 +116,16 @@ public class Chatbot {
                         ", ",
                         events
                                 .stream()
-                                .limit(3)
+                                .limit(2)
                                 .map(event -> event.getTitle() + " (" + event.getDescription() + ")")
                                 .toList()
                 )
                         + ". ";
+                attendeeEventIds = events
+                        .stream()
+                        .limit(2)
+                        .map(Event::getId)
+                        .toList();
             }
         }
         if (context.isEmpty()) {
@@ -114,12 +141,19 @@ public class Chatbot {
                 .replace("{Context}", context)
         ));
 
-        return client
+        String responseMessage = client
                 .getChatCompletions(model, new ChatCompletionsOptions(chatMessages))
                 .getChoices()
                 .get(0)
                 .getMessage()
                 .getContent();
+
+        return new Message(
+                "bot",
+                responseMessage,
+                attendeeEventIds,
+                helperEventIds
+        );
     }
 
     static FunctionDefinition getEventRecommendationFunctionDefinition() {
