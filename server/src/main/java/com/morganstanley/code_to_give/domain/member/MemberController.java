@@ -15,6 +15,12 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    public static class MemberUpdateInterestsSkillsRequest {
+        public String email;
+        public List<String> interests;
+        public List<String> skills;
+    }
+
     public static class MemberRequest {
         public String email;
         public String firstName;
@@ -44,6 +50,11 @@ public class MemberController {
                 memberRequest.language,
                 memberRequest.isAdmin
         ));
+    }
+
+    @PostMapping("/update-interests-skills")
+    public void updateMemberInterestsSkills(@RequestBody MemberUpdateInterestsSkillsRequest request) {
+        memberService.updateInterestsAndSkills(request.email, request.interests, request.skills);
     }
 
 }
