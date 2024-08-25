@@ -44,19 +44,19 @@ public class CreateEventService {
             List.of(),
             request.interests(),
             List.of(),
-//            request.startTime(),
-            LocalDateTime.now().plusMinutes(2L),
+            request.startTime(),
+//            LocalDateTime.now().plusMinutes(2L),
             request.endTime(),
             request.venue(),
             request.quota(),
             request.imgUrl(),
-//            ReminderTime.unFormatReminderTime(request.reminder())
-            List.of("1h")
+            ReminderTime.unFormatReminderTime(request.reminder())
+//            List.of("1h")
         );
 
         eventRepository.save(event);
 
-        recommendationService.saveEventEmbedding(event.getId(), request.skills(), request.interests());
+//        recommendationService.saveEventEmbedding(event.getId(), request.skills(), request.interests());
         publishEventCreatedEvent(event.getId());
 
         return new CreateEventResponse(event.getId());
