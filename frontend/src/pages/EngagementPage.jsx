@@ -140,6 +140,8 @@ const registerVolun = () => {
                   min={min}
                   endHour={endHour}
                   endMin={endMin}
+                  interests = {event.interests}
+                    skills = {event.skills}
                   description = {event.description}
                   venue = {event.venue}
               />

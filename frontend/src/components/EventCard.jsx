@@ -92,6 +92,8 @@ const EventCard = (props) => {
                         min={props.min}
                         endHour={props.endHour}
                         endMin={props.endMin}
+                        interests = {props.interests}
+                        skills = {props.skills}
                         description = {props.description}
                         venue = {props.venue}
                     />

@@ -172,6 +172,8 @@ const EventPage = () => {
                 min={min}
                 endHour={endHour}
                 endMin={endMin}
+                interests={event.interests}
+                skills={event.skills}
                 imageURL={event.imageUrl}
                 description={event.description}
               />)
