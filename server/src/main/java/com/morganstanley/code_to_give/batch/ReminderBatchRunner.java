@@ -12,6 +12,7 @@ import com.morganstanley.code_to_give.global.exception.CustomException;
 import com.morganstanley.code_to_give.message.MessageService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -53,27 +54,28 @@ public class ReminderBatchRunner {
         });
     }
 
-//    @Transactional
-//    @Scheduled(fixedDelay = 10000)
-//    public void handleEventCreatedEvent() {
-//        List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
-//
-//        eventCreatedEvents.forEach(event -> {
-//            Event newEvent = eventRepository.findById(event.getPayload().eventId())
-//                .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
-//
-//            if (!newEvent.getInterestsEmbedding().isEmpty()) {
-//                List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
-//                    memberService,
-//                    1,
-//                    newEvent.getInterests(),
-//                    newEvent.getSkills()
-//                );
-//                messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
-//                eventOutboxMessageRepository.delete(event);
-//            }
-//        });
-//    }
+    @Transactional
+    @Scheduled(fixedDelay = 10000)
+    @Profile("dev")
+    public void handleEventCreatedEvent() {
+        List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
+
+        eventCreatedEvents.forEach(event -> {
+            Event newEvent = eventRepository.findById(event.getPayload().eventId())
+                .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
+
+            if (!newEvent.getInterestsEmbedding().isEmpty()) {
+                List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
+                    memberService,
+                    1,
+                    newEvent.getInterests(),
+                    newEvent.getSkills()
+                );
+                messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
+                eventOutboxMessageRepository.delete(event);
+            }
+        });
+    }
 
     private LocalDateTime getReminderTime(String timeBeforeStartTime, LocalDateTime startTime) {
 
