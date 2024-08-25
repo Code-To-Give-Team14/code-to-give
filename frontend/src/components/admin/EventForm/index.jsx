@@ -47,8 +47,6 @@ export const EventForm = (props) => {
     };
 
 
-    console.log('Received values:', formattedValues);
-
     try {
       setLoading(true);
       const response = await axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/admin/events', formattedValues);
@@ -64,7 +62,7 @@ export const EventForm = (props) => {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Create Event
+        {props.isEdit ? 'Edit' : props.isRecurring ? 'Duplicate' : 'Create Event'}
       </Button>
       <Modal
         title="Event Form"

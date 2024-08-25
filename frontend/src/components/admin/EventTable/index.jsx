@@ -8,23 +8,47 @@ const dataColumns = [
         title: 'Title',
         dataIndex: 'title',
         key: 'title',
+        align: 'right',
     },
     {
-        title: 'Description',
-        dataIndex: 'description',
-        key: 'description',
+        title: 'Date',
+        dataIndex: 'date',
+        key: 'date',
+        align: 'right',
     },
+    {
+        title: 'Duration',
+        dataIndex: 'duration',
+        key: 'duration',
+        align: 'right',
+    },
+    {
+        title: 'Venue',
+        dataIndex: 'venue',
+        key: 'venue',
+        align: 'right',
+    },
+    {
+        title: 'Quota',
+        dataIndex: 'quota',
+        key: 'quota',
+    },
+
     {
         title: 'Types',
         dataIndex: 'types',
         key: 'types',
         render: (types) => (
             <>
-                {types.map((type) => (
-                    <Tag color="geekblue" key={type}>
-                        {type.toUpperCase()}
-                    </Tag>
-                ))}
+                {types.length > 0 ? (
+                    types.map((type) => (
+                        <Tag color="geekblue" key={type}>
+                            {type.toUpperCase()}
+                        </Tag>
+                    ))
+                ) : (
+                    <Tag color="red" key="empty"></Tag>
+                )}
             </>
         ),
     },
@@ -34,11 +58,15 @@ const dataColumns = [
         key: 'interests',
         render: (interests) => (
             <>
-                {interests.map((interest) => (
-                    <Tag color="green" key={interest}>
-                        {interest.toUpperCase()}
-                    </Tag>
-                ))}
+                {interests.length > 0 ? (
+                    interests.map((interest) => (
+                        <Tag color="green" key={interest}>
+                            {interest.toUpperCase()}
+                        </Tag>
+                    ))
+                ) : (
+                    <Tag color="red" key="empty"></Tag>
+                )}
             </>
         ),
     },
@@ -48,45 +76,15 @@ const dataColumns = [
         key: 'skills',
         render: (skills) => (
             <>
-                {skills.map((skill) => (
-                    <Tag color="yellow" key={skill}>
-                        {skill.toUpperCase()}
-                    </Tag>
-                ))}
-            </>
-        ),
-    },
-    {
-        title: 'Start Time',
-        dataIndex: 'startTime',
-        key: 'startTime',
-    },
-    {
-        title: 'End Time',
-        dataIndex: 'endTime',
-        key: 'endTime',
-    },
-    {
-        title: 'Venue',
-        dataIndex: 'venue',
-        key: 'venue',
-    },
-    {
-        title: 'Quota',
-        dataIndex: 'quota',
-        key: 'quota',
-    },
-    {
-        title: 'Reminder Times',
-        dataIndex: 'reminderTimes',
-        key: 'reminderTimes',
-        render: (reminderTimes) => (
-            <>
-                {reminderTimes.map((time) => (
-                    <Tag color="purple" key={time}>
-                        {time}
-                    </Tag>
-                ))}
+                {skills.length > 0 ? (
+                    skills.map((skill) => (
+                        <Tag color="yellow" key={skill}>
+                            {skill.toUpperCase()}
+                        </Tag>
+                    ))
+                ) : (
+                    <Tag color="red" key="empty"></Tag>
+                )}
             </>
         ),
     },
@@ -95,10 +93,9 @@ const dataColumns = [
         key: 'action',
         render:
             (_, value) => (
-                console.log(value),
                 <Space size="middle">
+                    <EventForm isEdit initialData={value} />
                     <EventForm isRecurring initialData={value} />
-                    {/* <EventForm /> */}
                 </Space>
             ),
     },
@@ -118,6 +115,8 @@ export const EventTable = () => {
         "skills": [
             "skill2"
         ],
+        "date": "2024-08-25",
+        "duration": "03:00-04:00",
         "startTime": "2024-08-25T03:00:00.540Z",
         "endTime": "2024-08-25T04:00:00.540Z",
         "venue": "Place1",
@@ -129,8 +128,22 @@ export const EventTable = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/admin/events');
-                console.log('Response from "/api/events":', response.data);
-                // setData(response.data);
+                const updatedData = response.data.map(event => {
+                    const sDate = new Date(event.startTime);
+                    const eDate = new Date(event.endTime);
+                    const date = `${sDate.getFullYear()}-${sDate.getMonth() + 1}-${sDate.getDate()}`;
+                    const startHours = sDate.getHours();
+                    const startMinutes = sDate.getMinutes().toString().padStart(2, '0');
+                    const endHours = eDate.getHours();
+                    const endMinutes = eDate.getMinutes().toString().padStart(2, '0');
+                    const duration = `${startHours}:${startMinutes}-${endHours}:${endMinutes}`;
+                    return {
+                        date,
+                        duration,
+                        ...event
+                    };
+                });
+                setData(updatedData);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
