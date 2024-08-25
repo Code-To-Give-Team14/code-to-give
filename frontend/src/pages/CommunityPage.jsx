@@ -86,12 +86,32 @@ const CommunityPage = () => {
           </ul>
           <h3>Current Topics</h3>
           <ul>
-          <li onClick={() => setSelectedTag('All')}><MessageOutlined /> All</li>
-            <li onClick={() => setSelectedTag('General')}><MessageOutlined /> General</li>
-            <li onClick={() => setSelectedTag('Event Polling')}><MessageOutlined /> Event Polling</li>
-            <li onClick={() => setSelectedTag('Emergency Relief')}><ExclamationCircleOutlined /> Emergency Relief</li>
-          </ul>
-          <Button type="primary" icon={<PlusOutlined />} style={{ marginTop: '20px', borderRadius: '20px' }}>
+            <li
+                onClick={() => setSelectedTag('All')}
+                className={selectedTag === 'All' ? 'active' : ''}
+            >
+                <MessageOutlined /> All
+            </li>
+            <li
+                onClick={() => setSelectedTag('General')}
+                className={selectedTag === 'General' ? 'active' : ''}
+            >
+                <MessageOutlined /> General
+            </li>
+            <li
+                onClick={() => setSelectedTag('Event Polling')}
+                className={selectedTag === 'Event Polling' ? 'active' : ''}
+            >
+                <MessageOutlined /> Event Polling
+            </li>
+            <li
+                onClick={() => setSelectedTag('Emergency Relief')}
+                className={selectedTag === 'Emergency Relief' ? 'active' : ''}
+            >
+                <ExclamationCircleOutlined /> Emergency Relief
+            </li>
+        </ul>
+          <Button type="primary" icon={<PlusOutlined />} style={{ marginTop: '20px', borderRadius: '10px', backgroundColor:'#533ce2' , padding: '20px'}}>
             Join a new topic
           </Button>
         </div>
@@ -99,7 +119,7 @@ const CommunityPage = () => {
 
       <main className="content">
         <div className="content-header">
-          <Button type="primary" icon={<PlusOutlined />} style={{ marginBottom: '20px', borderRadius: '20px' }}>
+          <Button type="primary" icon={<PlusOutlined />} style={{ marginBottom: '20px', borderRadius: '10px', backgroundColor:'#533ce2',padding:'20px' }}>
             Add a new thread
           </Button>
         </div>
@@ -145,7 +165,7 @@ const CommunityPage = () => {
           <UserOutlined style={{fontSize: '60px'}}/>
           <h3>Tvesha</h3>
           <p>Current User</p>
-          <Button type="primary" block>
+          <Button type="primary" style={{backgroundColor: '#533ce2'}}block>
             Profile
           </Button>
         </div>
