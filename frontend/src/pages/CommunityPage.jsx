@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Badge, Button } from 'antd';
+import { Input, Button } from 'antd';
 import { UserOutlined, PlusOutlined, HomeOutlined, MessageOutlined, SaveOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { ChatBot } from '../components/ChatBot';
 import '../styles/CommunityPage.css';
