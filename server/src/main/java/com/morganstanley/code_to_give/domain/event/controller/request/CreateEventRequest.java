@@ -15,6 +15,6 @@ public record CreateEventRequest(
     String venue,
     Integer quota,
     String imgUrl,
-    List<String> reminder
+    List<ReminderTime> reminder
 ) {
 }

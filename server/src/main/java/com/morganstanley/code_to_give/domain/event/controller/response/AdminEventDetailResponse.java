@@ -1,5 +1,6 @@
 package com.morganstanley.code_to_give.domain.event.controller.response;
 
+import com.morganstanley.code_to_give.domain.event.controller.request.ReminderTime;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
 import lombok.Builder;
 import org.hibernate.boot.jaxb.mapping.DiscriminatedAssociation;
@@ -20,7 +21,7 @@ public record AdminEventDetailResponse(
         String venue,
         Integer quota,
         Boolean isActivated,
-        List<String> reminder,
+        List<ReminderTime> reminder,
         String imgUrl
 ) {
 
@@ -38,7 +39,7 @@ public record AdminEventDetailResponse(
                 .venue(event.getVenue())
                 .quota(event.getQuota())
                 .isActivated(event.getIsActivated())
-                .reminder(event.getReminder())
+                .reminder(ReminderTime.formatReminderTime(event.getReminder()))
                 .imgUrl(event.getImgUrl())
                 .build();
     }

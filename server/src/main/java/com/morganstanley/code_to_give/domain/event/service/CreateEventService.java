@@ -1,12 +1,12 @@
 package com.morganstanley.code_to_give.domain.event.service;
 
-import com.morganstanley.code_to_give.ai.Recommendation;
 import com.morganstanley.code_to_give.ai.RecommendationService;
 import com.morganstanley.code_to_give.domain.event.EventCreatedEvent;
 import com.morganstanley.code_to_give.domain.event.EventOutboxMessageRepository;
 import com.morganstanley.code_to_give.domain.event.EventRepository;
 import com.morganstanley.code_to_give.domain.event.ProgramRepository;
 import com.morganstanley.code_to_give.domain.event.controller.request.CreateEventRequest;
+import com.morganstanley.code_to_give.domain.event.controller.request.ReminderTime;
 import com.morganstanley.code_to_give.domain.event.controller.response.CreateEventResponse;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
 import com.morganstanley.code_to_give.domain.event.entity.EventOutboxMessage;
@@ -48,7 +48,7 @@ public class CreateEventService {
             request.venue(),
             request.quota(),
             request.imgUrl(),
-            request.reminder()
+            ReminderTime.unFormatReminderTime(request.reminder())
         );
 
         eventRepository.save(event);
