@@ -131,7 +131,7 @@ public class Chatbot {
         if (context.isEmpty()) {
             context += "Please chat with the user. ";
         } else {
-            context += "ONLY LIST OUT THE EVENT NAMES, DO NOT MAKE UP ANY INFORMATION, ASK DOES THE USER WANT TO KNOW MORE ABOUT THE EVENT. ";
+            context += "ONLY LIST OUT THE EVENT NAMES, DO NOT MAKE UP ANY INFORMATION, ASK DOES THE USER WANT TO KNOW MORE ABOUT THE EVENT AND ONLY GIVE THE USER MORE DETAILED INFORMATION IF THEY ASKED FOR IT. ";
         }
 
         // Get response
