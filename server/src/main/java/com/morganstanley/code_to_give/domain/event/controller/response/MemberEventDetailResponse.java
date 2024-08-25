@@ -36,4 +36,23 @@ public record MemberEventDetailResponse(
                 .imgUrl(event.getImgUrl())
                 .build();
     }
+
+    public static List<MemberEventDetailResponse> from(List<Event> activeEventList) {
+        return activeEventList.stream()
+            .map(event -> MemberEventDetailResponse.builder()
+                .eventId(event.getId())
+                .program(event.getProgram().getName())
+                .title(event.getTitle())
+                .description(event.getDescription())
+                .types(event.getTypes())
+                .interests(event.getInterests())
+                .skills(event.getSkills())
+                .startTime(event.getStartTime().toString())
+                .endTime(event.getEndTime().toString())
+                .venue(event.getVenue())
+                .quota(event.getQuota())
+                .imgUrl(event.getImgUrl())
+                .build())
+            .toList();
+    }
 }

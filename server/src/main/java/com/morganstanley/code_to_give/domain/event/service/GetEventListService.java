@@ -18,14 +18,14 @@ import static com.morganstanley.code_to_give.global.exception.ErrorCode.EVENT_NO
 public class GetEventListService {
     private final EventRepository eventRepository;
 
-    public List<EventListResponse> getEventList(Integer programId) {
+    public List<MemberEventDetailResponse> getEventList(Integer programId) {
         List<Event> activeEventList = eventRepository.findAllByProgramIdAndIsActivatedIsTrue(programId);
-        return EventListResponse.from(activeEventList);
+        return MemberEventDetailResponse.from(activeEventList);
     }
 
-    public List<EventListResponse> getEventListForAdmin() {
+    public List<MemberEventDetailResponse> getEventListForAdmin() {
         List<Event> eventList = eventRepository.findAll();
-        return EventListResponse.from(eventList);
+        return MemberEventDetailResponse.from(eventList);
     }
 
     public MemberEventDetailResponse getEventDetailForMember(Integer eventId) {
