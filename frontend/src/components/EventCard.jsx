@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Button } from 'antd';
 import { Modal } from 'antd';
 import EventDescription from './EventDescription';
+import axios from 'axios';
 
 const { Meta } = Card;
 
@@ -20,6 +21,9 @@ const EventCard = (props) => {
             setPartiClicked(!partiClicked)
         }
         else{
+            axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/events/registration', {
+                "eventId": props.id,
+            });
             setPartiClicked(!partiClicked)
             setVolunClicked(false)
         } 
@@ -30,6 +34,9 @@ const EventCard = (props) => {
             setVolunClicked(!volunClicked)
         }
         else{
+            axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/events/registration', {
+                "eventId": props.id,
+            });
             setVolunClicked(!volunClicked)
             setPartiClicked(false)
         }
@@ -52,7 +59,7 @@ const EventCard = (props) => {
                 style = {{ width: 350 }}
                 onClick = {showModal}
                 cover = {
-                    <img alt="example" src = {props.imageURL} style={{width:350, height:200, display: "flex", objectFit:"cover"}} />
+                    <img alt="example" src={props.imgUrl} style={{width:350, height:200, display: "flex", objectFit:"cover"}} />
                 }
             >
                 <div style={{ display: "flex", flexDirection: "column", padding: "5px" }}>
@@ -92,6 +99,8 @@ const EventCard = (props) => {
                         min={props.min}
                         endHour={props.endHour}
                         endMin={props.endMin}
+                        interests = {props.interests}
+                        skills = {props.skills}
                         description = {props.description}
                         venue = {props.venue}
                     />

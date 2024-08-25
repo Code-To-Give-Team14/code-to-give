@@ -53,7 +53,9 @@ const WidgetEventCard = (props) => {
                                         min={min}
                                         endHour={endHour}
                                         endMin={endMin}
-                                        imageURL={event.imageUrl}
+                                        interests={event.interests}
+                                        skills={event.skills}
+                                        imgUrl={event.imgUrl}
                                         description={event.description}
                                     />
                                 )
@@ -92,7 +94,9 @@ const WidgetEventCard = (props) => {
                                         min={min}
                                         endHour={endHour}
                                         endMin={endMin}
-                                        imageURL={event.imageUrl}
+                                        interests={event.interests}
+                                        skills={event.skills}
+                                        imgUrl={event.imgUrl}
                                         description={event.description}
                                     />
                                 )

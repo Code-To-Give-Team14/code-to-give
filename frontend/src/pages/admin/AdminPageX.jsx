@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { PieChart } from '@mui/x-charts';
+import { PieChart, BarChart, LineChart } from '@mui/x-charts';
 import { Avatar, Badge, Calendar, Card, Col, List, Row } from 'antd';
 import { React } from 'react';
 // import './admin/styles/style.css';
@@ -18,24 +18,30 @@ const AdminPageX = () => {
 
     const listData = [
         {
-            title: 'Ant Design Title 1',
+          title: 'Arjun Singh',
+          feedback: 'Excellent service and support. The team was very responsive and went above and beyond to ensure satisfaction.',
         },
         {
-            title: 'Ant Design Title 2',
+          title: 'Edison Chan',
+          feedback: 'Very satisfied with the experience. The process was smooth, and the results exceeded my expectations.',
         },
         {
-            title: 'Ant Design Title 3',
+          title: 'Rajesh Gupta',
+          feedback: 'Good overall, but there is room for improvement in certain areas such as timeliness and communication.',
         },
         {
-            title: 'Ant Design Title 4',
+          title: 'Anthony So',
+          feedback: 'Amazing attention to detail. Every aspect was handled professionally, making it a memorable experience.',
         },
         {
-            title: 'Ant Design Title 4',
+          title: 'Deepak Chatterjee',
+          feedback: 'Overall experience is positive. The support provided was helpful and addressed all my queries effectively.',
         },
         {
-            title: 'Ant Design Title 4',
+          title: 'Leung Chek Ho',
+          feedback: 'Satisfied with the quick response and the effort put into resolving issues promptly and efficiently.',
         },
-    ];
+      ];
 
     const getListData = (value) => {
         let listData = []; // Specify the type of listData
@@ -110,71 +116,84 @@ const AdminPageX = () => {
 
     return (
         <div style={{ padding: '24px' }}>
-            <Row gutter={[16, 16]}>
-                <Col xs={24} sm={12} md={8}>
-                    <Card style={{ height: '100%' }}>
-                        <Box flexGrow={1}>
-                            <Typography>Default</Typography>
-                            <PieChart
-                                series={[{ data: [{ value: 10 }, { value: 15 }, { value: 20 }] }]}
-                                {...pieParams}
-                            />
-                        </Box>
-                    </Card>
-                </Col>
-                <Col xs={24} sm={12} md={8}>
-                    <Card style={{ height: '100%' }}>
-                        <Box flexGrow={1}>
-                            <Typography>Default</Typography>
-                            <PieChart
-                                series={[{ data: [{ value: 10 }, { value: 15 }, { value: 20 }] }]}
-                                {...pieParams}
-                            />
-                        </Box>
-                    </Card>
-                </Col>
-                <Col xs={24} sm={12} md={8}>
-                    <Card style={{ height: '100%' }}>
-                        <Box flexGrow={1}>
-                            <Typography>Default</Typography>
-                            <PieChart
-                                series={[{ data: [{ value: 10 }, { value: 15 }, { value: 20 }] }]}
-                                {...pieParams}
-                            />
-                        </Box>
-                    </Card>
-                </Col>
-            </Row>
+   <Row gutter={[16, 16]}>
+  <Col xs={24} sm={8} md={6}>
+    <Card style={{ height: '300px' }}> {/* Adjusted height */}
+      <Box flexGrow={1}>
+        <Typography><div style={{ fontWeight: "bold" }}>Most Popular Event</div></Typography>
+        <PieChart
+          series={[{ data: [{ value: 10 }, { value: 15 }, { value: 20 }] }]}
+          {...pieParams}
+          height={200} // Adjusted chart height
+        />
+      </Box>
+    </Card>
+  </Col>
+  <Col xs={24} sm={16} md={9}>
+    <Card style={{ height: '300px' }}> {/* Adjusted height */}
+      <Box flexGrow={1}>
+        <Typography> <div style ={{fontWeight: "bold"}}>Number of Volunteers</div></Typography>
+        <BarChart
+          series={[
+            { data: [35, 44, 24, 34] },
+            { data: [51, 6, 49, 30] },
+            { data: [15, 25, 30, 50] },
+            { data: [60, 50, 15, 25] },
+          ]}
+          height={200} // Adjusted chart height
+          xAxis={[{ data: ['Chai', 'Clay', 'Plant', 'Gathering'], scaleType: 'band' }]}
+          margin={{ top: 10, bottom: 30, left: 40, right: 10 }}
+        />
+      </Box>
+    </Card>
+  </Col>
+  <Col xs={24} sm={16} md={9}>
+    <Card style={{ height: '300px' }}> {/* Adjusted height */}
+      <Box flexGrow={1}>
+        <Typography> <div style = {{fontWeight:"bold"}}>Donation Tracking</div></Typography>
+        <LineChart
+          xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+          series={[
+            {
+              data: [2, 5.5, 2, 8.5, 1.5, 5],
+              area: true,
+            },
+          ]}
+          width={470}
+          height={200} // Adjusted chart height
+        />
+      </Box>
+    </Card>
+  </Col>
+</Row>
 
-            <Row gutter={[16, 16]} style={{ marginTop: '50px' }}>
-                <Col xs={24} sm={12} md={12}>
-                    <Card style={{ height: '100%' }}>
-                        <Calendar cellRender={cellRender} style={{ width: '100%', height: '100%' }} />
-                    </Card>
-                </Col>
-                <Col xs={24} sm={12} md={6}>
-                    <Card style={{ height: '100%' }}>
-                        <List
-                            itemLayout="horizontal"
-                            dataSource={listData}
-                            renderItem={(item, index) => (
-                                <List.Item>
-                                    <List.Item.Meta
-                                        avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
-                                        title={<a href="https://ant.design">{item.title}</a>}
-                                        description="Ant Design, a design language for background applications, is refined by Ant UED Team"
-                                    />
-                                </List.Item>
-                            )}
-                        />
-                    </Card>
-                </Col>
-                <Col xs={24} sm={12} md={6}>
-                    <Card style={{ height: '100%' }}>
-                        {/* Add your content here */}
-                    </Card>
-                </Col>
-            </Row>
+<Row gutter={[16, 16]} style={{ marginTop: '50px' }}>
+  <Col xs={24} sm={16} md={16}>
+    <Card style={{ height: '100%' }}>
+      <Calendar cellRender={cellRender} style={{ width: '100%', height: '100%' }} />
+    </Card>
+  </Col>
+  <Col xs={24} sm={8} md={8}>
+    <Card style={{ height: '100%' }}>
+      <div>
+        <div style ={{fontSize:"18px", fontWeight: "bold"}}>Satisfaction Feedbacks</div>
+        <List
+          itemLayout="horizontal"
+          dataSource={listData}
+          renderItem={(item, index) => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar src={`https://api.dicebear.com/7.x/miniavs/svg?seed=${index}`} />}
+                title={<a href="https://ant.design">{item.title}</a>}
+                description={`${item.feedback}`}
+              />
+            </List.Item>
+          )}
+        />
+      </div>
+    </Card>
+  </Col>
+</Row>
         </div>
     )
 };

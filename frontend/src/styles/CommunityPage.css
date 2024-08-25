@@ -2,8 +2,13 @@ body {
   font-family: "Open Sans", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f7f8fc;
-  color: #333;
+  background-image: linear-gradient(
+    to bottom left,
+    rgba(255, 230, 233, 0.7) 0%,
+    rgba(231, 251, 255, 0.7) 50%,
+    rgba(240, 226, 255, 0.7) 100%
+  );
+  color: #4b4b4b;
 }
 
 .community-page {
@@ -12,29 +17,18 @@ body {
 }
 
 .sidebar {
-  background-color: #ffffff;
-  border-right: 1px solid #ddd;
-  padding: 20px;
+  background-color: transparent;
+  border-right: 2px solid rgba(221, 221, 221, 0.5);
+  padding: 20px 0px 20px 20px;
   display: flex;
   flex-direction: column;
-  width: 650px;
+  width: 360px;
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar ul li {
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f7f8fc;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.sidebar ul li:hover {
-  background-color: #e0e7ff;
+.sidebar-courses ul li:hover,
+.sidebar-courses ul li.active {
+  background-color: #ffffff;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar-courses {
@@ -42,12 +36,17 @@ body {
 }
 
 .sidebar-courses h2 {
+  font-weight: 600;
+  font-size: 16px;
   margin-top: -10px;
+  margin-bottom: 10px;
 }
 
 .sidebar-courses h3 {
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
   font-size: 1em;
+  font-weight: 600;
 }
 
 .sidebar-courses ul {
@@ -57,15 +56,12 @@ body {
 }
 
 .sidebar-courses ul li {
+  font-size: 14px;
   padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f7f8fc;
+  margin-bottom: 8px;
+  margin-right: 20px;
   border-radius: 10px;
   cursor: pointer;
-}
-
-.sidebar-courses ul li:hover {
-  background-color: #e0e7ff;
 }
 
 .content {
@@ -88,6 +84,7 @@ body {
 }
 
 .thread-card {
+  color: rgb(14, 66, 109);
   background-color: #ffffff;
   border-radius: 20px;
   padding: 20px;
@@ -101,12 +98,11 @@ body {
 
 .thread-card h3 {
   margin: 0;
-  font-size: 1.2em;
+  font-size: 24px;
 }
 
 .thread-card p {
   margin: 10px 0;
-  color: #666;
 }
 
 .thread-meta {
@@ -170,8 +166,8 @@ body {
 
 .right-sidebar {
   width: 500px;
-  background-color: #ffffff;
-  border-left: 1px solid #ddd;
+  background-color: transparent;
+  border-left: 2px solid rgba(221, 221, 221, 0.5);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -200,10 +196,14 @@ body {
 }
 
 .attendees h3 {
+  font-weight: 500;
+  font-size: 14px;
+  color: #999;
   margin-bottom: 20px;
 }
 
 .attendees ul {
+  font-size: 14px;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -212,6 +212,6 @@ body {
 .attendees ul li {
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #f7f8fc;
+  background-color: transparent;
   border-radius: 10px;
 }

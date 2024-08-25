@@ -25,8 +25,17 @@ const EventDescription = (props) => {
         {
           key: '4',
           label: 'Interests',
-          children: 'Drawing',
-        }
+          children: props.interests.map(interest => (
+            <Badge key={interest} count={interest} style={{ backgroundColor: '#f9ef1e', color: 'black', margin: '5px' }} />
+          )),
+        },
+        {
+          key: '5',
+          label: 'Skills',
+          children: props.skills.map(skill => (
+            <Badge key={skill} count={skill} style={{ backgroundColor: '#f9ef1e', color: 'black', margin: '5px' }} />
+          )),
+        },
       ];
     
     const styledTitle = (

@@ -1,5 +1,6 @@
 package com.morganstanley.code_to_give.domain.event.service;
 
+import com.morganstanley.code_to_give.ai.Recommendation;
 import com.morganstanley.code_to_give.ai.RecommendationService;
 import com.morganstanley.code_to_give.domain.event.EventCreatedEvent;
 import com.morganstanley.code_to_give.domain.event.EventOutboxMessageRepository;
@@ -41,9 +42,9 @@ public class CreateEventService {
             program,
             request.types(),
             request.skills(),
-            List.of(),
+            Recommendation.getEmbedding(request.skills()),
             request.interests(),
-            List.of(),
+            Recommendation.getEmbedding(request.interests()),
 //            request.startTime(),
             LocalDateTime.now().plusMinutes(2L),
             request.endTime(),
@@ -56,7 +57,7 @@ public class CreateEventService {
 
         eventRepository.save(event);
 
-        recommendationService.saveEventEmbedding(event.getId(), request.skills(), request.interests());
+//        recommendationService.saveEventEmbedding(event.getId(), request.skills(), request.interests());
         publishEventCreatedEvent(event.getId());
 
         return new CreateEventResponse(event.getId());
