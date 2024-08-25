@@ -34,49 +34,49 @@ public class ReminderBatchRunner {
     private final EventOutboxMessageRepository eventOutboxMessageRepository;
 
 
-    @Transactional
-    @Scheduled(fixedDelay = 1000)
-    @Profile("dev")
-    public void sendReminderMessage() {
-        LocalDateTime now = LocalDateTime.now();
-        List<Event> livedEvents = eventRepository.findByStartTimeAfterAndIsActivatedIsTrue(LocalDateTime.now());
-        livedEvents.forEach(livedEvent -> {
-            livedEvent.getReminder().stream()
-                .filter(r -> livedEvent.getSentReminder() == null || !livedEvent.getSentReminder().contains(r))
-                .forEach(reminder -> {
-                    LocalDateTime reminderTime = getReminderTime(reminder, livedEvent.getStartTime());
-                    if (now.isEqual(reminderTime) ||
-                        now.isAfter(reminderTime)) {
-                        messageService.sendReminderMessage(livedEvent, reminder);
-                        livedEvent.getSentReminder().add(reminder);
-                        eventRepository.save(livedEvent);
-                    }
-                });
-        });
-    }
-
-    @Transactional
-    @Scheduled(fixedDelay = 10000)
-    @Profile("dev")
-    public void handleEventCreatedEvent() {
-        List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
-
-        eventCreatedEvents.forEach(event -> {
-            Event newEvent = eventRepository.findById(event.getPayload().eventId())
-                .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
-
-            if (!newEvent.getInterestsEmbedding().isEmpty()) {
-                List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
-                    memberService,
-                    1,
-                    newEvent.getInterests(),
-                    newEvent.getSkills()
-                );
-                messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
-                eventOutboxMessageRepository.delete(event);
-            }
-        });
-    }
+//    @Transactional
+//    @Scheduled(fixedDelay = 1000)
+//    @Profile("dev")
+//    public void sendReminderMessage() {
+//        LocalDateTime now = LocalDateTime.now();
+//        List<Event> livedEvents = eventRepository.findByStartTimeAfterAndIsActivatedIsTrue(LocalDateTime.now());
+//        livedEvents.forEach(livedEvent -> {
+//            livedEvent.getReminder().stream()
+//                .filter(r -> livedEvent.getSentReminder() == null || !livedEvent.getSentReminder().contains(r))
+//                .forEach(reminder -> {
+//                    LocalDateTime reminderTime = getReminderTime(reminder, livedEvent.getStartTime());
+//                    if (now.isEqual(reminderTime) ||
+//                        now.isAfter(reminderTime)) {
+//                        messageService.sendReminderMessage(livedEvent, reminder);
+//                        livedEvent.getSentReminder().add(reminder);
+//                        eventRepository.save(livedEvent);
+//                    }
+//                });
+//        });
+//    }
+//
+//    @Transactional
+//    @Scheduled(fixedDelay = 10000)
+//    @Profile("dev")
+//    public void handleEventCreatedEvent() {
+//        List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
+//
+//        eventCreatedEvents.forEach(event -> {
+//            Event newEvent = eventRepository.findById(event.getPayload().eventId())
+//                .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
+//
+//            if (!newEvent.getInterestsEmbedding().isEmpty()) {
+//                List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
+//                    memberService,
+//                    1,
+//                    newEvent.getInterests(),
+//                    newEvent.getSkills()
+//                );
+//                messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
+//                eventOutboxMessageRepository.delete(event);
+//            }
+//        });
+//    }
 
     private LocalDateTime getReminderTime(String timeBeforeStartTime, LocalDateTime startTime) {
 
