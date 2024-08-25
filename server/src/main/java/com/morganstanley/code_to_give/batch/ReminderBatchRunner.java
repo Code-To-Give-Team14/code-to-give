@@ -54,7 +54,7 @@ public class ReminderBatchRunner {
     }
 
     @Transactional
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedDelay = 10000)
     public void handleEventCreatedEvent() {
         List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
 
