@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Input, Badge, Button } from 'antd';
-import { UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { UserOutlined, PlusOutlined, HomeOutlined, MessageOutlined, SaveOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import '../styles/CommunityPage.css';
 
 const CommunityPage = () => {
   const [replies, setReplies] = useState({});
   const [newReply, setNewReply] = useState({});
+  const [selectedTag, setSelectedTag] = useState('All');
 
   const handleInputChange = (threadId, event) => {
     setNewReply({ ...newReply, [threadId]: event.target.value });
@@ -28,6 +29,7 @@ const CommunityPage = () => {
       author: 'Elisabeth May',
       time: '6h ago',
       category: 'Accounting',
+      tag: 'General',
     },
     {
       id: 1,
@@ -36,8 +38,22 @@ const CommunityPage = () => {
       author: 'Dr. Ronald Jackson',
       time: '3d ago',
       category: 'Accounting, Corporate Law',
+      tag: 'Event Polling',
+    },
+    {
+      id: 2,
+      title: 'Emergency Lecture',
+      content: 'Due to unforeseen circumstances, we have to conduct an emergency lecture on Monday.',
+      author: 'Alex Johnson',
+      time: '1d ago',
+      category: 'Corporate Law',
+      tag: 'Emergency Relief',
     },
   ];
+
+  const filteredThreads = selectedTag === 'All'
+    ? threads
+    : threads.filter(thread => thread.tag === selectedTag);
 
   return (
     <div className="community-page">
@@ -45,15 +61,16 @@ const CommunityPage = () => {
         <div className="sidebar-courses">
           <h2>Community Forum</h2>
           <ul>
-            <li><UserOutlined /> Home</li>
-            <li><UserOutlined /> Your Threads</li>
-            <li><UserOutlined /> Saved</li>
+            <li><HomeOutlined /> Home</li>
+            <li><MessageOutlined /> Your Threads</li>
+            <li><SaveOutlined /> Saved</li>
           </ul>
           <h3>Current Topics</h3>
           <ul>
-            <li>General <Badge count={3} /></li>
-            <li>Event Polling</li>
-            <li>Emergency Relief</li>
+          <li onClick={() => setSelectedTag('All')}><MessageOutlined /> All</li>
+            <li onClick={() => setSelectedTag('General')}><MessageOutlined /> General</li>
+            <li onClick={() => setSelectedTag('Event Polling')}><MessageOutlined /> Event Polling</li>
+            <li onClick={() => setSelectedTag('Emergency Relief')}><ExclamationCircleOutlined /> Emergency Relief</li>
           </ul>
           <Button type="primary" icon={<PlusOutlined />} style={{ marginTop: '20px', borderRadius: '20px' }}>
             Join a new topic
@@ -68,20 +85,20 @@ const CommunityPage = () => {
           </Button>
         </div>
         <div className="threads">
-          {threads.map(thread => (
+          {filteredThreads.map(thread => (
             <div key={thread.id} className="thread-card">
               <h3>{thread.title}</h3>
               <p>{thread.content}</p>
               <div className="thread-meta">
                 <span>{thread.author}</span>
                 <span>{thread.time}</span>
-                <span className="thread-category">{thread.category}</span>
+                <span className="thread-tag">{thread.tag}</span>
               </div>
               <div className="response-section">
                 {replies[thread.id] && replies[thread.id].map((reply, index) => (
                   <div key={index} className="reply">
                     <UserOutlined className="reply-icon" />
-                    <span className="reply-user">Tvesha:</span>
+                    <span className="reply-user">Current User:</span>
                     <p>{reply}</p>
                   </div>
                 ))}
@@ -111,7 +128,7 @@ const CommunityPage = () => {
           <h3>Tvesha</h3>
           <p>Current User</p>
           <Button type="primary" block>
-            Contact
+            Profile
           </Button>
         </div>
         <div className="attendees">

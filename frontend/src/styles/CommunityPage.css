@@ -72,6 +72,8 @@ body {
 .content {
   flex-grow: 1;
   padding: 40px;
+  width: 1800px;
+  overflow-y: scroll;
 }
 
 .content-header {
@@ -115,7 +117,7 @@ body {
   font-size: 0.9em;
 }
 
-.thread-category {
+.thread-tag {
   background-color: #f0f4ff;
   color: #5e72e4;
   padding: 3px 8px;
