@@ -54,7 +54,7 @@ public class ReminderBatchRunner {
     }
 
     @Transactional
-    @Scheduled(fixedDelay = 1000000)
+    @Scheduled(fixedDelay = 1000)
     public void handleEventCreatedEvent() {
         List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
 
@@ -65,7 +65,7 @@ public class ReminderBatchRunner {
             if (!newEvent.getInterestsEmbedding().isEmpty()) {
                 List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
                     memberService,
-                    10,
+                    1,
                     newEvent.getInterests(),
                     newEvent.getSkills()
                 );
