@@ -2,7 +2,12 @@ body {
   font-family: "Open Sans", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f7f8fc;
+  background-image: linear-gradient(
+    to bottom left,
+    #ffe6e9 0%,
+    #e7fbff 50%,
+    #f0e2ff 100%
+  );
   color: #333;
   padding-top: 100px;
 }
@@ -13,15 +18,15 @@ body {
 }
 
 .sidebar {
-  background-color: #ffffff;
-  border-right: 1px solid #ddd;
-  padding: 20px;
+  background-color: transparent;
+  border-right: 3px solid rgba(221, 221, 221, 0.5);
+  padding: 20px 0px 20px 20px;
   display: flex;
   flex-direction: column;
   width: 650px;
 }
 
-.sidebar ul {
+/* .sidebar ul {
   list-style: none;
   padding: 0;
 }
@@ -29,13 +34,14 @@ body {
 .sidebar ul li {
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #f7f8fc;
+  background-color: transparent;
   border-radius: 10px;
   cursor: pointer;
-}
+} */
 
-.sidebar ul li:hover {
-  background-color: #e0e7ff;
+.sidebar-courses ul li:hover,
+.sidebar-courses ul li:active {
+  background-color: #ffffff;
 }
 
 .sidebar-courses {
@@ -43,12 +49,15 @@ body {
 }
 
 .sidebar-courses h2 {
+  font-weight: 600;
+  font-size: 16px;
   margin-top: -10px;
 }
 
 .sidebar-courses h3 {
   margin-bottom: 20px;
   font-size: 1em;
+  font-weight: 600;
 }
 
 .sidebar-courses ul {
@@ -58,15 +67,12 @@ body {
 }
 
 .sidebar-courses ul li {
+  font-size: 14px;
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #f7f8fc;
+  margin-right: 20px;
   border-radius: 10px;
   cursor: pointer;
-}
-
-.sidebar-courses ul li:hover {
-  background-color: #e0e7ff;
 }
 
 .content {
@@ -169,8 +175,8 @@ body {
 
 .right-sidebar {
   width: 500px;
-  background-color: #ffffff;
-  border-left: 1px solid #ddd;
+  background-color: transparent;
+  border-left: 3px solid rgba(221, 221, 221, 0.5);
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -211,6 +217,6 @@ body {
 .attendees ul li {
   padding: 10px;
   margin-bottom: 10px;
-  background-color: #f7f8fc;
+  background-color: transparent;
   border-radius: 10px;
 }

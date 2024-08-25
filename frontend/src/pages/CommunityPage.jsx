@@ -55,7 +55,7 @@ const CommunityPage = () => {
             <li>Event Polling</li>
             <li>Emergency Relief</li>
           </ul>
-          <Button type="primary" icon={<PlusOutlined />} style={{ marginTop: '20px', borderRadius: '20px' }}>
+          <Button type="primary" icon={<PlusOutlined />} style={{ marginTop: '20px', borderRadius: '10px', backgroundColor:'#533ce2' , padding: '20px'}}>
             Join a new topic
           </Button>
         </div>
@@ -63,7 +63,7 @@ const CommunityPage = () => {
 
       <main className="content">
         <div className="content-header">
-          <Button type="primary" icon={<PlusOutlined />} style={{ marginBottom: '20px', borderRadius: '20px' }}>
+          <Button type="primary" icon={<PlusOutlined />} style={{ marginBottom: '20px', borderRadius: '10px', backgroundColor:'#533ce2',padding:'20px' }}>
             Add a new thread
           </Button>
         </div>
@@ -110,7 +110,7 @@ const CommunityPage = () => {
           <img src="path/to/doctor-profile.jpg" alt="Dr Ronald Jackson" />
           <h3>Tvesha</h3>
           <p>Current User</p>
-          <Button type="primary" block>
+          <Button type="primary" style={{backgroundColor: '#533ce2'}}block>
             Contact
           </Button>
         </div>
