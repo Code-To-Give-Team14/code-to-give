@@ -29,18 +29,18 @@ public class HealthzController {
     @GetMapping("/ping")
     public ResponseEntity<String> ping() {
 
-        Event newEvent = eventRepository.findById(37)
-            .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
-
-        if (!newEvent.getInterestsEmbedding().isEmpty()) {
-            List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
-                memberService,
-                1,
-                newEvent.getInterests(),
-                newEvent.getSkills()
-            );
-            messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
-        }
+//        Event newEvent = eventRepository.findById(37)
+//            .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
+//
+//        if (!newEvent.getInterestsEmbedding().isEmpty()) {
+//            List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
+//                memberService,
+//                1,
+//                newEvent.getInterests(),
+//                newEvent.getSkills()
+//            );
+//            messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
+//        }
 
 
         return ResponseEntity.ok().body("pong");
