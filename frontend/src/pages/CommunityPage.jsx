@@ -25,31 +25,49 @@ const CommunityPage = () => {
   const threads = [
     {
       id: 0,
-      title: 'Lecture Rescheduling',
-      content: 'Hi mates, I talked with Dr. Hellen and because of her illness we need to reschedule the upcoming lecture. This is the last before exam so Dr. Hellen asked us if we want to attend for additional lecture where we can study more difficult exercises.',
-      author: 'Elisabeth May',
-      time: '6h ago',
+      title: 'Welcome!',
+      content: 'Welcome to our discussion forum! Please feel free to ask questions here or raise an emergency...',
+      author: 'Scott Maxwell',
+      time: '6 days ago',
       category: 'Accounting',
       tag: 'General',
     },
     {
       id: 1,
-      title: 'Date of the final exams',
-      content: 'Dear Students, I want to inform you that after 6 months of our cooperation it is necessary to test your knowledge by the final exam. It means we need to find a date for our final exam. In this semester you were extremely under stress due to COVID-19 situation so I would like you to offer an extra attempt for this test. My proposition is...',
-      author: 'Dr. Ronald Jackson',
-      time: '3d ago',
+      title: 'House Rental',
+      content: 'How do rent a flat in Hong Kong? And is there any place that welcome us ethnic minorities?',
+      author: 'Ronald Jackson',
+      time: '3 days ago',
       category: 'Accounting, Corporate Law',
-      tag: 'Event Polling',
+      tag: 'General',
     },
     {
       id: 2,
-      title: 'Emergency Lecture',
-      content: 'Due to unforeseen circumstances, we have to conduct an emergency lecture on Monday.',
+      title: 'The Chai Workshop was lit',
+      content: 'The Chai Workshop I joined last week was really a fun experience to have!',
       author: 'Alex Johnson',
-      time: '1d ago',
+      time: '11 days ago',
+      category: 'Corporate Law',
+      tag: 'General',
+    },
+    {
+      id: 3,
+      title: 'New Event Poll',
+      content: 'What event should we organize next month? Please vote in the poll!',
+      author: 'Alex Johnson',
+      time: '12 days ago',
+      category: 'Corporate Law',
+      tag: 'Event Polling',
+    },
+    {
+      id: 4,
+      title: 'Emergency Relief Support',
+      content: 'We are organizing support for families affected by the recent floods. Please contact us if you can help!',
+      author: 'Alex Johnson',
+      time: '14 days ago',
       category: 'Corporate Law',
       tag: 'Emergency Relief',
-    },
+    }
   ];
 
   const filteredThreads = selectedTag === 'All'
@@ -91,8 +109,7 @@ const CommunityPage = () => {
               <h3>{thread.title}</h3>
               <p>{thread.content}</p>
               <div className="thread-meta">
-                <span>{thread.author}</span>
-                <span>{thread.time}</span>
+                <span>{thread.author} - {thread.time}</span>
                 <span className="thread-tag">{thread.tag}</span>
               </div>
               <div className="response-section">
@@ -125,7 +142,7 @@ const CommunityPage = () => {
 
       <aside className="right-sidebar">
         <div className="profile-card">
-          <img src="path/to/doctor-profile.jpg" alt="Dr Ronald Jackson" />
+          <UserOutlined style={{fontSize: '60px'}}/>
           <h3>Tvesha</h3>
           <p>Current User</p>
           <Button type="primary" block>

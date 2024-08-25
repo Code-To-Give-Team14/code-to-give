@@ -23,4 +23,10 @@ public class MemberService {
     public Member createMember(Member member) {
         return memberRepository.save(member);
     }
+
+    public void updateInterestsAndSkills(String email, List<String> interests, List<String> skills) {
+        Member member = memberRepository.findById(email).orElseThrow(() -> new RuntimeException("Member not found"));
+        member.updateInterestsAndSkills(interests, skills);
+        memberRepository.save(member);
+    }
 }

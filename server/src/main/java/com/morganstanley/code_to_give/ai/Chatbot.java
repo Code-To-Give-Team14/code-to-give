@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.morganstanley.code_to_give.domain.event.controller.response.EventListResponse;
 import com.morganstanley.code_to_give.domain.event.service.EventService;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
+import com.morganstanley.code_to_give.domain.member.MemberService;
 import com.morganstanley.code_to_give.domain.member.entity.Member;
 
 import java.util.*;
@@ -25,6 +26,8 @@ public class Chatbot {
         public static class ExtraItems {
             public List<EventListResponse> eventForUserToJoinAsMember;
             public List<EventListResponse> eventForUserToJoinAsVolunteer;
+            public List<String> newInterests;
+            public List<String> newSkills;
         }
 
         public String type; // Only "user" or "bot"
@@ -35,13 +38,17 @@ public class Chatbot {
                 String type,
                 String message,
                 List<EventListResponse> eventForUserToJoinAsMember,
-                List<EventListResponse> eventForUserToJoinAsVolunteer
+                List<EventListResponse> eventForUserToJoinAsVolunteer,
+                List<String> newInterests,
+                List<String> newSkills
         ) {
             this.type = type;
             this.message = message;
             this.items = new ExtraItems();
             this.items.eventForUserToJoinAsMember = eventForUserToJoinAsMember;
             this.items.eventForUserToJoinAsVolunteer = eventForUserToJoinAsVolunteer;
+            this.items.newInterests = newInterests;
+            this.items.newSkills = newSkills;
         }
     }
 
@@ -49,7 +56,12 @@ public class Chatbot {
         public String isUserAskingForEventRecommendation;
     }
 
-    public static Message getResponse(Member member, List<Message> messages, EventService eventService) {
+    public static class AddNewInterestsOrSkills {
+        public List<String> addInterests;
+        public List<String> addSkills;
+    }
+
+    public static Message getResponse(Member member, List<Message> messages, EventService eventService, MemberService memberService) {
         String model = System.getenv("AZURE_OPENAI_CHAT_DEPLOYMENT");
 
         OpenAIClient client = new OpenAIClientBuilder()
@@ -69,12 +81,12 @@ public class Chatbot {
         }
 
         // Get function call completions
-        ChatCompletionsOptions functionCallOptions = new ChatCompletionsOptions(chatMessages);
-        functionCallOptions.setFunctions(List.of(getEventRecommendationFunctionDefinition()));
-        functionCallOptions.setFunctionCall(new FunctionCallConfig("shouldGetEventRecommendations"));
-        ChatCompletions functionCallCompletions = client.getChatCompletions(model, functionCallOptions);
+        ChatCompletionsOptions shouldGetEventRecommendationsFunctionCallOptions = new ChatCompletionsOptions(chatMessages);
+        shouldGetEventRecommendationsFunctionCallOptions.setFunctions(List.of(getEventRecommendationFunctionDefinition()));
+        shouldGetEventRecommendationsFunctionCallOptions.setFunctionCall(new FunctionCallConfig("shouldGetEventRecommendations"));
+        ChatCompletions shouldGetEventRecommendationsFunctionCallCompletions = client.getChatCompletions(model, shouldGetEventRecommendationsFunctionCallOptions);
 
-        String functionCallResponse = functionCallCompletions
+        String shouldGetEventRecommendationsFunctionCallResponse = shouldGetEventRecommendationsFunctionCallCompletions
                 .getChoices()
                 .get(0)
                 .getMessage()
@@ -83,11 +95,48 @@ public class Chatbot {
         String isUserAskingForEventRecommendation = "No";
         try {
             isUserAskingForEventRecommendation = new ObjectMapper()
-                    .readValue(functionCallResponse, shouldGetEventRecommendations.class)
+                    .readValue(shouldGetEventRecommendationsFunctionCallResponse, shouldGetEventRecommendations.class)
                     .isUserAskingForEventRecommendation;
         } catch (Exception ignored) {}
 
+
+        ChatCompletionsOptions addNewInterestsOrSkillsFunctionCallOptions = new ChatCompletionsOptions(chatMessages);
+        addNewInterestsOrSkillsFunctionCallOptions.setFunctions(List.of(addNewInterestsOrSkillsFunctionDefinition()));
+        addNewInterestsOrSkillsFunctionCallOptions.setFunctionCall(new FunctionCallConfig("addNewInterestsOrSkills"));
+        ChatCompletions addNewInterestsOrSkillsFunctionCallCompletions = client.getChatCompletions(model, addNewInterestsOrSkillsFunctionCallOptions);
+
+        String addNewInterestsOrSkillsFunctionCallResponse = addNewInterestsOrSkillsFunctionCallCompletions
+                .getChoices()
+                .get(0)
+                .getMessage()
+                .getFunctionCall()
+                .getArguments();
+        AddNewInterestsOrSkills addNewInterestsOrSkills = new AddNewInterestsOrSkills();
+        try {
+            addNewInterestsOrSkills = new ObjectMapper()
+                    .readValue(addNewInterestsOrSkillsFunctionCallResponse, AddNewInterestsOrSkills.class);
+        } catch (Exception ignored) {}
+
         String context = "";
+
+        List<String> newInterests = new ArrayList<>();
+        if (addNewInterestsOrSkills.addInterests != null && !addNewInterestsOrSkills.addInterests.isEmpty()) {
+            newInterests.addAll(addNewInterestsOrSkills.addInterests);
+            List<String> interests = new ArrayList<>(member.getInterests().stream().toList());
+            interests.addAll(addNewInterestsOrSkills.addInterests);
+            memberService.updateInterestsAndSkills(member.getEmail(), interests, member.getSkills());
+            context += "Tell the user that their interests have been updated to include " + String.join(", ", addNewInterestsOrSkills.addInterests) + ".\n";
+        }
+
+        List<String> newSkills = new ArrayList<>();
+        if (addNewInterestsOrSkills.addSkills != null && !addNewInterestsOrSkills.addSkills.isEmpty()) {
+            newSkills.addAll(addNewInterestsOrSkills.addSkills);
+            List<String> skills = new ArrayList<>(member.getSkills().stream().toList());
+            skills.addAll(addNewInterestsOrSkills.addSkills);
+            memberService.updateInterestsAndSkills(member.getEmail(), member.getInterests(), skills);
+            context += "Tell the user that their interests have been updated to include " + String.join(", ", addNewInterestsOrSkills.addSkills) + ".\n";
+        }
+
         List<Event> helperEvents = new ArrayList<>();
         if (isUserAskingForEventRecommendation.equals("YesAsHelper") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
             List<Event> events = Recommendation.findSkills(member, eventService);
@@ -128,6 +177,7 @@ public class Chatbot {
                         .toList();
             }
         }
+
         if (context.isEmpty()) {
             context += "Please chat with the user. ";
         } else {
@@ -152,13 +202,15 @@ public class Chatbot {
                 "bot",
                 responseMessage,
                 EventListResponse.from(attendeeEvents),
-                EventListResponse.from(helperEvents)
+                EventListResponse.from(helperEvents),
+                newInterests,
+                newSkills
         );
     }
 
     static FunctionDefinition getEventRecommendationFunctionDefinition() {
         FunctionDefinition functionDefinition = new FunctionDefinition("shouldGetEventRecommendations");
-        functionDefinition.setDescription("Determine whether user is asking for event recommendations.");
+        functionDefinition.setDescription("Determine whether user is asking for event recommendations ONLY in the LATEST SINGLE message.");
         functionDefinition.setParameters(BinaryData.fromString("""
                 {
                    "type": "object",
@@ -166,10 +218,37 @@ public class Chatbot {
                        "isUserAskingForEventRecommendation": {
                            "type": "string",
                            "enum": ["No", "YesAsHelper", "YesAsAttendee", "YesAsEitherHelperOrAttendee"],
-                           "description": "No if user is not asking for event recommendations, YesAsHelper if user is asking for event that they can be a helper or volunteer at, YesAsAttendee if user is asking for event that they can participate as an attendee, YesAsEitherHelperOrAttendee if user is asking for event that they can either be a helper or an attendee."
+                           "description": "No if user is not asking for event recommendations in the latest single message, YesAsHelper if user is asking for event that they can be a helper or volunteer at, YesAsAttendee if user is asking for event that they can participate as an attendee, YesAsEitherHelperOrAttendee if user is asking for event that they can either be a helper or an attendee."
                        }
                    },
                    "required": ["isUserAskingForEventRecommendation"]
+               }"""));
+        return functionDefinition;
+    }
+
+    static FunctionDefinition addNewInterestsOrSkillsFunctionDefinition() {
+        FunctionDefinition functionDefinition = new FunctionDefinition("addNewInterestsOrSkills");
+        functionDefinition.setDescription("Determine whether user is asking to add some new interests or skills.");
+        functionDefinition.setParameters(BinaryData.fromString("""
+                {
+                   "type": "object",
+                   "properties": {
+                       "addInterests": {
+                           "type": "array",
+                            "items": {
+                                 "type": "string"
+                            },
+                           "description": "Interests the user wants to add, empty list if user does not want to add any interests."
+                       },
+                       "addSkills": {
+                           "type": "array",
+                            "items": {
+                                 "type": "string"
+                            },
+                           "description": "Skills the user wants to add, empty list if user does not want to add any skills."
+                       }
+                   },
+                   "required": ["addInterests", "addSkills"]
                }"""));
         return functionDefinition;
     }

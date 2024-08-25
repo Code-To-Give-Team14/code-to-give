@@ -1,6 +1,7 @@
 package com.morganstanley.code_to_give.domain.member.entity;
 
 
+import com.morganstanley.code_to_give.ai.Recommendation;
 import com.morganstanley.code_to_give.domain.entitybase.AuditLoggingBase;
 import com.morganstanley.code_to_give.domain.event.entity.MemberEvent;
 import com.morganstanley.code_to_give.domain.event.entity.MemberTraining;
@@ -96,5 +97,11 @@ public class Member extends AuditLoggingBase {
     ) {
         this.skillsEmbedding = skillsEmbedding;
         this.interestsEmbedding = interestsEmbedding;
+    }
+
+    public void updateInterestsAndSkills(List<String> interests, List<String> skills) {
+        this.interests = interests;
+        this.skills = skills;
+        this.updateEmbeddings(Recommendation.getEmbedding(skills), Recommendation.getEmbedding(interests));
     }
 }

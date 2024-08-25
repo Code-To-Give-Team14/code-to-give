@@ -25,6 +25,6 @@ public class ChatbotController {
     @PostMapping("/chat")
     public Chatbot.Message chat(@RequestBody ChatRequest request) {
         Member member = memberService.getMemberByEmail("lio-testing@email.com");
-        return Chatbot.getResponse(member, request.messages, eventService);
+        return Chatbot.getResponse(member, request.messages, eventService, memberService);
     }
 }
