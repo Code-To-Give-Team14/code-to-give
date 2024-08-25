@@ -89,4 +89,12 @@ public class Member extends AuditLoggingBase {
         this.language = language;
         this.isAdmin = isAdmin;
     }
+
+    public void updateEmbeddings(
+        List<Float> skillsEmbedding,
+        List<Float> interestsEmbedding
+    ) {
+        this.skillsEmbedding = skillsEmbedding;
+        this.interestsEmbedding = interestsEmbedding;
+    }
 }

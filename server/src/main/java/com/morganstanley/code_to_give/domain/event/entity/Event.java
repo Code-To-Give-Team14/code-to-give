@@ -171,5 +171,13 @@ public class Event  {
             "    Image URL: " + imgUrl +
             "}";
     }
+
+    public void updateEmbeddings(
+        List<Float> skillsEmbedding,
+        List<Float> interestsEmbedding
+    ) {
+        this.skillsEmbedding = skillsEmbedding;
+        this.interestsEmbedding = interestsEmbedding;
+    }
 }
 
