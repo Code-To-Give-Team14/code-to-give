@@ -6,9 +6,9 @@ import SideBar from "../components/SideBar.jsx";
 const AdminPage = () => {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
-      <aside className="sidebar">
+      <aside className="admin-sidebar">
           <button className="new-event-btn"><span>New Event</span></button>
-          <div className="categories">
+          <div className="admin-categories">
             <ul>
             <Link className="side-link" to="/admin"><li><span>Dashboard</span></li></Link>
             <Link className="side-link" to="/admin/table"><li><span>Events</span></li></Link>

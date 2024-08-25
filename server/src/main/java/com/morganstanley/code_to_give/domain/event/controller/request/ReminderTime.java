@@ -10,12 +10,18 @@ public record ReminderTime(
 ) {
 
     public static List<String> unFormatReminderTime(List<ReminderTime> reminderTimeList) {
+        if (reminderTimeList == null) {
+            return List.of();
+        }
         return reminderTimeList.stream()
                 .map(reminderTime -> reminderTime.value().toString() + reminderTime.unit().charAt(0))
                 .toList();
     }
 
     public static List<ReminderTime> formatReminderTime(List<String> reminderTime) {
+        if (reminderTime == null) {
+            return List.of();
+        }
         return reminderTime.stream()
                 .map(formattedString -> new ReminderTime(
                         Integer.valueOf(formattedString.substring(0, formattedString.length() - 1)),

@@ -7,12 +7,16 @@ body {
 }
 
 .header {
-  background-color: #f1f1f1;
+  background: linear-gradient(
+    to right,
+    rgba(255, 126, 95, 0.8) 20%,
+    rgba(254, 180, 123, 0.8) 80%
+  ); /* Warm gradient */
   padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #ddd;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .header-title {
@@ -25,7 +29,12 @@ body {
 }
 
 .sidebar {
-  background-color: #f1f1f1;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 126, 95, 0.8) 20%,
+    rgba(254, 180, 123, 0.8) 80%
+  );
+  background-color: transparent;
   width: 200px;
   padding: 20px;
   border-right: 1px solid #ddd;
@@ -36,18 +45,22 @@ body {
 .new-thread-btn {
   position: flex; /* Absolutely position the button within the box */
   padding: 10px 20px;
-  background-color: #f9ef1e;
+  background: linear-gradient(
+    to right,
+    #ffaf2f,
+    #f9cd1e
+  ); /* Gradient background */
   border-radius: 7px;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
-  border-color: #eedf9f;
-  color: #333333;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #f7f7f7;
+  transition: background 0.3s ease, color 0.3s ease; /* Smooth transition for background */
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: None;
 }
 
 .new-thread-btn::after {
@@ -60,7 +73,11 @@ body {
 }
 
 .new-thread-btn:hover {
-  background-color: #e0a800;
+  background: linear-gradient(
+    to right,
+    #ff8446,
+    #f9bb1e
+  ); /* Gradient background on hover */
   color: #fff;
 }
 
@@ -80,15 +97,16 @@ body {
 
 .courses,
 .categories {
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-top: 50px;
 }
 
 .courses h3,
 .categories h3 {
   font-size: 1em;
-  margin-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+  margin-top: -20px;
+  border-bottom: 1px solid #f7f7f7;
+  color: #f7f7f7;
 }
 
 .courses ul,
@@ -96,41 +114,39 @@ body {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  color: #f7f7f7;
 }
 
 .categories li.active {
-  background-color: #e0e0e0; /* Highlight active category */
-  color: #333;
+  background-color: #ff6139; /* Highlight active category */
+  color: #f7f7f7;
 }
 
-.courses li,
 .categories li {
   position: relative;
   cursor: pointer;
   padding: 10px; /* Add some padding for better clickability */
-  border-radius: 5px; /* Optional: Add border radius for smoother corners */
   padding: 10px 20px;
-  background-color: #f1f1f1;
   border-radius: 7px;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
   border-color: black;
+  color: #f7f7f7;
+  background-color: transparent;
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow: hidden;
-  border-bottom: 1px solid #ddd;
+  margin-bottom: 5px;
 }
 
-.courses li.active,
-.courses li:hover,
 .categories li:hover {
-  background-color: #e0e0e0; /* Light grey background on hover */
-  color: #333; /* Optional: Change the text color on hover */
+  background-color: #ff6139; /* Light grey background on hover */
+  color: #f7f7f7; /* Optional: Change the text color on hover */
 }
 
 .categories li:hover::after {
   opacity: 1; /* Show the arrow on hover */
-  transform: translateY(-50%) translateX(-5px); /* Slightly move the arrow to the right */
+  transform: translateY(-60%) translateX(-5px); /* Slightly move the arrow to the right */
 }
 
 .categories li span {
@@ -147,14 +163,14 @@ body {
   font-size: 16px;
   position: absolute;
   right: 20px; /* Position the arrow on the right inside the list item */
-  top: 45%; /* Center the arrow vertically */
-  transform: translateY(-50%); /* Adjust for exact centering */
+  top: 50%; /* Center the arrow vertically */
+  transform: translateY(-40%); /* Adjust for exact centering */
   opacity: 0; /* Initially hide the arrow */
   transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for opacity and transform */
 }
 
 .thread-list {
-  background-color: #ffffff;
+  background-color: #ffebca;
   flex-grow: 1;
   padding: 20px;
   border-right: 1px solid #ddd;
@@ -178,36 +194,56 @@ body {
   margin-bottom: 20px;
 }
 
+/* Initial gradient background for thread-item */
 .thread-item {
-  padding: 15px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
+  position: relative;
+  border-radius: 10px;
+  border: 1px solid #feb47b;
+  margin-bottom: 15px;
+  padding-left: 20px;
   cursor: pointer;
-  width: "150px";
+  background: linear-gradient(
+    to right,
+    #ff7e5f,
+    #feb47b
+  ); /* Initial gradient */
+  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+/* Pseudo-element for hover gradient */
+.thread-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #ff5e36,
+    #ffa561
+  ); /* Darker gradient on hover */
+  opacity: 0; /* Initially hidden */
+  border-radius: inherit; /* Inherit the border radius */
+}
+
+/* On hover, reveal the new gradient by changing the opacity */
+.thread-item:hover::before {
+  opacity: 1; /* Show the new gradient */
 }
 
 .thread-item:hover {
-  background-color: #f0f0f5;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-.thread-item.pinned {
-  background-color: #fdf5d4;
-  border-color: #e0c96b;
-}
-
-.thread-item h4 {
-  margin: 0;
-  font-size: 1.1em;
-  color: #333;
-}
-
+/* Content inside thread-item */
+.thread-item h4,
 .thread-item p {
-  margin: 5px 0 0 0;
-  font-size: 0.9em;
-  color: #666;
+  position: relative;
+  z-index: 1;
+  color: #ffffff; /* Text color to contrast with the gradient */
 }
-
 .discussion-panel {
   background-color: #ffffff;
   flex-grow: 2;
@@ -236,7 +272,7 @@ body {
 }
 
 .reply-item {
-  background-color: #f8f8f8;
+  background-color: #ffecd9; /* Soft pastel background for replies */
   border-left: 4px solid #5a2d82;
   padding: 15px;
   margin-bottom: 15px;
@@ -317,4 +353,63 @@ body {
 
 .reply-form button:hover {
   background-color: #45a049;
+}
+
+/* Pinned thread item styling */
+.pinned-thread-item {
+  position: relative;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  background: linear-gradient(
+    to right,
+    #ff9c38,
+    #ffc285
+  ); /* Different gradient for pinned thread */
+  color: #ffffff; /* White text color */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.pinned-thread-item h4,
+.pinned-thread-item p {
+  margin: 0;
+}
+
+.pinned-thread-item:hover {
+  background: linear-gradient(
+    to right,
+    #ff8a16,
+    #ffaf5f
+  ); /* Darker gradient on hover */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.placeholder-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50%; /* Fill the height of the discussion panel */
+  text-align: center;
+  background: linear-gradient(
+    to right,
+    #ffecd2,
+    #fcb69f
+  ); /* Gradient background */
+  color: #555;
+  font-size: 1.5em;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.placeholder-message i {
+  margin-right: 10px;
+  font-size: 1.5em;
+  color: #ff7e5f;
+}
+
+.placeholder-message p {
+  margin: 0;
 }
