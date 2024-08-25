@@ -3,7 +3,9 @@ import { Card } from "antd";
 import { EventTable } from "../../components/admin/EventTable";
 
 export const AdminViewEventPage = () => {
-    <Card>
-        <EventTable />
-    </Card>
+    return (
+        <Card>
+            <EventTable />
+        </Card>
+    );
 };

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
-import { DashboardOutlined, TableOutlined, LogoutOutlined, LoginOutlined } from '@ant-design/icons';
+import { DashboardOutlined, TableOutlined, LogoutOutlined, LoginOutlined, PlusOutlined  } from '@ant-design/icons';
 import { Breadcrumb, Button, Menu, Modal, Form, Input, Layout } from 'antd';
 import './styles/NavBar.css';
 import logo from './assets/Zubin-Logo.jpg'
@@ -13,6 +13,10 @@ import CommunityPage from './pages/CommunityPage'
 import EngagementPage from './pages/EngagementPage'
 import AdminPage from './pages/AdminPage'
 import AdminTablePage from './pages/AdminTablePage'
+
+import { AdminViewEventPage } from './pages/admin/AdminViewEventsPage';
+import { AdminCreateEventPage } from './pages/admin/AdminCreateEventPage';
+
 import TrainingPage from './pages/TrainingPage';
 
 import { ChatBot } from './components/ChatBot';
@@ -78,7 +82,7 @@ function App() {
                 <Link to="/engagement">Engagement</Link>
               </Menu.Item>
               <Menu.Item key="login" icon={<LoginOutlined />} onClick={showLoginModal}>
-                  Login
+                Login
               </Menu.Item>
             </Menu>
           </Header>
@@ -139,6 +143,9 @@ function App() {
               <Menu.Item key="2" icon={<TableOutlined />}>
                 <Link to="/table">Table</Link>
               </Menu.Item>
+              <Menu.Item key="3" icon={<PlusOutlined />}>
+                <Link to="/create">Create Event</Link>
+              </Menu.Item>
               <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
                 <Link to="/">logout</Link>
               </Menu.Item>
@@ -175,6 +182,7 @@ function App() {
                 <Routes>
                   <Route path="/" element={<AdminPage />} />
                   <Route path="/table" element={<AdminTablePage />} />
+                  <Route path="/create" element={<AdminCreateEventPage />} />
                 </Routes>
               </div>
 
