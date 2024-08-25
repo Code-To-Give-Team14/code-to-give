@@ -7,6 +7,7 @@ import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.morganstanley.code_to_give.domain.event.controller.response.EventListResponse;
 import com.morganstanley.code_to_give.domain.event.service.EventService;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
 import com.morganstanley.code_to_give.domain.member.entity.Member;
@@ -22,8 +23,8 @@ public class Chatbot {
     public static class Message {
 
         public static class ExtraItems {
-            public List<Integer> eventForUserToJoinAsMember;
-            public List<Integer> eventForUserToJoinAsVolunteer;
+            public List<EventListResponse> eventForUserToJoinAsMember;
+            public List<EventListResponse> eventForUserToJoinAsVolunteer;
         }
 
         public String type; // Only "user" or "bot"
@@ -33,8 +34,8 @@ public class Chatbot {
         public Message(
                 String type,
                 String message,
-                List<Integer> eventForUserToJoinAsMember,
-                List<Integer> eventForUserToJoinAsVolunteer
+                List<EventListResponse> eventForUserToJoinAsMember,
+                List<EventListResponse> eventForUserToJoinAsVolunteer
         ) {
             this.type = type;
             this.message = message;
@@ -87,7 +88,7 @@ public class Chatbot {
         } catch (Exception ignored) {}
 
         String context = "";
-        List<Integer> helperEventIds = new ArrayList<>();
+        List<Event> helperEvents = new ArrayList<>();
         if (isUserAskingForEventRecommendation.equals("YesAsHelper") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
             List<Event> events = Recommendation.findSkills(member, eventService);
             if (!events.isEmpty()) {
@@ -101,14 +102,13 @@ public class Chatbot {
                                 .toList()
                 )
                         + ".\n";
-                helperEventIds = events
+                helperEvents = events
                         .stream()
                         .limit(2)
-                        .map(Event::getId)
                         .toList();
             }
         }
-        List<Integer> attendeeEventIds = new ArrayList<>();
+        List<Event> attendeeEvents = new ArrayList<>();
         if (isUserAskingForEventRecommendation.equals("YesAsAttendee") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
             List<Event> events = Recommendation.findInterests(member, eventService);
             if (!events.isEmpty()) {
@@ -122,10 +122,9 @@ public class Chatbot {
                                 .toList()
                 )
                         + ".\n";
-                attendeeEventIds = events
+                attendeeEvents = events
                         .stream()
                         .limit(2)
-                        .map(Event::getId)
                         .toList();
             }
         }
@@ -152,8 +151,8 @@ public class Chatbot {
         return new Message(
                 "bot",
                 responseMessage,
-                attendeeEventIds,
-                helperEventIds
+                EventListResponse.from(attendeeEvents),
+                EventListResponse.from(helperEvents)
         );
     }
 
