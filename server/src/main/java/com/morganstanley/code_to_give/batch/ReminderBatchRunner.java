@@ -35,7 +35,7 @@ public class ReminderBatchRunner {
 
 
     @Transactional
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedRate = 1000)
     @Profile("dev")
     public void sendReminderMessage() {
         LocalDateTime now = LocalDateTime.now();
@@ -56,7 +56,7 @@ public class ReminderBatchRunner {
     }
 
     @Transactional
-    @Scheduled(fixedDelay = 1000)
+    @Scheduled(fixedRate = 1000)
     @Profile("dev")
     public void handleEventCreatedEvent() {
         List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
