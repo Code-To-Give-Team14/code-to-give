@@ -5,6 +5,7 @@ import com.azure.ai.openai.OpenAIClientBuilder;
 import com.azure.ai.openai.models.*;
 import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.util.BinaryData;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.morganstanley.code_to_give.domain.event.service.EventService;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
@@ -90,16 +91,16 @@ public class Chatbot {
         if (isUserAskingForEventRecommendation.equals("YesAsHelper") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
             List<Event> events = Recommendation.findSkills(member, eventService);
             if (!events.isEmpty()) {
-                context += "Some relevant events for the user to participate as a helper (sorted from more to less suitable for the user) are "
+                context += "Some relevant events for the user to participate as a helper (sorted from more to less suitable for the user) are:\n"
                         + String.join(
-                        ", ",
+                        ",\n",
                         events
                                 .stream()
                                 .limit(2)
-                                .map(event -> event.getTitle() + " (" + event.getDescription() + ")")
+                                .map(Event::toChatbotString)
                                 .toList()
                 )
-                        + ". ";
+                        + ".\n";
                 helperEventIds = events
                         .stream()
                         .limit(2)
@@ -111,16 +112,16 @@ public class Chatbot {
         if (isUserAskingForEventRecommendation.equals("YesAsAttendee") || isUserAskingForEventRecommendation.equals("YesAsEitherHelperOrAttendee")) {
             List<Event> events = Recommendation.findInterests(member, eventService);
             if (!events.isEmpty()) {
-                context += "Some relevant events for the user to participate as an attendee (sorted from more to less suitable for the user) are "
+                context += "Some relevant events for the user to participate as an attendee (sorted from more to less suitable for the user) are:\n"
                         + String.join(
-                        ", ",
+                        ",\n",
                         events
                                 .stream()
                                 .limit(2)
-                                .map(event -> event.getTitle() + " (" + event.getDescription() + ")")
+                                .map(Event::toChatbotString)
                                 .toList()
                 )
-                        + ". ";
+                        + ".\n";
                 attendeeEventIds = events
                         .stream()
                         .limit(2)

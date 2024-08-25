@@ -158,5 +158,18 @@ public class Event  {
         this.isActivated = activeStatus;
         return this;
     }
+
+    public String toChatbotString() {
+        return "{\n" +
+            "    Event: " + title + "\n" +
+            "    Description: " + description + "\n" +
+            "    Start Time: " + startTime + "\n" +
+            "    End Time: " + endTime + "\n" +
+            "    Venue: " + venue + "\n" +
+            "    Quota: " + quota + "\n" +
+            "    Reminder: " + reminder + "\n" +
+            "    Image URL: " + imgUrl +
+            "}";
+    }
 }
 
