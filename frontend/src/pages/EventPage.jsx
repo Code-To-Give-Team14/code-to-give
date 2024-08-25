@@ -7,32 +7,16 @@ const EventPage = () => {
 
   const [events, setEvents] = useState([]);
   const [error, setError] = useState(null);
+  const [programId, setProgramId] = useState(3)
 
   const tabData = [
     { label: 'Women and Girls', key: '1'},
     { label: 'Family', key: '3'},
     { label: 'Mental Health', key: '4'}
-  ];
-  
-  const programId = 3
+  ]
 
   const handleTabChange = (activeKey) => {
-    fetch(`https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/events/${activeKey}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-        setEvents(data);
-        
-      })
-      .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-        setError(error);
-      });
+    setProgramId(activeKey)
   };
 
   useEffect(() => {
@@ -44,14 +28,62 @@ const EventPage = () => {
         return response.json();
       })
       .then(data => {
-        console.log(data);
         setEvents(data);
+        
+        // Connect and open a Database
+        const request = indexedDB.open("GetEventDB", 1)
+        
+        request.onupgradeneeded = (event) =>{
+          const db = event.target.result;
+          if (!db.objectStoreNames.contains("events")){
+            db.createObjectStore('events', { keyPath: 'id' });
+          }
+        }
+
+        const dbData = {"id": programId, "data": data}
+        console.log(dbData)
+
+        request.onsuccess = (event) => {
+          const db = event.target.result;
+          const transaction = db.transaction('events', 'readwrite');
+          const events = transaction.objectStore('events');
+          events.put(dbData);
+        };
+
+        request.onerror = (event) => {
+          console.error('Database error:', event.target.error);
+        };
       })
       .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
-        setError(error);
+        const request = indexedDB.open("GetEventDB", 1);
+          request.onsuccess = (event) => {
+            const db = event.target.result;
+            const transaction = db.transaction('events', 'readonly');
+            const store = transaction.objectStore('events');
+
+            const getRequest = store.get(programId); // Use the key to get the specific record
+
+            getRequest.onsuccess = (event) => {
+              const dbData = event.target.result;
+              const data = dbData.data
+              if (data) {
+                setEvents(data);
+              } else {
+                console.log('No data found for the given key.');
+              }
+            };
+
+            getRequest.onerror = (event) => {
+              console.error('Error retrieving data:', event.target.error);
+            };
+          };
+
+          request.onerror = (event) => {
+            console.error('Database error:', event.target.error);
+          };
+          throw new Error('Network response was not ok');
       });
-  }, []);
+  }, [programId]);
 
   const eventsRef = useRef(null);
 
