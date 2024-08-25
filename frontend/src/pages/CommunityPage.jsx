@@ -78,6 +78,7 @@ const CommunityPage = () => {
             <li><MessageOutlined /> Your Threads</li>
             <li><SaveOutlined /> Saved</li>
           </ul>
+          
           <h3>Current Topics</h3>
           <ul>
           <li onClick={() => setSelectedTag('All')}><MessageOutlined /> All</li>
