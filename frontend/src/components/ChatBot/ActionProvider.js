@@ -19,11 +19,17 @@ class ActionProvider {
         this.setState(state => ({
             ...state,
             eventForUserToJoinAsMember: response.data.items.eventForUserToJoinAsMember,
-            eventForUserToJoinAsVolunteer: response.data.items.eventForUserToJoinAsVolunteer
+            eventForUserToJoinAsVolunteer: response.data.items.eventForUserToJoinAsVolunteer,
+            newInterests: response.data.items.newInterests,
+            newSkills: response.data.items.newSkills
         }));
         const botMessage = this.createChatBotMessage(
             response.data.message,
-            response.data.items.eventForUserToJoinAsMember.length > 0 ? { widget: 'recommendation' } : null
+            response.data.items.eventForUserToJoinAsMember.length > 0 || response.data.items.eventForUserToJoinAsVolunteer.length > 0 ?
+            { widget: 'recommendation' } :
+            response.data.items.newInterests.length > 0 || response.data.items.newSkills.length > 0 ?
+            { widget: 'newInterestsOrSkills' } :
+            null
         );
         this.setChatbotMessage(botMessage);
       })
