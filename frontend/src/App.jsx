@@ -3,11 +3,11 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './styles/NavBar.css';
 import logo from './assets/Zubin-Logo.jpg'
 import './App.css'
+import ScrollToTop from './components/ScrollToTop';
 
 // List of pages
 import MainScrollPage from './pages/MainScrollPage'
 import EventPage from './pages/EventPage'
-import LoginPage from './pages/LoginPage'
 import CommunityPage from './pages/CommunityPage'
 import EngagementPage from './pages/EngagementPage'
 import AdminPage from './pages/AdminPage'
@@ -28,6 +28,7 @@ function App() {
   return (
     <>
       <Router>
+        <ScrollToTop/>
         <nav>
           <Link className="nav-link" to="/"><img src={logo} className="nav-logo"/></Link>
             <ul className="nav-links">

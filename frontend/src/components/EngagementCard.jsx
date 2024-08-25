@@ -5,7 +5,7 @@ const EngagementCard = (props) => {
 
   return (
     <div 
-      style={{ display: "flex", margin: "15px", backgroundColor: "#f0f4ff", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)", overflow: "hidden" }}
+      style={{ display: "flex", margin: "15px", backgroundColor: "#f0f4ff", borderRadius: "12px", boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)", overflow: "hidden",cursor: "pointer" }}
     >
       
       <div style={{ display: "flex", flexDirection: "column", width: "80px", padding: "15px", borderRight: "2px solid #007bff", alignItems: "center", backgroundColor: "#e6f0ff" }}>
