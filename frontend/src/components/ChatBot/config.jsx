@@ -55,7 +55,7 @@ const WidgetEventCard = (props) => {
                                         endMin={endMin}
                                         interests={event.interests}
                                         skills={event.skills}
-                                        imageURL={event.imageUrl}
+                                        imgUrl={event.imgUrl}
                                         description={event.description}
                                     />
                                 )
@@ -96,7 +96,7 @@ const WidgetEventCard = (props) => {
                                         endMin={endMin}
                                         interests={event.interests}
                                         skills={event.skills}
-                                        imageURL={event.imageUrl}
+                                        imgUrl={event.imgUrl}
                                         description={event.description}
                                     />
                                 )

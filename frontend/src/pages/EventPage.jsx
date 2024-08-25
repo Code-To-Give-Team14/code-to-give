@@ -174,7 +174,7 @@ const EventPage = () => {
                 endMin={endMin}
                 interests={event.interests}
                 skills={event.skills}
-                imageURL={event.imageUrl}
+                imgUrl={event.imgUrl}
                 description={event.description}
               />)
           })}
