@@ -31,7 +31,7 @@ public class Recommendation {
                                 + computeSimilarity(skillsEmbedding, member.getSkillsEmbedding())
                 ))
                 .sorted((a, b) -> b.similarity.compareTo(a.similarity))
-                .limit(1)
+                .limit(10)
                 .map(memberSimilarity -> memberSimilarity.member)
                 .toList();
     }
