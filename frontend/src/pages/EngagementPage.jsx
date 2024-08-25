@@ -5,12 +5,15 @@ import eventDataList from '../assets/stubEngagementList.json'
 import volunDataList from '../assets/stubVolunteerList.json'
 import EngagementCard from '../components/EngagementCard';
 import QuizForm from '../components/QuizBox';
+import EventDescription from '../components/EventDescription';
 
 const EngagementPage = () => {
 
   const [eventId, setEventId] = useState("1")
   const [eventTitle, setEventTitle] = useState("DIY Mirror Clay Art")
   const [eventLink, setEventLink] = useState("https://www.youtube.com/watch?v=oR4vdnNa7oI")
+  const [partiClicked, setPartiClicked] = useState(false)
+  const [volunClicked, setVolunClicked] = useState(false)
 
   const eventsRef = useRef(null);
 
@@ -46,6 +49,8 @@ const EngagementPage = () => {
   }
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPartiModalOpen, setIsPartiModalOpen] = useState(false);
+
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -55,6 +60,37 @@ const EngagementPage = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  // Below
+  const showPartiModal = () => {
+    setIsPartiModalOpen(true);
+  };
+  const handlePartiOk = () => {
+    setIsPartiModalOpen(false);
+  };
+  const handlePartiCancel = () => {
+    setIsPartiModalOpen(false);
+  };
+
+  const registerParti = () => {
+    if (partiClicked){
+        setPartiClicked(!partiClicked)
+    }
+    else{
+        setPartiClicked(!partiClicked)
+        setVolunClicked(false)
+    } 
+};
+
+const registerVolun = () => {
+    if (volunClicked){
+        setVolunClicked(!volunClicked)
+    }
+    else{
+        setVolunClicked(!volunClicked)
+        setPartiClicked(false)
+    }
+    
+}; 
 
   const navigate = useNavigate();
   const ParticipatedEvents = () => (
@@ -74,6 +110,10 @@ const EngagementPage = () => {
         const endMin = String(endDate.getMinutes()).padStart(2, '0');
 
         return (
+          <>
+          <div 
+            onClick = {() => showPartiModal(event)}
+          >
             <EngagementCard
               key={event.eventId}
               title={event.title}
@@ -85,7 +125,39 @@ const EngagementPage = () => {
               min={min}
               endHour = {endHour}
               endMin = {endMin}
-          />
+            />
+            
+          </div>
+          <Modal open={isPartiModalOpen} onOk={handlePartiOk} onCancel={handlePartiCancel} width = {700}>
+            <div style = {{display: "flex", flexDirection: "column"}}>
+              <EventDescription
+                  title = {event.title}
+                  year = {year}
+                  month = {month}
+                  day = {day}
+                  hour={hour}
+                  min={min}
+                  endHour={endHour}
+                  endMin={endMin}
+                  description = {event.description}
+                  venue = {event.venue}
+              />
+              <div style = {{display:"flex", justifyContent:"center", margin: "8px"}}>
+                  <Button 
+                      type="primary" 
+                      style = {{width: "400px", height: "70px", backgroundColor: partiClicked ? "#d9d9d9" : "#f9ef1e", color: "black", fontWeight: "bold"}}
+                      onClick = {registerParti}
+                  > {partiClicked ? "Successfully Registered" : "Register as a participant"}</Button>
+              </div>
+              <div style = {{display:"flex", justifyContent:"center", margin: "8px"}}>
+                  <Button 
+                      style = {{width: "400px", height: "70px", fontWeight: "bold", backgroundColor: volunClicked ? "#d9d9d9": "white", color: volunClicked? "black": "#108ee9"}}
+                      onClick = {registerVolun}    
+                  >{volunClicked ? "Successfully Registered" : "Register as a volunteer"}</Button>
+              </div>
+          </div>
+          </Modal>
+        </>
         );
       })}
     </>
@@ -193,9 +265,9 @@ const EngagementPage = () => {
 
         
         <Modal open={isModalOpen} onOk={handleOk} onCancel={handleCancel} width={600}>
-        <div style={{ fontSize: '30px', fontWeight: 'bold', textAlign: 'center', marginBottom: '20px' }}>
-        Quiz
-      </div>
+          <div style={{ fontSize: '30px', fontWeight: 'bold', textAlign: 'center', marginBottom: '20px' }}>
+            Quiz
+          </div>
           <QuizForm/>
         </Modal>
       </div>

@@ -17,7 +17,7 @@ const EventPage = () => {
   const programId = 3
 
   const handleTabChange = (activeKey) => {
-    fetch(`https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/admin/programs/${activeKey}/events`)
+    fetch(`https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/events/${activeKey}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -36,7 +36,7 @@ const EventPage = () => {
   };
 
   useEffect(() => {
-    fetch(`https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/admin/programs/${programId}/events`)
+    fetch(`https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/events/${programId}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -77,7 +77,7 @@ const EventPage = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", minHeight: "100vh", backgroundColor: "white" }}>
       
-      <div style={{ backgroundImage: "url(/events.png)", backgroundSize: "cover", width: "100%", height: "750px", backgroundPosition: "center", display: "flex", justifyContent: "center", alignItems: "end" }}>
+      <div style={{ backgroundImage: "url(/events.png)", backgroundSize: "cover", width: "100%", height: "770px", backgroundPosition: "center", display: "flex", justifyContent: "center", alignItems: "end" }}>
         <Button
           ghost
           style={{
@@ -98,9 +98,7 @@ const EventPage = () => {
         <div ref={eventsRef} style ={{paddingBottom: "100px"}}></div>
       </div>
       
-      <div  style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold", marginTop: "20px", backgroundColor: "white", width: "100%" }}>
-        
-      </div>
+      <div  style={{ textAlign: "center", fontSize: "24px", fontWeight: "bold", marginTop: "20px", backgroundColor: "white", width: "100%" }}></div>
       
 
       <Tabs
