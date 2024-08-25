@@ -1,6 +1,7 @@
 package com.morganstanley.code_to_give.domain.event.service;
 
 import com.morganstanley.code_to_give.ai.Recommendation;
+import com.morganstanley.code_to_give.ai.RecommendationService;
 import com.morganstanley.code_to_give.domain.event.EventRepository;
 import com.morganstanley.code_to_give.domain.event.controller.request.ChangeEventActiveStatusRequest;
 import com.morganstanley.code_to_give.domain.event.controller.request.UpdateEventRequest;
@@ -21,6 +22,7 @@ import static com.morganstanley.code_to_give.global.exception.ErrorCode.EVENT_NO
 public class UpdateEventService {
 
     private final EventRepository eventRepository;
+    private final RecommendationService recommendationService;
 
     @Transactional
     public void updateEvent(UpdateEventRequest request) {
@@ -32,8 +34,8 @@ public class UpdateEventService {
             request.description(),
             request.types(),
             request.skills(),
-            Recommendation.getEmbedding(request.skills()),
-            request.interests(),
+            List.of(),
+            List.of(),
             Recommendation.getEmbedding(request.interests()),
             request.startTime(),
             request.endTime(),
@@ -41,6 +43,10 @@ public class UpdateEventService {
             request.quota(),
             request.reminder()
         );
+
+        eventRepository.save(event);
+
+        recommendationService.saveEventEmbedding(event.getId(), request.skills(), request.interests());
     }
 
     @Transactional

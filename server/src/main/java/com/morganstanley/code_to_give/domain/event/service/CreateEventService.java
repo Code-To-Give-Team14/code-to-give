@@ -1,6 +1,7 @@
 package com.morganstanley.code_to_give.domain.event.service;
 
 import com.morganstanley.code_to_give.ai.Recommendation;
+import com.morganstanley.code_to_give.ai.RecommendationService;
 import com.morganstanley.code_to_give.domain.event.EventCreatedEvent;
 import com.morganstanley.code_to_give.domain.event.EventOutboxMessageRepository;
 import com.morganstanley.code_to_give.domain.event.EventRepository;
@@ -15,6 +16,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static com.morganstanley.code_to_give.global.exception.ErrorCode.PROGRAM_NOT_FOUND;
 
 @Service
@@ -24,6 +27,7 @@ public class CreateEventService {
     private final EventRepository eventRepository;
     private final ProgramRepository programRepository;
     private final EventOutboxMessageRepository eventOutboxMessageRepository;
+    private final RecommendationService recommendationService;
 
     @Transactional
     public CreateEventResponse createEvent(CreateEventRequest request) {
@@ -36,9 +40,9 @@ public class CreateEventService {
             program,
             request.types(),
             request.skills(),
-            Recommendation.getEmbedding(request.skills()),
+            List.of(),
             request.interests(),
-            Recommendation.getEmbedding(request.interests()),
+            List.of(),
             request.startTime(),
             request.endTime(),
             request.venue(),
@@ -48,6 +52,8 @@ public class CreateEventService {
         );
 
         eventRepository.save(event);
+
+        recommendationService.saveEventEmbedding(event.getId(), request.skills(), request.interests());
         publishEventCreatedEvent(event.getId());
 
         return new CreateEventResponse(event.getId());

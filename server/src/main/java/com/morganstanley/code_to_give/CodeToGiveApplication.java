@@ -2,8 +2,10 @@ package com.morganstanley.code_to_give;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 @SpringBootApplication
+@EnableAsync
 public class CodeToGiveApplication {
 
 	public static void main(String[] args) {
