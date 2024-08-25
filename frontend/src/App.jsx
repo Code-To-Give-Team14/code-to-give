@@ -36,6 +36,7 @@ function App() {
               <li><Link className="nav-link" to="/community">Community</Link></li>
               <li><Link className="nav-link" to="/engagement">Engagement</Link></li>
               <li><Link className="nav-link" to="/admin">Admin</Link></li>
+              <div style={{ width: '50px' }}/>
             </ul>
         </nav>
       
