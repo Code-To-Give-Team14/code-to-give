@@ -1,4 +1,4 @@
-.sidebar {
+.admin-sidebar {
   background-color: #f1f1f1;
   width: 200px;
   padding: 20px;
@@ -56,64 +56,58 @@
   transform: translateX(-10px); /* Move the text to the left */
 }
 
-.courses,
-.categories {
+.admin-categories {
   margin-top: 45px;
   margin-bottom: 20px;
 }
 
-.courses h3,
-.categories h3 {
+.admin-categories h3 {
   font-size: 1em;
   margin-bottom: 10px;
 }
 
-.courses ul,
-.categories ul {
+.admin-categories ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
 
-.courses li,
-.categories li {
+.admin-categories li {
   position: relative;
   cursor: pointer;
   padding: 10px; /* Add some padding for better clickability */
-  border-radius: 5px; /* Optional: Add border radius for smoother corners */
   padding: 10px 20px;
-  background-color: #f1f1f1;
   border-radius: 7px;
   cursor: pointer;
   font-size: 14px;
   font-weight: bold;
   border-color: black;
+  background-color: transparent;
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow: hidden;
+  margin-bottom: 5px;
 }
 
-.courses li.active,
-.courses li:hover,
-.categories li:hover {
+.admin-categories li:hover {
   background-color: #e0e0e0; /* Light grey background on hover */
   color: #333; /* Optional: Change the text color on hover */
 }
 
-.categories li:hover::after {
+.admin-categories li:hover::after {
   opacity: 1; /* Show the arrow on hover */
   transform: translateY(-50%) translateX(-5px); /* Slightly move the arrow to the right */
 }
 
-.categories li span {
+.admin-categories li span {
   display: inline-block;
   transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for text movement */
 }
 
-.categories li:hover span {
+.admin-categories li:hover span {
   transform: translateX(10px); /* Move the text to the left */
 }
 
-.categories li::after {
+.admin-categories li::after {
   content: "→"; /* Arrow symbol */
   font-size: 16px;
   position: absolute;
