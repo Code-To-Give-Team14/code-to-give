@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import SideBar from "../components/SideBar.jsx";
+import AdminPageX from "./admin/AdminPageX.jsx";
 
 const AdminPage = () => {
   return (
@@ -17,6 +18,7 @@ const AdminPage = () => {
         </aside>
       <main style={{ flexGrow: 1, padding: '20px' }}>
         <Outlet />
+        <AdminPageX />
       </main>
     </div>
   );
