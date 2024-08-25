@@ -16,7 +16,15 @@ class ActionProvider {
     axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/chat', messageHistory)
       .then(response => {
         console.log('Response from "/chat" API:', response.data);
-        const botMessage = this.createChatBotMessage(response.data.response);
+        this.setState(state => ({
+            ...state,
+            eventForUserToJoinAsMember: response.data.items.eventForUserToJoinAsMember,
+            eventForUserToJoinAsVolunteer: response.data.items.eventForUserToJoinAsVolunteer
+        }));
+        const botMessage = this.createChatBotMessage(
+            response.data.message,
+            response.data.items.eventForUserToJoinAsMember.length > 0 ? { widget: 'recommendation' } : null
+        );
         this.setChatbotMessage(botMessage);
       })
       .catch(error => {

@@ -4,6 +4,7 @@ import '../styles/MainScrollPage.css';
 import activityImage from '../assets/mainScroll_activities.jpg';
 import communityImage from '../assets/mainScroll_community.png';
 import aboutUsImage from '../assets/mainScroll_aboutUs.jpg';
+import { ChatBot } from '../components/ChatBot';
 import zubinLogo from '../assets/mainScroll_zubinLogo.jpg';
 
 const MainScrollPage = () => {
@@ -59,6 +60,7 @@ const MainScrollPage = () => {
           </p>
         </div>
       </footer>
+      <ChatBot />
     </div>
   );
 };

@@ -3,7 +3,7 @@ import Chatbot from 'react-chatbot-kit';
 import 'react-chatbot-kit/build/main.css';
 import { FaRobot } from 'react-icons/fa';
 import ActionProvider from './ActionProvider';
-import config from './config.js';
+import config from './config.jsx';
 import MessageParser from './MessageParser';
 import './styles/index.css';
 
