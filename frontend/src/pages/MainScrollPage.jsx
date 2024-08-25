@@ -51,7 +51,7 @@ const MainScrollPage = () => {
     <div style = {{overflow: "auto", display:"flex", flexDirection: "column"}}>
       <div
         style={{
-          backgroundImage: "url(zubinHands.jpg)",
+          backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(zubinHands.jpg)",
           backgroundSize: "cover",
           backgroundPosition: "center",
           width: "100%",
@@ -64,8 +64,8 @@ const MainScrollPage = () => {
         }}
       >
         <div
-            style = {{textAlign: "center", fontSize: "70px", fontWeight: "bold", backgroundColor: "white", color:"black", padding: "10px", paddingLeft: "20px", padingRight: "20px"}}
-          > 𝐙𝐮𝐛𝐢𝐧 𝐅𝐨𝐮𝐧𝐝𝐚𝐭𝐢𝐨𝐧 
+            style = {{textAlign: "center", fontSize: "70px", fontWeight: "bold", backgroundColor: "#EADA30", color:"#333333", paddingTop: '5px', paddingLeft: "40px", paddingRight: "40px"}}
+          > 𝐙𝐮𝐛𝐢𝐧 𝐅𝐨𝐮𝐧𝐝𝐚𝐭𝐢𝐨𝐧
         </div>
         <Button
           style={{
@@ -143,7 +143,7 @@ const MainScrollPage = () => {
 
         <div style={{flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems:"start"}}>
          
-            <div style = {{fontSize: "60px", fontWeight: "bold", color: "black", marginBottom: "20px", paddingLeft: "50px"}}>
+            <div style = {{fontSize: "60px", fontWeight: "bold", color: "black", marginBottom: "30px", paddingLeft: "50px", lineHeight: "60px"}}>
               𝐂𝐨𝐦𝐦𝐮𝐧𝐢𝐭𝐲 𝐒𝐮𝐩𝐩𝐨𝐫𝐭
             </div>
             

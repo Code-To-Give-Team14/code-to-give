@@ -380,8 +380,8 @@ body {
 .pinned-thread-item:hover {
   background: linear-gradient(
     to right,
-    #29a19c,
-    #126a82
+    #ff8a16,
+    #ffaf5f
   ); /* Darker gradient on hover */
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
 }
