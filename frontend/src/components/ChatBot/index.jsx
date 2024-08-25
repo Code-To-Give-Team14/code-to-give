@@ -38,7 +38,7 @@ export const ChatBot = () => {
                     />
                 </div>
             }
-            <div className='chatbot-icon-container'>
+            <div className='chatbot-icon-container' style={{ backgroundColor: '#f9ef1e', borderRadius: 1000, padding: '10px', boxShadow: '0 0 10px rgba(0, 0, 0, 0.4)' }}>
                 <FaRobot
                     className='chatbot-icon'
                     onClick={handleChatbotToggle}

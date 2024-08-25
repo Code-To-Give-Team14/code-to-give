@@ -5,6 +5,7 @@ import eventDataList from '../assets/stubEngagementList.json'
 import volunDataList from '../assets/stubVolunteerList.json'
 import EngagementCard from '../components/EngagementCard';
 import QuizForm from '../components/QuizBox';
+import { ChatBot } from '../components/ChatBot';
 import EventDescription from '../components/EventDescription';
 
 const EngagementPage = () => {
@@ -271,6 +272,7 @@ const registerVolun = () => {
           <QuizForm/>
         </Modal>
       </div>
+      <ChatBot />
     </div>
 
   );

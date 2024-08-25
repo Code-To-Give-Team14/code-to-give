@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Input, Badge, Button } from 'antd';
 import { UserOutlined, PlusOutlined } from '@ant-design/icons';
+import { ChatBot } from '../components/ChatBot';
 import '../styles/CommunityPage.css';
 
 const CommunityPage = () => {
@@ -126,6 +127,7 @@ const CommunityPage = () => {
           </ul>
         </div>
       </aside>
+      <ChatBot />
     </div>
   );
 };

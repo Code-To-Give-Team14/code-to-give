@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import EventCard from '../components/EventCard';
 import eventDataList from '../assets/stubEventList.json';
 import { Button, Tabs } from 'antd';
+import { ChatBot } from '../components/ChatBot';
 
 const EventPage = () => {
 
@@ -179,6 +180,7 @@ const EventPage = () => {
       </Tabs>
 
       <div style={{ paddingBottom: "30px", backgroundColor: "white", width: "100%" }}></div>
+      <ChatBot />
 
     </div>
   );
