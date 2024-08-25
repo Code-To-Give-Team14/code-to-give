@@ -1,5 +1,6 @@
 package com.morganstanley.code_to_give.domain.event.service;
 
+import com.morganstanley.code_to_give.ai.Recommendation;
 import com.morganstanley.code_to_give.ai.RecommendationService;
 import com.morganstanley.code_to_give.domain.event.EventCreatedEvent;
 import com.morganstanley.code_to_give.domain.event.EventOutboxMessageRepository;
@@ -41,17 +42,17 @@ public class CreateEventService {
             program,
             request.types(),
             request.skills(),
-            List.of(),
+            Recommendation.getEmbedding(request.skills()),
             request.interests(),
-            List.of(),
-            request.startTime(),
-//            LocalDateTime.now().plusMinutes(2L),
+            Recommendation.getEmbedding(request.interests()),
+//            request.startTime(),
+            LocalDateTime.now().plusMinutes(2L),
             request.endTime(),
             request.venue(),
             request.quota(),
             request.imgUrl(),
-            ReminderTime.unFormatReminderTime(request.reminder())
-//            List.of("1h")
+//            ReminderTime.unFormatReminderTime(request.reminder())
+            List.of("1h")
         );
 
         eventRepository.save(event);
