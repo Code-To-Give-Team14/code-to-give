@@ -36,6 +36,7 @@ public class ReminderBatchRunner {
 
     @Transactional
     @Scheduled(fixedDelay = 1000)
+    @Profile("dev")
     public void sendReminderMessage() {
         LocalDateTime now = LocalDateTime.now();
         List<Event> livedEvents = eventRepository.findByStartTimeAfterAndIsActivatedIsTrue(LocalDateTime.now());
