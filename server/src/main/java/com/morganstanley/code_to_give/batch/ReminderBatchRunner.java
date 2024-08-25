@@ -53,27 +53,27 @@ public class ReminderBatchRunner {
         });
     }
 
-    @Transactional
-    @Scheduled(fixedDelay = 10000)
-    public void handleEventCreatedEvent() {
-        List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
-
-        eventCreatedEvents.forEach(event -> {
-            Event newEvent = eventRepository.findById(event.getPayload().eventId())
-                .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
-
-            if (!newEvent.getInterestsEmbedding().isEmpty()) {
-                List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
-                    memberService,
-                    1,
-                    newEvent.getInterests(),
-                    newEvent.getSkills()
-                );
-                messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
-                eventOutboxMessageRepository.delete(event);
-            }
-        });
-    }
+//    @Transactional
+//    @Scheduled(fixedDelay = 10000)
+//    public void handleEventCreatedEvent() {
+//        List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
+//
+//        eventCreatedEvents.forEach(event -> {
+//            Event newEvent = eventRepository.findById(event.getPayload().eventId())
+//                .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
+//
+//            if (!newEvent.getInterestsEmbedding().isEmpty()) {
+//                List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
+//                    memberService,
+//                    1,
+//                    newEvent.getInterests(),
+//                    newEvent.getSkills()
+//                );
+//                messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
+//                eventOutboxMessageRepository.delete(event);
+//            }
+//        });
+//    }
 
     private LocalDateTime getReminderTime(String timeBeforeStartTime, LocalDateTime startTime) {
 
