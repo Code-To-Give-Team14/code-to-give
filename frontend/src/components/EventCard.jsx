@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, Button } from 'antd';
 import { Modal } from 'antd';
 import EventDescription from './EventDescription';
+import axios from 'axios';
 
 const { Meta } = Card;
 
@@ -20,6 +21,9 @@ const EventCard = (props) => {
             setPartiClicked(!partiClicked)
         }
         else{
+            axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/events/registration', {
+                "eventId": props.id,
+            });
             setPartiClicked(!partiClicked)
             setVolunClicked(false)
         } 
@@ -30,6 +34,9 @@ const EventCard = (props) => {
             setVolunClicked(!volunClicked)
         }
         else{
+            axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/events/registration', {
+                "eventId": props.id,
+            });
             setVolunClicked(!volunClicked)
             setPartiClicked(false)
         }
@@ -43,7 +50,7 @@ const EventCard = (props) => {
       const handleCancel = () => {
         setIsModalOpen(false);
       };
-      
+
     return (
 
         <div style = {{margin: "20px"}}>
