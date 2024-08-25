@@ -210,7 +210,7 @@ public class Chatbot {
 
     static FunctionDefinition getEventRecommendationFunctionDefinition() {
         FunctionDefinition functionDefinition = new FunctionDefinition("shouldGetEventRecommendations");
-        functionDefinition.setDescription("Determine whether user is asking for event recommendations ONLY in the LATEST SINGLE message.");
+        functionDefinition.setDescription("Determine whether user is asking for event recommendations ONLY in the LATEST SINGLE message, also do supply No as the argument if the user is just asking to add new interest or skill.");
         functionDefinition.setParameters(BinaryData.fromString("""
                 {
                    "type": "object",
@@ -228,7 +228,7 @@ public class Chatbot {
 
     static FunctionDefinition addNewInterestsOrSkillsFunctionDefinition() {
         FunctionDefinition functionDefinition = new FunctionDefinition("addNewInterestsOrSkills");
-        functionDefinition.setDescription("Determine whether user is asking to add some new interests or skills.");
+        functionDefinition.setDescription("Determine whether user is asking to add some new interests or skills, fill in empty lists if the user is just asking for event recommendation.");
         functionDefinition.setParameters(BinaryData.fromString("""
                 {
                    "type": "object",
