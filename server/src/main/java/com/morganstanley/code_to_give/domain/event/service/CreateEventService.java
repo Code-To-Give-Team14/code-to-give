@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.morganstanley.code_to_give.global.exception.ErrorCode.PROGRAM_NOT_FOUND;
@@ -43,12 +44,14 @@ public class CreateEventService {
             List.of(),
             request.interests(),
             List.of(),
-            request.startTime(),
+//            request.startTime(),
+            LocalDateTime.now().plusMinutes(2L),
             request.endTime(),
             request.venue(),
             request.quota(),
             request.imgUrl(),
-            ReminderTime.unFormatReminderTime(request.reminder())
+//            ReminderTime.unFormatReminderTime(request.reminder())
+            List.of("1h")
         );
 
         eventRepository.save(event);

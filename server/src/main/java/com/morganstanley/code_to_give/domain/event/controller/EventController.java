@@ -6,7 +6,6 @@ import com.morganstanley.code_to_give.domain.event.controller.request.RegisterEv
 import com.morganstanley.code_to_give.domain.event.controller.request.UpdateEventRequest;
 import com.morganstanley.code_to_give.domain.event.controller.response.AdminEventDetailResponse;
 import com.morganstanley.code_to_give.domain.event.controller.response.CreateEventResponse;
-import com.morganstanley.code_to_give.domain.event.controller.response.EventListResponse;
 import com.morganstanley.code_to_give.domain.event.controller.response.MemberEventDetailResponse;
 import com.morganstanley.code_to_give.domain.event.service.CreateEventService;
 import com.morganstanley.code_to_give.domain.event.service.GetEventListService;
@@ -14,7 +13,15 @@ import com.morganstanley.code_to_give.domain.event.service.RegisterEventService;
 import com.morganstanley.code_to_give.domain.event.service.UpdateEventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
