@@ -44,9 +44,9 @@ public class EventController {
         return ResponseEntity.ok(getEventListService.getEventList(programId));
     }
 
-    @GetMapping("/admin/programs/{programId}/events")
-    public ResponseEntity<List<EventListResponse>> getEventListForAdmin(@PathVariable Integer programId) {
-        return ResponseEntity.ok(getEventListService.getEventListForAdmin(programId));
+    @GetMapping("/admin/events")
+    public ResponseEntity<List<EventListResponse>> getEventListForAdmin() {
+        return ResponseEntity.ok(getEventListService.getEventListForAdmin());
     }
 
     @PutMapping("/admin/events")

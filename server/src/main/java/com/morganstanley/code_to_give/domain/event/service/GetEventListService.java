@@ -23,8 +23,8 @@ public class GetEventListService {
         return EventListResponse.from(activeEventList);
     }
 
-    public List<EventListResponse> getEventListForAdmin(Integer programId) {
-        List<Event> eventList = eventRepository.findAllByProgramId(programId);
+    public List<EventListResponse> getEventListForAdmin() {
+        List<Event> eventList = eventRepository.findAll();
         return EventListResponse.from(eventList);
     }
 
