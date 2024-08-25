@@ -54,21 +54,24 @@ public class ReminderBatchRunner {
     }
 
     @Transactional
-    @Scheduled(cron = "0 0 10,22 * * *")
+    @Scheduled(fixedDelay = 1000)
     public void handleEventCreatedEvent() {
         List<EventOutboxMessage> eventCreatedEvents = eventOutboxMessageRepository.findAll();
 
         eventCreatedEvents.forEach(event -> {
             Event newEvent = eventRepository.findById(event.getPayload().eventId())
                 .orElseThrow(() -> new CustomException(EVENT_NOT_FOUND));
-            List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
-                memberService,
-                10,
-                newEvent.getInterests(),
-                newEvent.getSkills()
-            );
-            messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
-            eventOutboxMessageRepository.delete(event);
+
+            if (!newEvent.getInterestsEmbedding().isEmpty()) {
+                List<Member> recommendedMember = Recommendation.getMemberByMatchingInterestsAndSkills(
+                    memberService,
+                    10,
+                    newEvent.getInterests(),
+                    newEvent.getSkills()
+                );
+                messageService.sendEventRecommendationMessage(newEvent, recommendedMember);
+                eventOutboxMessageRepository.delete(event);
+            }
         });
     }
 
