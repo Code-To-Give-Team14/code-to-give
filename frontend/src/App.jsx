@@ -17,7 +17,8 @@ import AdminTablePage from './pages/AdminTablePage'
 import ProtectedRoute from './components/ProtectedRoute';
 
 import { ChatBot } from './components/ChatBot';
-import { EventForm } from './components/EventForm'
+import { EventForm } from './components/admin/EventForm';
+import { EventTable } from './components/admin/EventTable';
 
 function App() {
 
