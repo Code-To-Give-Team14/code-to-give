@@ -46,7 +46,7 @@ public class CreateEventService {
             request.interests(),
             Recommendation.getEmbedding(request.interests()),
 //            request.startTime(),
-            LocalDateTime.now().plusMinutes(2L),
+            LocalDateTime.now().plusHours(1L).plusMinutes(2L),
             request.endTime(),
             request.venue(),
             request.quota(),
