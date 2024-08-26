@@ -163,12 +163,8 @@ public class Event  {
         return "{\n" +
             "    Event: " + title + "\n" +
             "    Description: " + description + "\n" +
-            "    Start Time: " + startTime + "\n" +
-            "    End Time: " + endTime + "\n" +
+            "    Time: " + startTime + "\n" +
             "    Venue: " + venue + "\n" +
-            "    Quota: " + quota + "\n" +
-            "    Reminder: " + reminder + "\n" +
-            "    Image URL: " + imgUrl +
             "}";
     }
 
