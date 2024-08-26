@@ -5,6 +5,7 @@ import com.morganstanley.code_to_give.domain.member.entity.Member;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -40,15 +41,43 @@ public class MessageService {
         String value = reminder.substring(0, reminder.length() - 1);
         String unit = TIME_UNITS.get(reminder.substring(reminder.length() - 1));
 
-        return String.format("Greetings from Jubin Foundation! " +
-                        "This is a reminder that our event '%s' is coming up in %s %s. We're looking forward to seeing you there!",
-                livedEvent.getTitle(), value, unit);
+        return String.format(
+                "Hi Lio, 🌟\n\n" +
+                        "Just a friendly reminder that our event, '%s', is happening in just %s %s!\n\n" +
+                        "We're excited to have you join us and make a positive impact together.\n\n" +
+                        "See you soon!\n\n" +
+                        "Warm regards,\n" +
+                        "The Zubin Foundation Team",
+                livedEvent.getTitle(), value, unit
+        );
     }
 
     private String createRecommendationMessage(Event event) {
-        return String.format(
-            //TODO: replace [Event URL] after front web server is published
-            "Empower yourself! '%s' awaits. Click for details: https://www.zubinfoundation.org/team-14?eventId=29", event.getTitle());
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        String eventName = event.getTitle();
+        String eventDate = event.getStartTime().format(dateFormatter);
+        String eventTime = event.getStartTime().format(timeFormatter);
+        String eventVenue = event.getVenue();
+        String registrationLink = "https://www.zubinfoundation.org/team-14?eventId=29";
+
+        // Create the message
+        String message = String.format(
+                "Hi %s, 🌻\n\n" +
+                        "We thought you’d be interested in our upcoming event: %s!\n\n" +
+                        "🗓️ Date: %s\n" +
+                        "🕒 Time: %s\n" +
+                        "🏛️ Location: %s\n\n" +
+                        "Join us and be a part of something meaningful. Your participation can make a big difference!\n\n" +
+                        "Reserve your spot here: %s\n\n" +
+                        "Looking forward to seeing you there! 🙌\n\n" +
+                        "Warm regards,\n" +
+                        "Zubin Foundation",
+                "Lio", eventName, eventDate, eventTime, eventVenue, registrationLink
+        );
+
+        return message;
     }
 
 }
