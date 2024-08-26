@@ -50,7 +50,8 @@ public class CreateEventService {
             request.endTime(),
             request.venue(),
             request.quota(),
-            request.imgUrl(),
+//            request.imgUrl(),
+            "/famMovieNight.png", //mock data for quick demo
 //            ReminderTime.unFormatReminderTime(request.reminder())
             List.of("1h")
         );
