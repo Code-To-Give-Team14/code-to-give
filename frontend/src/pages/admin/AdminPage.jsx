@@ -180,9 +180,9 @@ const AdminPage = () => {
           </Card>
         </Col>
         <Col xs={24} sm={16} md={9}>
-          <Card style={{ height: '300px' }}> {/* Adjusted height */}
+          <Card style={{ height: '300px', overflowX: "hidden"}}> {/* Adjusted height */}
             <Box flexGrow={1}>
-              <Typography> <div style={{ fontWeight: "bold" }}>Donation Tracking</div></Typography>
+              <Typography> <div style={{ fontWeight: "bold"}}>Donation Tracking</div></Typography>
               <LineChart
                 xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
                 series={[
