@@ -48,7 +48,7 @@ public class MessageService {
     private String createRecommendationMessage(Event event) {
         return String.format(
             //TODO: replace [Event URL] after front web server is published
-            "Empower yourself! '%s' awaits. Click for details: [Event URL]", event.getTitle());
+            "Empower yourself! '%s' awaits. Click for details: https://www.zubinfoundation.org/team-14?eventId=29", event.getTitle());
     }
 
 }
