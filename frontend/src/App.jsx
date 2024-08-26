@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from 'react-router-dom';
-import { DashboardOutlined, TableOutlined, LogoutOutlined, LoginOutlined, PlusOutlined  } from '@ant-design/icons';
+import { DashboardOutlined, TableOutlined, LogoutOutlined, LoginOutlined, PlusOutlined } from '@ant-design/icons';
 import { Breadcrumb, Button, Menu, Modal, Form, Input, Layout } from 'antd';
 import './styles/NavBar.css';
 import logo from './assets/Zubin-Logo.jpg'
@@ -11,13 +11,14 @@ import MainScrollPage from './pages/MainScrollPage'
 import EventPage from './pages/EventPage'
 import CommunityPage from './pages/CommunityPage'
 import EngagementPage from './pages/EngagementPage'
-import AdminPage from './pages/AdminPage'
+import AdminPage from './pages/admin/AdminPage'
 import AdminTablePage from './pages/AdminTablePage'
 
 import { AdminViewEventPage } from './pages/admin/AdminViewEventsPage';
 import { AdminCreateEventPage } from './pages/admin/AdminCreateEventPage';
 
 import TrainingPage from './pages/TrainingPage';
+import NotFound from './pages/NotFound';
 
 import { ChatBot } from './components/ChatBot';
 import { EventForm } from './components/admin/EventForm';
@@ -29,6 +30,8 @@ function App() {
   const [isLogin, setIsLogin] = useState(false);
   const [loginModalVisible, setLoginModalVisible] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+
+  const [BreadcrumbItems, setBreadcrumbItems] = useState('Dashboard');
   // const location = useLocation();
 
   const showLoginModal = () => {
@@ -38,6 +41,7 @@ function App() {
   const handleLoginOk = () => {
     setIsLogin(true);
     setLoginModalVisible(false);
+    setBreadcrumbItems('Dashboard')
   };
 
   const handleLoginCancel = () => {
@@ -73,7 +77,7 @@ function App() {
             </Link>
             <Menu mode="horizontal" style={{ border: 'none' }}>
               <Menu.Item key="event">
-                <Link to="/event">Event</Link>
+                <Link to="/event" >Event</Link>
               </Menu.Item>
               <Menu.Item key="community">
                 <Link to="/community">Community</Link>
@@ -82,7 +86,7 @@ function App() {
                 <Link to="/engagement">Engagement</Link>
               </Menu.Item>
               <Menu.Item key="login" icon={<LoginOutlined />} onClick={showLoginModal}>
-                Login
+                <Link to="/" >Login</Link>
               </Menu.Item>
             </Menu>
           </Header>
@@ -138,16 +142,16 @@ function App() {
             />
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" >
               <Menu.Item key="1" icon={<DashboardOutlined />}>
-                <Link to="/">Dashboard</Link>
+                <Link to="/" onClick={() => setBreadcrumbItems('Dashboard')}>Dashboard</Link>
               </Menu.Item>
               <Menu.Item key="2" icon={<TableOutlined />}>
-                <Link to="/table">Table</Link>
+                <Link to="/table" onClick={() => setBreadcrumbItems('Table')}>Table</Link>
               </Menu.Item>
               <Menu.Item key="3" icon={<PlusOutlined />}>
-                <Link to="/create">Create Event</Link>
+                <Link to="/create" onClick={() => setBreadcrumbItems('Create Event')}>Create Event</Link>
               </Menu.Item>
               <Menu.Item key="logout" icon={<LogoutOutlined />} onClick={handleLogout}>
-                <Link to="/">logout</Link>
+                <Link to="/" onClick={() => setBreadcrumbItems('Dashboard')}>logout</Link>
               </Menu.Item>
 
             </Menu>
@@ -169,7 +173,7 @@ function App() {
                 }}
               >
                 <Breadcrumb.Item>Admin</Breadcrumb.Item>
-                <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+                <Breadcrumb.Item>{BreadcrumbItems}</Breadcrumb.Item>
               </Breadcrumb>
               <div
                 style={{
@@ -191,7 +195,6 @@ function App() {
 
         </Layout>
       )}
-
     </Router >
   )
 }
