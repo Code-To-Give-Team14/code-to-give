@@ -23,6 +23,8 @@ const EventCard = (props) => {
         else{
             axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/events/registration', {
                 "eventId": props.id,
+                "remindEmail": true,
+                "remindSMS": true
             });
             setPartiClicked(!partiClicked)
             setVolunClicked(false)
@@ -36,6 +38,8 @@ const EventCard = (props) => {
         else{
             axios.post('https://port-0-code-to-give-m05y7f0q09864f76.sel4.cloudtype.app/events/registration', {
                 "eventId": props.id,
+                "remindEmail": true,
+                "remindSMS": true
             });
             setVolunClicked(!volunClicked)
             setPartiClicked(false)

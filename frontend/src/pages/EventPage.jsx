@@ -162,7 +162,7 @@ const EventPage = () => {
             return (
               <EventCard
                 key={index}
-                id={event.id}
+                id={event.eventId}
                 title={event.title}
                 venue = {event.venue}
                 year = {year}
