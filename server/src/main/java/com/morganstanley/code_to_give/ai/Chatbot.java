@@ -8,6 +8,7 @@ import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.morganstanley.code_to_give.domain.event.controller.response.EventListResponse;
+import com.morganstanley.code_to_give.domain.event.controller.response.MemberEventDetailResponse;
 import com.morganstanley.code_to_give.domain.event.service.EventService;
 import com.morganstanley.code_to_give.domain.event.entity.Event;
 import com.morganstanley.code_to_give.domain.member.MemberService;
@@ -24,8 +25,8 @@ public class Chatbot {
     public static class Message {
 
         public static class ExtraItems {
-            public List<EventListResponse> eventForUserToJoinAsMember;
-            public List<EventListResponse> eventForUserToJoinAsVolunteer;
+            public List<MemberEventDetailResponse> eventForUserToJoinAsMember;
+            public List<MemberEventDetailResponse> eventForUserToJoinAsVolunteer;
             public List<String> newInterests;
             public List<String> newSkills;
         }
@@ -37,8 +38,8 @@ public class Chatbot {
         public Message(
                 String type,
                 String message,
-                List<EventListResponse> eventForUserToJoinAsMember,
-                List<EventListResponse> eventForUserToJoinAsVolunteer,
+                List<MemberEventDetailResponse> eventForUserToJoinAsMember,
+                List<MemberEventDetailResponse> eventForUserToJoinAsVolunteer,
                 List<String> newInterests,
                 List<String> newSkills
         ) {
@@ -201,8 +202,8 @@ public class Chatbot {
         return new Message(
                 "bot",
                 responseMessage,
-                EventListResponse.from(attendeeEvents),
-                EventListResponse.from(helperEvents),
+                MemberEventDetailResponse.from(attendeeEvents),
+                MemberEventDetailResponse.from(helperEvents),
                 newInterests,
                 newSkills
         );

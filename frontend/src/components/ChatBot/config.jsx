@@ -2,7 +2,7 @@ import { createChatBotMessage } from 'react-chatbot-kit';
 import { Card, Col, Row } from 'antd';
 import EventCard from '../EventCard';
 import { useState } from 'react';
-const botName = 'AiBot';
+const botName = 'ChatBot';
 const monthMap = {
     '01': 'JAN',
     '02': 'FEB',
